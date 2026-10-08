@@ -1,0 +1,77 @@
+# Secrets and local environment configuration
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Python environments, caches, and generated packages
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+*.egg-info/
+.coverage
+.coverage.*
+htmlcov/
+
+# Frontend dependencies, build output, and test reports
+node_modules/
+.next/
+.nuxt/
+.turbo/
+build/
+dist/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+
+# Private Prism data, model weights, and Trailforge execution state
+/uploads/
+/data/
+/artifacts/
+/models/
+/checkpoints/
+/var/
+/.prism/
+/.trailforge/
+*.sqlite
+*.sqlite3
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3-wal
+*.sqlite3-shm
+*.db
+*.db-wal
+*.db-shm
+
+# Generated output; retain only reviewed, synthetic study evidence
+/output/*
+!/output/evidence/
+/output/evidence/*
+!/output/evidence/trailforge/
+/output/evidence/trailforge/*
+!/output/evidence/trailforge/verify_reference.py
+!/output/evidence/trailforge/reference-checks.json
+
+# Local editors, logs, temporary files, and operating system metadata
+.idea/
+.vscode/
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+Desktop.ini

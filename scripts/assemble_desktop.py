@@ -16,7 +16,7 @@ def main():
     base=Path(sys.base_prefix)
     runtime=args.dist.resolve()/'_internal/python'
     runtime.mkdir(parents=True,exist_ok=True)
-    for name in ('python.exe','python3.dll',f'python{sys.version_info.major}{sys.version_info.minor}.dll','vcruntime140.dll','vcruntime140_1.dll','LICENSE.txt'):
+    for name in ('python.exe','pythonw.exe','python3.dll',f'python{sys.version_info.major}{sys.version_info.minor}.dll','vcruntime140.dll','vcruntime140_1.dll','LICENSE.txt'):
         shutil.copy2(base/name,runtime/name)
     shutil.copytree(base/'DLLs',runtime/'DLLs',dirs_exist_ok=True)
     def ignore_stdlib(directory,names):

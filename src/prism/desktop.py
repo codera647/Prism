@@ -50,6 +50,9 @@ def backend():
     from .api import create_app
     from .cli import authority_lock
     import uvicorn
+    if os.name == 'nt':
+        import multiprocessing as mp
+        mp.set_executable(str(Path(sys.executable).with_name('pythonw.exe')))
     port = int(os.environ["PRISM_DESKTOP_PORT"])
     settings = Settings.environment()
     with authority_lock(settings):

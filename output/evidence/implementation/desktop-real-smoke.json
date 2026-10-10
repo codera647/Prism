@@ -1,0 +1,231 @@
+{
+  "status": "PASS",
+  "version": "0.2.0",
+  "packaged_executable": true,
+  "scope": "real product photos; missing ad copy; developmental, not held-out quality",
+  "model": {
+    "name": "ViT-B-32",
+    "pretrained": "openai",
+    "sha256": "431adb635d7a35aaaf5b70acf8738712c6f9ae30d08e17698c6f505c9a686fb8",
+    "file": "clip-ViT-B-32-openai.safetensors",
+    "preprocessing": "open_clip/ViT-B-32/224/v1",
+    "dimensions": 512,
+    "quick_gelu": true,
+    "tokenization": "75-token chunks; normalized mean",
+    "source_sha256": "40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af"
+  },
+  "harness": "Trailforge 0.1.0a1",
+  "collection_id": "f3fbeb147a86441d94b4484088cb3cda",
+  "coverage": {
+    "images": 30,
+    "copy": 0,
+    "ad_variants": 30,
+    "unique_images": 30
+  },
+  "upload_seconds": 38.384,
+  "groups": [
+    {
+      "name": "People & lifestyle",
+      "count": 3
+    },
+    {
+      "name": "Discount promotions",
+      "count": 3
+    },
+    {
+      "name": "Discount promotions",
+      "count": 2
+    },
+    {
+      "name": "Discount promotions",
+      "count": 1
+    },
+    {
+      "name": "Product close-ups",
+      "count": 2
+    },
+    {
+      "name": "Product close-ups",
+      "count": 3
+    },
+    {
+      "name": "Discount promotions",
+      "count": 1
+    },
+    {
+      "name": "Product close-ups",
+      "count": 1
+    },
+    {
+      "name": "Discount promotions",
+      "count": 1
+    },
+    {
+      "name": "Product close-ups",
+      "count": 1
+    },
+    {
+      "name": "Discount promotions",
+      "count": 1
+    },
+    {
+      "name": "Product close-ups",
+      "count": 1
+    },
+    {
+      "name": "People & lifestyle",
+      "count": 1
+    },
+    {
+      "name": "Product close-ups",
+      "count": 1
+    },
+    {
+      "name": "Product close-ups",
+      "count": 1
+    },
+    {
+      "name": "People & lifestyle",
+      "count": 1
+    },
+    {
+      "name": "Discount promotions",
+      "count": 1
+    },
+    {
+      "name": "Product close-ups",
+      "count": 1
+    },
+    {
+      "name": "Product close-ups",
+      "count": 1
+    },
+    {
+      "name": "Product close-ups",
+      "count": 1
+    },
+    {
+      "name": "Product close-ups",
+      "count": 1
+    },
+    {
+      "name": "People & lifestyle",
+      "count": 1
+    }
+  ],
+  "report_status": "partial",
+  "report_limitations": [
+    "Visual labels are tentative CLIP suggestions; rename them after inspection.",
+    "Copy tags use English rules and quote supplied text. No OCR or semantic language model is enabled.",
+    "Repeated claims in ads are advertiser statements, not verified product benefits.",
+    "No campaign performance data was supplied."
+  ],
+  "queries": [
+    {
+      "query": "minimal skincare ads with product close-ups",
+      "seconds": 0.257,
+      "match_count": 14,
+      "no_match": false,
+      "top5": [
+        {
+          "id": "36f2542d9abd453a8b984df66568af7c",
+          "score": 0.2995,
+          "similarity": 0.2995,
+          "filename": "photo-1583209814683-c023dd293cc6.jpg"
+        },
+        {
+          "id": "4102c51e193c446fb3e0652f9c917375",
+          "score": 0.2912,
+          "similarity": 0.2912,
+          "filename": "photo-1581182800629-7d90925ad072.jpg"
+        },
+        {
+          "id": "9c618a51e62b4343ad4351bd9048317c",
+          "score": 0.2856,
+          "similarity": 0.2856,
+          "filename": "photo-1585945037805-5fd82c2e60b1.jpg"
+        },
+        {
+          "id": "203960952b8942bc81b8854141f27c99",
+          "score": 0.2675,
+          "similarity": 0.2675,
+          "filename": "photo-1555820585-c5ae44394b79.jpg"
+        },
+        {
+          "id": "b8ee3a76979e4450afcf6b17ea0f4370",
+          "score": 0.2629,
+          "similarity": 0.2629,
+          "filename": "photo-1580870069867-74c57ee1bb07.jpg"
+        }
+      ]
+    },
+    {
+      "query": "a pair of headphones",
+      "seconds": 0.28,
+      "match_count": 2,
+      "no_match": false,
+      "top5": [
+        {
+          "id": "957b4b6e62154b54b6e63a87809f2eee",
+          "score": 0.2712,
+          "similarity": 0.2712,
+          "filename": "photo-1505740420928-5e560c06d30e.jpg"
+        },
+        {
+          "id": "32f4ad9f44bb47f593f273a46895c021",
+          "score": 0.2478,
+          "similarity": 0.2478,
+          "filename": "photo-1523275335684-37898b6baf30.jpg"
+        }
+      ]
+    },
+    {
+      "query": "running shoes",
+      "seconds": 0.287,
+      "match_count": 7,
+      "no_match": false,
+      "top5": [
+        {
+          "id": "24f1533f9e5f47e08c3e703534e7b25b",
+          "score": 0.2655,
+          "similarity": 0.2655,
+          "filename": "photo-1606107557195-0e29a4b5b4aa.jpg"
+        },
+        {
+          "id": "e8abe174bf9e4d1d88d9d6377eb86068",
+          "score": 0.263,
+          "similarity": 0.263,
+          "filename": "photo-1542291026-7eec264c27ff.jpg"
+        },
+        {
+          "id": "e67728ad940a41d1bc7ecb80232b6023",
+          "score": 0.2541,
+          "similarity": 0.2541,
+          "filename": "photo-1560769629-975ec94e6a86.jpg"
+        },
+        {
+          "id": "defa562a94b245c0baebe6fccd013bec",
+          "score": 0.2485,
+          "similarity": 0.2485,
+          "filename": "photo-1608231387042-66d1773070a5.jpg"
+        },
+        {
+          "id": "0575e25004f540dd893a4e08d6382a99",
+          "score": 0.2456,
+          "similarity": 0.2456,
+          "filename": "photo-1595950653106-6c9ebd614d3a.jpg"
+        }
+      ]
+    },
+    {
+      "query": "underwater submarines and coral reefs",
+      "seconds": 0.304,
+      "match_count": 0,
+      "no_match": true,
+      "top5": []
+    }
+  ],
+  "paid_calls": 0,
+  "elapsed_seconds": 121.66,
+  "controlled_shutdown": true
+}

@@ -1,5 +1,7 @@
 # Prism - Local Implementation Record
 
+> Current 0.2 desktop/browser scope and verification: [release record](RELEASE_0_2.md), [deployment architecture](DEPLOYMENT.md). Earlier local-only implementation sections below describe the 0.1 baseline; open human/quality gates remain open.
+
 Updated: 2026-10-10 (Asia/Karachi). Release: **0.1.0 local app**.
 
 The user authorized completing Prism and synchronizing its GitHub repository. They have no ad images available. The implemented app therefore includes clearly labelled synthetic skincare creatives. Synthetic data demonstrates executable mechanics; it does not complete the framework's real-user, permitted-dataset, held-out quality, pilot or hosted release gates.

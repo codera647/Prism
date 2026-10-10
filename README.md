@@ -6,6 +6,14 @@ Prism turns up to 100 static ad images and their copy into a private visual boar
 
 Trailforge `v0.1.0a1` runs separate analysis and report workflows, with durable checkpoints, typed verification, retained work units and explicit recovery. Your own coding-agent commands can connect separately through Trailforge Develop.
 
+## Desktop and free website
+
+Open **https://prism-creative.pages.dev/** for the browser app. It downloads a pinned CLIP model (~150 MB) on first analysis and processes images on your device. Boards stay in this browser; export before clearing site data. Keep this tab open while processing. Use current Chrome or Edge on a computer.
+
+The Windows x64 portable package is built and tested by [GitHub Actions](https://github.com/codera647/Prism/actions/workflows/desktop-release.yml) and published on [GitHub Releases](https://github.com/codera647/Prism/releases). Extract the entire ZIP, then open `Prism.exe`; keep its `_internal` folder beside it. The package includes Python, CLIP and Trailforge. Windows 10/11 and WebView2 Runtime are required. Its private data lives in `%LOCALAPPDATA%/Prism/data`.
+
+Desktop and browser boards are separate. The website runs quantized CLIP in a browser worker and has no Python backend, Trailforge receipts, accounts or cloud synchronization. Desktop retains the full local Python/Harness workflows. Both use the same source-linked English copy rules. See [deployment architecture](doc/DEPLOYMENT.md) and [0.2 verification record](doc/RELEASE_0_2.md).
+
 ## Run on Windows
 
 Python 3.11+ is required; this workspace was verified with Python 3.13.15 on Windows. About 2 GiB of free disk space is needed for the environment and CLIP. No API key, paid model call or cloud service is needed.
@@ -54,7 +62,7 @@ Declared Trailforge units are cumulative, finite work reservations, not money or
 .\.venv\Scripts\python.exe -m prism.cli doctor
 ```
 
-For another local port, set `PRISM_PORT`. The CLI sets its expected origin accordingly. External hosting, team identity, HTTPS/reverse proxy, GPU execution, isolated untrusted code, OCR, paid language models and ad-platform integrations are outside this local release.
+For another local port, set `PRISM_PORT`. The CLI sets its expected origin accordingly. Hosting the full Python backend, team identity, GPU execution, isolated untrusted code, OCR, paid language models and ad-platform integrations are outside this release. The separately implemented browser app is hosted on Cloudflare Pages.
 
 ## Backup and restore
 

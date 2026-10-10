@@ -1,12 +1,14 @@
 # Prism - Project Memory and Continuation State
 
+> Current 0.2 desktop/browser scope and verification: [release record](RELEASE_0_2.md), [deployment architecture](DEPLOYMENT.md). Earlier local-only implementation sections below describe the 0.1 baseline; open human/quality gates remain open.
+
 Last updated: 2026-10-10 (Asia/Karachi).
 
 ## 1. User intent and current authorization
 
 Prism answers "Show me what all these ads have in common": 30-100 uploaded ad images/copy, CLIP visual grouping and natural-language retrieval, source-linked hook/offer analysis, pattern drafts and three distinct creative experiments. The user requested the framework documentation, a step-by-step build order, adapting it to their own Trailforge harness, GitHub setup/push, then **complete the project** and **continue**. They confirmed that they have no images available.
 
-The local app, dependency setup/free model download, labelled synthetic fixtures, local verification/server and repository synchronization are authorized. Earlier planning-only scope was superseded by the explicit build request. No paid model service, public hosting, campaign execution or messages to other people are included. Do not ask again for routine authorized local edits/pushes.
+The local app, dependency setup/free model download, labelled synthetic fixtures, local verification/server and repository synchronization are authorized. Earlier planning-only scope was superseded by the explicit build request. The user subsequently authorized a Windows desktop release, free public hosting on Cloudflare and real-photo development checks. Paid inference, campaign execution and messages to other people remain outside scope. Do not ask again for routine authorized local edits/pushes.
 
 ## 2. Current workspace and app
 

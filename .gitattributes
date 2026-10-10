@@ -1,6 +1,11 @@
 * text=auto
 *.py text eol=lf
 *.js text eol=lf
+*.mjs text eol=lf
+*.spec text eol=lf
+*.txt text eol=lf
+_headers text eol=lf
+_redirects text eol=lf
 *.css text eol=lf
 *.html text eol=lf
 *.svg text eol=lf

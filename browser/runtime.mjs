@@ -51,8 +51,9 @@ async function analyze(id,jobId){
       board.model=policy.model;board.analysisRevision=revision;
       board.report=draftReport(board.ads,board.patterns,board.coverage);
       job.status='completed';job.error=null;await put(board);
+      document.dispatchEvent(new CustomEvent('prism-progress',{detail:'Analysis complete. Visual group names are suggestions; inspect and rename them.'}));
     });
-  }catch(error){await locked(async()=>{const board=await get(id),job=board?.jobs.find(j=>j.id===jobId);if(board&&job&&job.status==='processing'){job.status='needs_attention';job.error=error.message;await put(board);}});}
+  }catch(error){await locked(async()=>{const board=await get(id),job=board?.jobs.find(j=>j.id===jobId);if(board&&job&&job.status==='processing'){job.status='needs_attention';job.error=error.message;await put(board);document.dispatchEvent(new CustomEvent('prism-progress',{detail:'Analysis needs attention. Open View progress to inspect and retry.'}));}});}
 }
 function queue(board){
   for(const j of board.jobs)if(['queued','processing'].includes(j.status))j.status='cancelled';

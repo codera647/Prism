@@ -1,5 +1,7 @@
 # Prism - Dependency-Ordered Backlog
 
+> Current 0.2 desktop/browser scope and verification: [release record](RELEASE_0_2.md), [deployment architecture](DEPLOYMENT.md). Earlier local-only implementation sections below describe the 0.1 baseline; open human/quality gates remain open.
+
 Updated: 2026-10-10 (Asia/Karachi). The local app is implemented. **Implemented locally** means a mechanical capability with linked evidence; it does not complete missing human/real-data prerequisites or framework stage signoff. Full completion-evidence requirements below are retained.
 
 Source stages: framework PDF pp. 20-21; P00-P20 coverage: [PLAN.md](PLAN.md). Acceptance targets: [PRD.md](PRD.md). Owners are roles pending actual assignment.

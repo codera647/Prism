@@ -1,5 +1,7 @@
 # Prism - System Blueprint
 
+> Current 0.2 desktop/browser scope and verification: [release record](RELEASE_0_2.md), [deployment architecture](DEPLOYMENT.md). Earlier local-only implementation sections below describe the 0.1 baseline; open human/quality gates remain open.
+
 > Implementation update (2026-10-10): the local Prism 0.1.0 app is built with real CLIP and pinned Trailforge. See [IMPLEMENTATION.md](IMPLEMENTATION.md) for implemented contracts, evidence and remaining gates. Earlier proposals below remain framework/reference requirements; they do not imply that missing real-data, pilot or hosted-release evidence exists.
 
 Updated: 2026-10-09 (Asia/Karachi). Status: Trailforge selected by the user; Prism integration and learned behavior remain planned and subject to evidence. No product system is implemented.

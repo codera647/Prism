@@ -158,7 +158,7 @@ if(!await activeTab){
 }
 // A refreshed/closed tab cannot own an in-flight worker from the preceding page.
 await locked(async()=>{for(const b of await all()){let dirty=false;for(const j of b.jobs)if(['queued','processing'].includes(j.status)){j.status='needs_attention';j.error='This tab closed during analysis. Your images are saved; inspect and retry.';dirty=true;}if(dirty)await put(b);}});
-const script=document.createElement('script');script.src='/static/app.js';document.head.append(script);
+const script=document.createElement('script');script.src=`/static/app.js?v=${PRISM_BUILD_ID}`;document.head.append(script);
 let lastProgress='';
 document.addEventListener('prism-progress',e=>{lastProgress=e.detail;const node=document.getElementById('browser-progress');if(node)node.textContent=lastProgress;});
 const observer=new MutationObserver(()=>{

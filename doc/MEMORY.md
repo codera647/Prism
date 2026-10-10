@@ -1,102 +1,56 @@
 # Prism - Project Memory and Continuation State
 
-Last updated: 2026-10-09 (Asia/Karachi).
+Last updated: 2026-10-10 (Asia/Karachi).
 
-## 1. User intent and authorized work
+## 1. User intent and current authorization
 
-The user described Prism as an ad-analysis project: upload 30-100 images with copy, use CLIP embeddings/clustering for similar visuals, analyze hooks/offers, retrieve supporting examples, summarize patterns, and propose three distinct creative experiments. The main interface is a searchable visual board. Demo query: "minimal skincare ads with product close-ups."
+Prism answers "Show me what all these ads have in common": 30-100 uploaded ad images/copy, CLIP visual grouping and natural-language retrieval, source-linked hook/offer analysis, pattern drafts and three distinct creative experiments. The user requested the framework documentation, a step-by-step build order, adapting it to their own Trailforge harness, GitHub setup/push, then **complete the project** and **continue**. They confirmed that they have no images available.
 
-The subsequent request was to map this concept into the user's recurring development mechanism in `F:/Diffwise/output/pdf/Production_AI_Thinking_Framework.pdf`, create a `doc` folder in Prism, and add the eleven Markdown filenames shown in the screenshot.
+The local app, dependency setup/free model download, labelled synthetic fixtures, local verification/server and repository synchronization are authorized. Earlier planning-only scope was superseded by the explicit build request. No paid model service, public hosting, campaign execution or messages to other people are included. Do not ask again for routine authorized local edits/pushes.
 
-An earlier follow-up requested a step-by-step order to create the project. [BUILD_ORDER.md](BUILD_ORDER.md) provides 21 practical steps, now updated to cover the original tasks and Trailforge integration tasks. Application implementation remains unstarted.
+## 2. Current workspace and app
 
-The current request explicitly selects the user's Trailforge harness and asks for its technical guide/repository study and adaptation of Prism's plan/architecture/steps. The revised sequence includes T01-T42 plus TF01-TF08 (50 tasks). Generic Harness runs product analysis/report profiles; Develop sets up user-owned coding agents under a separate developer plane.
+- Workspace: `F:/Prism`, Windows PowerShell. No applicable AGENTS.md was found in F:/ or this workspace.
+- App: Prism 0.1.0. Python/FastAPI, responsive vanilla JavaScript, separate SQLite product and execution databases, private files and supervised local CPU CLIP. Run from README; local URL `http://127.0.0.1:8000`.
+- Source: `src/prism/`; tests: `tests/`; exact validated Windows/Python 3.13.15 versions: `requirements.lock`; CLI setup/start/doctor/model-download/backup/restore/develop.
+- Runtime `.prism/`, virtualenv, models, private uploads, credentials and generated packages are excluded from Git. Retain execution authority and independent deletion ledger; never reset them to regain units or resurrect data.
+- Two retained smoke boards belong to the synthetic verification account: a 30-ad demo and a 100-ad capacity fixture. Test credentials exist only in ignored private runtime data. New users can create their own account and choose Explore a demo.
+- Trailforge pin: `v0.1.0a1`, commit `fbefaf40fb39a1429dcc328184372214f9fd849d`, reference tree `cfe3cbc5b6317fa58d3154785d6f4538250039da`. Generic product Harness and separate Develop planes are implemented. Actual user coding-agent commands/check ownership are not supplied.
+- Private repository: [codera647/Prism](https://github.com/codera647/Prism), origin HTTPS, branch main. Determine latest committed/pushed state from Git refs rather than assuming a historical hash.
 
-Authorized planning scope includes local tagged-source inspection, guide reading, synthetic harness mechanism checks, and saved documentation adaptation. The subsequent user request authorizes a .gitignore and GitHub repository setup/commit/push for Prism. Product implementation, actual model/provider calls, paid/cloud deployment, campaign execution, and external messages remain outside this work.
+## 3. Framework and inventory
 
-## 2. Verified source and workspace facts
+The framework PDF at `F:/Diffwise/output/pdf/Production_AI_Thinking_Framework.pdf` was read (29 pages, 167,748 bytes); it is the Production AI Design Compass / A Thinking Framework v1.0 prepared for Diffwise on 6 October 2026. It covers five working artifacts/design moves, eleven questions, failures, A0-A4, P00-P20, S0-S6, module responsibilities, ADRs and pre-build review. A referenced companion workbook was not found; no unseen template fidelity is claimed.
 
-- Workspace: `F:/Prism`. It was empty when successfully inspected on 2026-10-08.
-- No applicable `F:/AGENTS.md` or `F:/Prism/AGENTS.md` was found during the inspection.
-- Framework PDF exists at the supplied path; file size observed: 167,748 bytes; 29 pages.
-- Source title: Production AI Design Compass / A Thinking Framework; v1.0, prepared for Diffwise, 6 October 2026.
-- Relevant text across all 29 pages was reviewed in extraction batches; representative pages 4, 13, 20, and 26 were visually inspected.
-- The source covers five working artifacts, five design moves, eleven questions, seven baseline failures plus extensions, five A0-A4 levels, 21 P00-P20 concerns, S0-S6 stages, 20 internal module responsibilities plus frontend/migrations, ADRs, and a three-pass pre-build review.
-- The PDF references a companion `Production_AI_Project_Workbook.md`. It was not located in the searched Diffwise planning/doc/scripts paths; this pack records the stated blueprint fields without claiming that unseen template was followed.
-- Official CLIP repository and scikit-learn AgglomerativeClustering documentation were checked for the proposed similarity/clustering mechanisms. They are capability references, not Prism experiments.
-- Filesystem access initially failed with the default shell; explicit `powershell.exe` with `login=false` succeeded. Future agents should inspect actual environment instead of assuming workspace is inaccessible.
+The Trailforge guide at `F:/Diffwise/output/pdf/Trailforge_Technical_Reference_and_User_Guide_v0.1.0a1.pdf` was read (46 pages, 255,864 bytes), with selected visual checks. Read-only source reference: `C:/Users/nexge/AppData/Local/Temp/Prism-Trailforge-v0.1.0a1-reference`.
 
-## 3. Documentation inventory
+Fourteen documents now live in doc: ARCHITECTURE, BUILD_PROMPT, BUILD_ORDER, DECISION, DESIGN, GUARDRAILS, IMPLEMENTATION, MEMORY, PLAN, PRD, RULES, SECURITY, TASKS and TRAILFORGE_INTEGRATION. The 21 build steps and 50 unique T01-T42/TF01-TF08 tasks remain the framework map; implementation updates preserve their original evidence requirements.
 
-All requested files are under `F:/Prism/doc`:
+## 4. Actual evidence and stage limits
 
-| File | Current content |
-|---|---|
-| ARCHITECTURE.md | Responsibility map, domain invariants, typed contracts, workflow, state, retrieval, API/ports, all source-module dispositions |
-| BUILD_PROMPT.md | Copy-ready future build instructions and milestone invocations |
-| BUILD_ORDER.md | Practical 21-step build sequence with results, proceed checks, and dependency-safe task order |
-| DECISION.md | Q1-Q11 mapping, ADR-01 through ADR-13, uncertainty register |
-| DESIGN.md | Upload/board/search/detail/report/review/correction states and accessibility |
-| GUARDRAILS.md | Autonomy, grounded-output/resource policies, F01-F14 recovery register |
-| MEMORY.md | Facts, assumptions, actual progress, open gates, continuation instructions |
-| PLAN.md | Full framework mapping, P00-P20, S0-S6, experiments, operations/release |
-| PRD.md | Product contract, scope, R01-R12, proposed targets, non-goals |
-| RULES.md | Authority/dependency/evidence/security/change discipline |
-| SECURITY.md | Trust boundaries, S01-S14 threats, access/provider/secrets/data/deletion |
-| TASKS.md | T01-T42 and TF01-TF08 with stage, role owner, dependency, and completion evidence |
-| TRAILFORGE_INTEGRATION.md | Tagged source/guide capability study, product/coding harness composition, limits, host bridge, and limited check evidence |
-
-Document validation is recorded below. Source PDFs were not modified; no app code, package installations, cloud resources, or actual model calls were created by the planning task.
-
-## 4. Proposed design direction
-
-Trailforge selection follows explicit user direction. Remaining product choices are proposals pending the specified evidence:
-
-1. Outcome-first product: faster useful reference selection and evidence-backed pattern explanation, not predicting winners.
-2. Modular application with API and TrailforgeWorkflow host/worker; generic product Harness and Develop coding-agent planes separated.
-3. Product relational truth/private artifacts plus selected neutral SQLite execution authority; recoverable linkage/current-output bridge; exact scoped similarity before dedicated vector service.
-4. Pretrained CLIP candidate; no custom training. Threshold-based visual grouping with singletons and editable labels.
-5. Separate overlapping hook/offer tags; user copy and optional OCR kept distinct with source provenance.
-6. Deterministic counts/authorization/state. Rules/templates first; one bounded generator only if comparative evidence justifies it.
-7. Search/derived work target scoped automation; generated reports begin as reviewed drafts; experiment decisions stay human.
-8. Versioned inputs/config/models/evidence, durable job admission, task leases/fencing, transactional resource reservations.
-9. No external web retrieval, ad-platform integration, campaign launch, public sharing, arbitrary model tools, or persistent conversational memory in MVP.
-10. Ad variant identity matters: same image/different copy can be distinct; report unique-image and variant units explicitly.
-11. Corrections are collection-local annotated truth; global evaluation/learning requires permission and adjudication; no online adaptation.
-12. Harness is user-selected: Trailforge v0.1.0a1, `fbefaf40fb39a1429dcc328184372214f9fd849d`, Python >=3.11. App framework/hardware/model provider/hosting/monetary cap remains unresolved. Harness scope/units/checks do not replace identity, actual spend or semantic quality.
-
-## 5. Actual progress and evidence
-
-| Area | Actual state | Evidence / limit |
+| Area | Actual state | Evidence / limitation |
 |---|---|---|
-| User concept | Received | User messages; no interviews or workflow validation |
-| Source reading | Complete | PDF extraction and representative visual inspection |
-| Documentation authoring | Thirteen-file pack complete, including build order and Trailforge adaptation | Inventory above; checks recorded below; no implementation implied |
-| Discovery S0 | Not started | No observed workflow, ratified baseline, data permission audit, or named role acceptance |
-| Feasibility S1 | Not started | No dataset, embeddings, clusters, extraction, or benchmark results |
-| Blueprint S2 | Initial draft only | This pack; decisions/gates not ratified or tested |
-| Slice S3 | Not started | No app code or executable product |
-| Pilot S4 | Not started | No real user/usefulness/capacity/cost results |
-| Release S5 | Not started | No deployment/security/restore/rollback evidence |
-| Operation S6 | Not started | No incidents/feedback/promotion history |
+| Local executable slice | Delivered | See [IMPLEMENTATION.md](IMPLEMENTATION.md) for features/contracts/setup |
+| Product/host tests | 28 passed; zero failed/skipped | Privacy, invalid inputs, currentness, tampering, real process death, explicit UNKNOWN recovery, cross-store crash windows, exact-report review, Develop continuity and restore/deletion |
+| Installed harness | Pin metadata plus six bounded checks passed | [installed-harness.json](../output/evidence/implementation/installed-harness.json); not full upstream conformance |
+| Real CLIP | Synthetic 30/100-ad workflows passed | [local-smoke.json](../output/evidence/implementation/local-smoke.json); no custom training or paid calls |
+| Browser/package | Responsive mobile/tablet inspected; wheel built | [verification.json](../output/evidence/implementation/verification.json), [screenshot](../output/evidence/implementation/prism-board.png) |
+| S0/S1 full signoff | Open | No real workflow/baseline, permitted representative dataset or held-out quality |
+| S2/S3 framework gates | Local mechanical implementation documented | Proposed targets/owners not fully ratified; synthetic evidence does not fill missing prerequisites |
+| S4 pilot | Open | No actual strategist usefulness/review-effort measurements |
+| S5/S6 production | Open | No hosted deployment/operator/release/incident signoff |
 
-Every T01-T42 and TF01-TF08 implementation task is Planned. Harness selection is decided; actual product/coding-adapter setup and installed conformance remain future work. PRD targets/resources/pilot/retention/reviewer/SLO values are proposed. Hypothetical ad counts are not actual results.
+Source-model SHA-256 `40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af`; converted tensor-only runtime SHA-256 `431adb635d7a35aaaf5b70acf8738712c6f9ae30d08e17698c6f505c9a686fb8`. Search floor 0.23/clustering threshold 0.22 are provisional local development settings. No p95, P@5, extraction F1, advertising effectiveness or held-out grouping result is claimed.
 
-## 6. Open questions and blocking conditions
+## 5. Next work and continuation rules
 
-Additional open integration gates: installed release verification; actual coding-agent/tool callbacks; protected-check ownership; Goal/payload/batch contracts; cross-store crash recovery; local capacity; host UNKNOWN policy; finite cumulative unit-cap lifecycle; suitable decoder/ML/Linux-check isolation. Legacy PostgreSQL is not a generic backend option in this alpha.
+Read IMPLEMENTATION and current TASKS before modifying the working app. Preserve scoped product truth, independent native authority, hash/revision/currentness checks and deletion replay. Run relevant tests after substantive changes. Use the existing browser runtime binding if continuing browser inspection; no need to reconnect merely because a turn changed.
 
-Critical next evidence: real user workflow and manual baseline; permitted representative images/copy; expected language/privacy/provider handling; supported model/search/grouping quality; actual hardware/capacity; owner-set paid allowance; affordable total cost; named operator/reviewer availability; ratified acceptance/retention/hosting policies.
+Next external evidence: permitted representative ads and user workflow/baseline; freeze held-out cases; run E01-E05/ratify targets; supply actual coding-agent argv/check configuration; supervised usefulness pilot; then separately scoped hosting/release work if requested. These missing inputs do not invalidate the user's already delivered local mechanical build.
 
-The uncertainty register in DECISION gives owners, next experiments, and blocked gates. Do not stop independent local/synthetic planning merely because hosted decisions are open. Do not upload private real data to a provider or call a paid service without the required policy and allowance.
+Keep verified facts separate from proposals. Record real checks and population limitations; no secrets/private raw data in docs. Earlier dated verification below describes earlier states, not the current app.
 
-## 7. Next work when the user asks to build
-
-Read RULES/PLAN/TASKS and the current filesystem. Begin T01-T04 discovery, reference data/permission/baseline preparation, and dependency-ready S1 experiments. Where real inputs are unavailable, isolated synthetic fixtures may demonstrate mechanics while real evidence gates remain open. A future general build request does not justify claiming S0-S2 passed.
-
-Use BUILD_PROMPT for implementation handoff. Choose exact stack versions through ADR-10 after evidence; update rather than silently override other contracts. Preserve the user's original scope and autonomy constraints across sessions.
-
-Follow the revised BUILD_ORDER: TF01/TF02 accompany early feasibility; TF04 finalizes product contracts; TF03 composes Develop after stack/setup; TF05/TF06 precede integrated model processing; TF07 precedes full diagnostics/recovery; TF08 precedes release gates. Do not present the six study checks as completing these tasks.
+## 6. Historical planning and study record
 
 ## 8. Session verification record
 

@@ -1,5 +1,7 @@
 # Prism - Decisions, Alternatives, and Uncertainty
 
+> Implementation update (2026-10-10): the local Prism 0.1.0 app is built with real CLIP and pinned Trailforge. See [IMPLEMENTATION.md](IMPLEMENTATION.md) for implemented contracts, evidence and remaining gates. Earlier proposals below remain framework/reference requirements; they do not imply that missing real-data, pilot or hosted-release evidence exists.
+
 Updated: 2026-10-09 (Asia/Karachi). Status: user-selected Trailforge is decided; product quality/capacity/integration remains unvalidated. Limited source checks are in [TRAILFORGE_INTEGRATION.md](TRAILFORGE_INTEGRATION.md), not product evidence.
 
 ## 1. Decision vocabulary and ownership
@@ -89,6 +91,9 @@ Original records were created on 2026-10-08 and adapted to Trailforge on 2026-10
 
 ### ADR-06 - Context and search combination
 
+- Local implementation disposition (2026-10-10): exact current-collection CLIP cosine retrieval with a provisional 0.23 floor and 0.08 normalized lexical bonus, not a claim that E05 rank-fusion superiority has been measured. Long queries use complete token chunks. Reports use exact aggregates and source-linked templates; no paid generator or E04 comparative win is claimed. Revisit on frozen permitted data before quality promotion.
+
+
 - Question: what context may reports and search use?
 - Alternatives: full collection prompts; collection-local selected evidence; persistent chat/history; web retrieval.
 - Proposed choice: current authorized collection snapshot, exact aggregates, representative ad evidence, and explicitly supplied category hints. Search begins CLIP-only; add lexical/tag ranking via rank fusion only after E05. A lexical result list and semantic list may have different scores; do not blend raw incomparable scores.
@@ -132,15 +137,15 @@ Original records were created on 2026-10-08 and adapted to Trailforge on 2026-10
 
 ### ADR-10 - Initial stack and deployment
 
-- Question: which concrete stack should implement the selected capabilities?
-- Selected harness baseline: Trailforge v0.1.0a1 at `fbefaf40fb39a1429dcc328184372214f9fd849d`, Python >=3.11, neutral SQLite. Application candidates remain Python API/worker, relational product DB, TypeScript UI, private artifacts and local CLIP. FastAPI/PostgreSQL/React are not finalized.
-- Alternatives: framework-equivalent stack; local-only application; hosted managed model; separate model-serving process.
-- Proposed choice: TF01 pins the harness, TF02/TF03 validate generic/Develop composition, T15 pins remaining app dependencies. Begin on one persistent execution host; hosted release stays S5. Optional LangGraph/Postgres extras and generic distributed execution are deferred unless their exact contracts are justified.
-- Reason: the user prescribed the harness; hardware, app framework, provider, accounts and hosting remain unselected.
-- Downside: some setup choices remain unresolved until feasibility.
-- Owner: ENG/OPS. Status: harness decided; application stack/hardware/provider open. Bounded experiments may use recorded temporary dependencies.
-- Evidence: reproducible clean setup, encoder inference, load, privacy, cost, restore.
-- Revisit: unsupported runtime/hardware or operating requirements change feasibility. No cloud resources created by this planning task.
+- Question: which concrete stack implements the selected capabilities?
+- Selected local stack (2026-10-10): Python/FastAPI, a responsive vanilla JavaScript interface, separate product/execution SQLite databases, private filesystem artifacts and supervised local CPU OpenCLIP. Trailforge v0.1.0a1 is pinned to `fbefaf40fb39a1429dcc328184372214f9fd849d`. Exact validated versions are in [requirements.lock](../requirements.lock).
+- Alternatives: React/TypeScript, PostgreSQL product storage, hosted inference and separate distributed services. These add setup/operations requirements without evidence of local necessity.
+- Decision: one loopback server and execution host under a data-directory lock; no paid model calls. CLI setup, model-download, doctor, backup, restore and Develop configuration are implemented. PostgreSQL, distributed generic execution and hosted release remain deferred.
+- Reason: completes the user's authorized local build with no paid service, no available real ads and a reproducible real-CLIP demonstration.
+- Downside: local accounts/single-host storage are not a hosted team product; CPU cold start and ingestion are material waits. Rules/templates cover a narrower language/messaging space than OCR or a general language model.
+- Owner: implementation ENG role; operational/pilot owners remain unassigned. Status: selected and implemented locally; production stage gates open.
+- Evidence: 28 automated tests, six installed harness checks, real-CLIP 30/100-ad synthetic workflows, browser layouts and packaged web assets. See [IMPLEMENTATION.md](IMPLEMENTATION.md); these are not a held-out quality or SLO result.
+- Revisit: representative data, team/hosting needs or measured capacity justify a new versioned choice. No cloud deployment is included.
 
 ### ADR-11 - Feedback and learning
 
@@ -171,7 +176,7 @@ Original records were created on 2026-10-08 and adapted to Trailforge on 2026-10
 - Composition: host supplies PLAN/RESEARCH/BUILD/DEBUG/VERIFY; HEALTH is built in. One round initially; up to three predeclared rounds. BUILD alone writes candidates; DEBUG diagnoses; repairs occur in a later planned BUILD or a new contract.
 - Reason: follows the selected harness and retains protected criteria/current-candidate continuity. Multiple specialist agents and approval at every phase are not required.
 - Downside: file/tree limits require narrow staged candidates. Trusted callbacks are not OS isolation; Linux runner checks are read-only/network-free, not a mutable app/GPU environment.
-- Owner: ENG/PO. Status: user-directed mechanism decided; actual phase adapters planned in TF03.
+- Owner: ENG/PO. Status: user-directed mechanism decided; command phase adapters implemented in develop.py; the user's actual commands/check ownership remain pending in TF03.
 - Evidence: synthetic resume/handoff-mutation denial passed; meaningful independently administered Prism checks and isolation/promotion remain TF03/TF08/S5 evidence.
 - Revisit: new release/size/isolation needs. Handoff is never merge/deployment approval.
 

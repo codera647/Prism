@@ -63,6 +63,12 @@ test-results/
 /output/evidence/trailforge/*
 !/output/evidence/trailforge/verify_reference.py
 !/output/evidence/trailforge/reference-checks.json
+!/output/evidence/implementation/
+/output/evidence/implementation/*
+!/output/evidence/implementation/local-smoke.json
+!/output/evidence/implementation/installed-harness.json
+!/output/evidence/implementation/verification.json
+!/output/evidence/implementation/prism-board.png
 
 # Local editors, logs, temporary files, and operating system metadata
 .idea/
@@ -75,3 +81,6 @@ test-results/
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+# User-owned trusted coding-agent configuration
+/config/*.local.json

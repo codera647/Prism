@@ -1,5 +1,7 @@
 # Prism - Security, Privacy, and Data Lifecycle
 
+> Implementation update (2026-10-10): the local Prism 0.1.0 app is built with real CLIP and pinned Trailforge. See [IMPLEMENTATION.md](IMPLEMENTATION.md) for implemented contracts, evidence and remaining gates. Earlier proposals below remain framework/reference requirements; they do not imply that missing real-data, pilot or hosted-release evidence exists.
+
 Date: 2026-10-08 (Asia/Karachi). Status: proposed threat model and enforcement plan. No security certification or passed tests are claimed.
 
 Framework references: P07/P11/P15/P18, PDF pp. 15-19, configuration/secret contract p. 24. Scope: [PRD.md](PRD.md). Boundaries: [ARCHITECTURE.md](ARCHITECTURE.md). Output/action policy: [GUARDRAILS.md](GUARDRAILS.md).
@@ -118,3 +120,7 @@ Named SEC/OPS owners must exist before pilot/hosted release. On suspected exposu
 Required S5 packet: threat fixtures, authorization/artifact access evidence, input/resource isolation, redacted telemetry sample, provider data-flow decision, retention/deletion/restore exercise, least-privilege configuration review, dependency/model manifest, operator ownership, and rollback evidence.
 
 Security review is connected to actual enforcement. A prompt, document, filename allowlist, or append-only application table alone cannot satisfy these gates.
+
+## Local release boundary (2026-10-10)
+
+The implemented decoder and CLIP actor use bounded child processes with timeouts under trusted host privileges. They are not an OS sandbox. Develop reports TRUSTED_HOST_CALLBACKS and linux_isolation_verified=False. The local server is loopback-only with scoped local accounts, CSRF and private image routes; internet/team hosting requires its own reviewed identity/HTTPS/isolation design. Offline backups are private, unencrypted and exclude model weights and the independent live deletion ledger. Restore clears sessions, preserves current reservation floors and replays live tombstones. See IMPLEMENTATION.md for actual security/fault test scope; no penetration audit or hosted release is claimed.

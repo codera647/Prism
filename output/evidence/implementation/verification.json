@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-10",
+  "application": "Prism 0.1.0 local release",
+  "status": "PASS",
+  "automated_tests": {
+    "passed": 28,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 75.273,
+    "scope": "test-only encoder; actual native harness and process-death/host fault tests"
+  },
+  "installed_harness": {
+    "pin": {
+      "url": "https://github.com/codera647/Trailforge.git",
+      "vcs_info": {
+        "commit_id": "fbefaf40fb39a1429dcc328184372214f9fd849d",
+        "requested_revision": "fbefaf40fb39a1429dcc328184372214f9fd849d",
+        "vcs": "git"
+      }
+    },
+    "bounded_mechanism_checks": 6,
+    "full_upstream_conformance": false
+  },
+  "browser_script_syntax": "PASS",
+  "dependency_consistency": "PASS",
+  "wheel": {
+    "file": "prism_creative-0.1.0-py3-none-any.whl",
+    "sha256": "41188476beab7fa6cb1bd3356ef37c9f0495c4a79eb69ea13b4ef39690083019",
+    "source_byte_match": true,
+    "web_assets": [
+      "prism/web/app.js",
+      "prism/web/icon.svg",
+      "prism/web/index.html",
+      "prism/web/style.css"
+    ]
+  },
+  "documentation": {
+    "files": 14,
+    "unique_framework_tasks": 50,
+    "local_links_checked": 127,
+    "titles_fences_links": "PASS",
+    "missing_human_quality_gates_preserved": true
+  },
+  "real_model": "See local-smoke.json: genuine CLIP on labelled synthetic 30/100-ad boards",
+  "final_restarted_server": {
+    "loopback": "http://127.0.0.1:8000",
+    "synthetic_boards": 2,
+    "related_search": 27,
+    "unrelated_no_match": true,
+    "exact_report_review": true,
+    "json_export": true
+  },
+  "browser": {
+    "login": "PASS",
+    "board": "PASS",
+    "semantic_search": "PASS",
+    "patterns_and_experiments": "PASS",
+    "mobile_390_no_page_overflow": true,
+    "tablet_1024_no_page_overflow": true,
+    "screenshot": "prism-board.png"
+  },
+  "limits": [
+    "Synthetic developmental fixtures, not held-out quality or advertising performance.",
+    "No real-user pilot, p95 SLO, hosted-release signoff or actual user coding-agent commands.",
+    "Trusted local subprocesses, not verified untrusted-code OS isolation."
+  ],
+  "paid_calls": 0
+}

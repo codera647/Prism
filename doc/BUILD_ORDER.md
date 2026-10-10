@@ -1,5 +1,7 @@
 # Prism - Step-by-Step Build Order
 
+> Implementation update (2026-10-10): the local Prism 0.1.0 app is built with real CLIP and pinned Trailforge. See [IMPLEMENTATION.md](IMPLEMENTATION.md) for implemented contracts, evidence and remaining gates. Earlier proposals below remain framework/reference requirements; they do not imply that missing real-data, pilot or hosted-release evidence exists.
+
 Updated: 2026-10-09 (Asia/Karachi). Status: execution order tailored to user-selected Trailforge; product and agent integration remain planned.
 
 This is the practical reading guide to [PLAN.md](PLAN.md) and [TASKS.md](TASKS.md). Follow the steps in order. Each step produces something you can inspect and a check that tells you whether to proceed. Keep actual task status and evidence in TASKS/MEMORY.

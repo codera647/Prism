@@ -1,5 +1,7 @@
 # Prism - Trailforge Adoption and Agent Setup
 
+> Implementation update (2026-10-10): the local Prism 0.1.0 app is built with real CLIP and pinned Trailforge. See [IMPLEMENTATION.md](IMPLEMENTATION.md) for implemented contracts, evidence and remaining gates. Earlier proposals below remain framework/reference requirements; they do not imply that missing real-data, pilot or hosted-release evidence exists.
+
 Updated: 2026-10-09 (Asia/Karachi). Status: harness selection is user-directed; Prism integration is planned, not implemented. Six limited source-checkout checks passed on 2026-10-08; no model-quality or deployment claim follows.
 
 ## 1. Study sources and selected baseline

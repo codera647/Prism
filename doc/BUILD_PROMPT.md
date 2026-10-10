@@ -1,6 +1,8 @@
 # Prism - Reusable Build Handoff
 
-Updated: 2026-10-09 (Asia/Karachi). Status: future build handoff tailored to user-selected Trailforge; product/agent integration is not implemented and deployment/paid work is not authorized by this document.
+> Implementation update (2026-10-10): the local Prism 0.1.0 app is built with real CLIP and pinned Trailforge. See [IMPLEMENTATION.md](IMPLEMENTATION.md) for implemented contracts, evidence and remaining gates. Earlier proposals below remain framework/reference requirements; they do not imply that missing real-data, pilot or hosted-release evidence exists.
+
+Updated: 2026-10-09 (Asia/Karachi). Status: continuation handoff for the implemented local app; actual user coding-agent commands remain unconfigured. Hosting and paid work remain outside this local release.
 
 Use the prompt below with a coding assistant that can access `F:/Prism`. The current project state and outstanding gates live in [MEMORY.md](MEMORY.md), not in an assumed prior conversation.
 
@@ -41,10 +43,11 @@ can establish mechanics but do not complete real-user or held-out product gates.
 Ask for a critical missing input while continuing independent authorized work.
 Do not ask again for ordinary local edits already within the requested build scope.
 
-At the current state, all T01-T42 and TF01-TF08 implementation tasks are Planned.
-The documentation pack and limited source-study evidence exist; this is not
-S0-S2 signoff, implemented agent setup, installed conformance, or S5 readiness.
-Validate the actual filesystem before assuming this remains true.
+The local app is implemented; read doc/IMPLEMENTATION.md and current task states.
+Do not rebuild from scratch or replace durable execution/deletion history.
+Twenty-eight product/host tests and six installed harness checks passed; real CLIP
+ran synthetic 30/100-ad workflows. Actual user agent commands are not configured.
+These checks do not establish real-user/held-out quality or S5 hosted readiness.
 
 First implementation approach, subject to recorded feasibility decisions:
 - The user selected Trailforge. Pin v0.1.0a1 at source commit
@@ -54,9 +57,9 @@ First implementation approach, subject to recorded feasibility decisions:
   Fixed OfflineController/CLI Review mocks are not the Prism runtime.
 - Use a modular application with provider-independent domain contracts and
   separate API/worker processes as needed. Start simple, not with microservices.
-- Choose/pin actual stack versions after checking local compatibility and current
-  official documentation. Python API/worker, relational records, private artifact
-  storage, and TypeScript browser UI are candidates, not a mandatory vendor stack.
+- Preserve the selected Python/FastAPI, separate SQLite stores, local CPU CLIP
+  and vanilla JavaScript interface unless evidence justifies an ADR change.
+  requirements.lock records the validated Windows/Python 3.13 environment.
 - Product DB owns accepted work intents, revisions, ownership, actual money limits,
   current outputs and deletion. Trailforge's persistent neutral SQLite owns runs,
   ordered tasks, local attempts/checkpoints/receipts and declared units. Implement

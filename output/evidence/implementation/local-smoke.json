@@ -1,0 +1,215 @@
+{
+  "date": "2026-10-10",
+  "scope": "local synthetic mechanics, not held-out quality or human usefulness",
+  "status": "PASS",
+  "real_clip": {
+    "name": "ViT-B-32",
+    "pretrained": "openai",
+    "sha256": "431adb635d7a35aaaf5b70acf8738712c6f9ae30d08e17698c6f505c9a686fb8",
+    "file": "clip-ViT-B-32-openai.safetensors",
+    "preprocessing": "open_clip/ViT-B-32/224/v1",
+    "dimensions": 512,
+    "quick_gelu": true,
+    "tokenization": "75-token chunks; normalized mean",
+    "source_sha256": "40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af"
+  },
+  "harness": "Trailforge 0.1.0a1",
+  "demo_30": {
+    "collection_id": "cd80f30eb67643e59d5eec106afe35e4",
+    "cold_end_to_end_seconds": 92.049,
+    "coverage": {
+      "images": 30,
+      "copy": 30,
+      "ad_variants": 30,
+      "unique_images": 18
+    },
+    "groups": [
+      {
+        "name": "Product close-ups",
+        "count": 10
+      },
+      {
+        "name": "Discount promotions",
+        "count": 10
+      },
+      {
+        "name": "Testimonials",
+        "count": 10
+      }
+    ]
+  },
+  "capacity_100": {
+    "collection_id": "512e2c2a0a194d9889305c628d4a0377",
+    "upload_decode_seconds": 83.683,
+    "warm_processing_seconds": 71.345,
+    "coverage": {
+      "images": 100,
+      "copy": 100,
+      "ad_variants": 100,
+      "unique_images": 23
+    },
+    "group_count": 3
+  },
+  "queries": [
+    {
+      "query": "minimal skincare ads with product close-ups",
+      "seconds": 0.446,
+      "match_count": 27,
+      "no_match": false,
+      "top5": [
+        {
+          "id": "cb0649a82861438ca1152d098693a3e9",
+          "score": 0.3138,
+          "similarity": 0.3024,
+          "filename": "demo-01.png"
+        },
+        {
+          "id": "7dbf96f8dedc4207b752e77e5d2f18f9",
+          "score": 0.3117,
+          "similarity": 0.3002,
+          "filename": "demo-19.png"
+        },
+        {
+          "id": "ae4d6171b6a247048937566090fb9eee",
+          "score": 0.311,
+          "similarity": 0.2996,
+          "filename": "demo-07.png"
+        },
+        {
+          "id": "b35ca197642c49c69f074b902fce426e",
+          "score": 0.3109,
+          "similarity": 0.2995,
+          "filename": "demo-10.png"
+        },
+        {
+          "id": "b1dfb0e6a97b42e0aa0131dbddd8f2ec",
+          "score": 0.3089,
+          "similarity": 0.2975,
+          "filename": "demo-22.png"
+        }
+      ]
+    },
+    {
+      "query": "customer testimonial reviews",
+      "seconds": 0.423,
+      "match_count": 13,
+      "no_match": false,
+      "top5": [
+        {
+          "id": "60400571fc714c20b26c163275ef08fe",
+          "score": 0.3318,
+          "similarity": 0.3051,
+          "filename": "demo-26.png"
+        },
+        {
+          "id": "ffa44347c66a414388cbb094930a67f6",
+          "score": 0.3318,
+          "similarity": 0.3051,
+          "filename": "demo-11.png"
+        },
+        {
+          "id": "3fbbf0c6eaf14db3bfc4274b73a6abe3",
+          "score": 0.3273,
+          "similarity": 0.3006,
+          "filename": "demo-23.png"
+        },
+        {
+          "id": "f82e07a854204d36ad74c903ea4ff7c2",
+          "score": 0.3273,
+          "similarity": 0.3006,
+          "filename": "demo-08.png"
+        },
+        {
+          "id": "b613323758c041d28201767d63072d07",
+          "score": 0.3266,
+          "similarity": 0.2999,
+          "filename": "demo-02.png"
+        }
+      ]
+    },
+    {
+      "query": "discount sale promotions",
+      "seconds": 0.463,
+      "match_count": 10,
+      "no_match": false,
+      "top5": [
+        {
+          "id": "01286450cb0d47049fa53f7ca43c3823",
+          "score": 0.2563,
+          "similarity": 0.2563,
+          "filename": "demo-09.png"
+        },
+        {
+          "id": "18dfe0bf386d450fa3f97af18d649aba",
+          "score": 0.2563,
+          "similarity": 0.2563,
+          "filename": "demo-27.png"
+        },
+        {
+          "id": "5a3d0a0820814fbc9b79a3076994493c",
+          "score": 0.2563,
+          "similarity": 0.2563,
+          "filename": "demo-03.png"
+        },
+        {
+          "id": "a7014730508c4672b7376945e5b122fb",
+          "score": 0.2563,
+          "similarity": 0.2563,
+          "filename": "demo-18.png"
+        },
+        {
+          "id": "c93e1247acf1462eb1180710daa69012",
+          "score": 0.2563,
+          "similarity": 0.2563,
+          "filename": "demo-12.png"
+        }
+      ]
+    },
+    {
+      "query": "underwater submarines and coral reefs",
+      "seconds": 0.411,
+      "match_count": 0,
+      "no_match": true,
+      "top5": []
+    },
+    {
+      "query": "minimal skincare products minimal skincare products minimal skincare products minimal skincare products minimal skincare products minimal skincare products minimal skincare products minimal skincare products minimal skincare products minimal skincare products minimal skincare products minimal skincare products minimal skincare products minimal skincare products minimal skincare products minimal skincare products minimal skincare products minimal skincare products minimal skincare products ",
+      "seconds": 0.458,
+      "match_count": 27,
+      "no_match": false,
+      "top5": [
+        {
+          "id": "ae4d6171b6a247048937566090fb9eee",
+          "score": 0.28,
+          "similarity": 0.2533,
+          "filename": "demo-07.png"
+        },
+        {
+          "id": "b1dfb0e6a97b42e0aa0131dbddd8f2ec",
+          "score": 0.2789,
+          "similarity": 0.2522,
+          "filename": "demo-22.png"
+        },
+        {
+          "id": "ca0956819d3045e5964e495ad178c066",
+          "score": 0.2743,
+          "similarity": 0.2476,
+          "filename": "demo-25.png"
+        },
+        {
+          "id": "9d6c5a2b1728456a8b0175bef7c04cc6",
+          "score": 0.27,
+          "similarity": 0.2434,
+          "filename": "demo-04.png"
+        },
+        {
+          "id": "5f7557c0c4ff467cb8bb324d195777b1",
+          "score": 0.2697,
+          "similarity": 0.243,
+          "filename": "demo-16.png"
+        }
+      ]
+    }
+  ],
+  "paid_calls": 0
+}

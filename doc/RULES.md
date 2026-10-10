@@ -1,5 +1,7 @@
 # Prism - Development and Change Rules
 
+> Implementation update (2026-10-10): the local Prism 0.1.0 app is built with real CLIP and pinned Trailforge. See [IMPLEMENTATION.md](IMPLEMENTATION.md) for implemented contracts, evidence and remaining gates. Earlier proposals below remain framework/reference requirements; they do not imply that missing real-data, pilot or hosted-release evidence exists.
+
 Updated: 2026-10-09 (Asia/Karachi). Status: project working rules adapted to the user-selected Trailforge harness; current work is study/planning, not product implementation.
 
 ## 1. Authority and scope
@@ -112,3 +114,7 @@ Pin source/distribution/protocol and adapter implementation/config hashes. Insta
 Bounded local feasibility is not hosted release. S5 requires ratified acceptance, security/privacy/provider decisions, named operators/reviewers, fault/load/cost evidence, deletion/restore, protected CI, and compatible rollback.
 
 Deploy a version manifest, not an isolated prompt edit. Model/index/data changes invalidate incompatible derived state. Restore reapplies deletion records before serving. Unknown critical items cannot be hidden by a readiness average.
+
+## Current user authorization (2026-10-10)
+
+The subsequent requests to complete the project and continue authorize implementing, installing and running this local app, using a free local CLIP model, creating labelled synthetic demo data because no real images were supplied, and committing/pushing changes to the established private Prism repository. Earlier planning-only statements describe the earlier session scope. Actual user coding-agent commands, paid providers, internet hosting and campaign actions have not been configured or authorized by implication. Continue ordinary reversible local work without asking again for already authorized steps.

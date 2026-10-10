@@ -1,5 +1,7 @@
 # Prism - System Blueprint
 
+> Implementation update (2026-10-10): the local Prism 0.1.0 app is built with real CLIP and pinned Trailforge. See [IMPLEMENTATION.md](IMPLEMENTATION.md) for implemented contracts, evidence and remaining gates. Earlier proposals below remain framework/reference requirements; they do not imply that missing real-data, pilot or hosted-release evidence exists.
+
 Updated: 2026-10-09 (Asia/Karachi). Status: Trailforge selected by the user; Prism integration and learned behavior remain planned and subject to evidence. No product system is implemented.
 
 Framework source: Sections 06/09/10, PDF pp. 10-12 and 22-24. Scope and acceptance: [PRD.md](PRD.md). Delivery/evidence: [PLAN.md](PLAN.md). Tradeoffs: [DECISION.md](DECISION.md).
@@ -222,7 +224,7 @@ Prism job lifecycle: queued -> running/awaiting_attention -> succeeded/partial/f
 6. After checks, host rereads current collection/policy/artifacts/tombstones and atomically commits an idempotent current product snapshot keyed by job/capability/goal/output digest. A stale/late result cannot pass this bridge merely because its harness run completed.
 7. Start separate `prism.creative_report/1` Goal from the current board/evidence manifest. Report outage/hold preserves committed board/search. Reconcile actual provider cost independently from retained harness declared units.
 
-SQLite execution authority and a possible PostgreSQL product store are separate transactions. Work-intent/run-link and result-commit recovery in TF05 is mandatory; no cross-store exactly-once guarantee is assumed. Trailforge's optional PostgresRunStore/dispatch/broker belongs to legacy Review and is not a generic backend for this profile.
+The implemented local release uses separate SQLite product and execution databases, each with its own transaction authority. Work-intent/run-link and result-commit recovery in TF05 is mandatory; no cross-store exactly-once guarantee is assumed. Trailforge's optional PostgresRunStore/dispatch/broker belongs to legacy Review and is not a generic backend for this profile.
 
 For a crash/expired callback: advance retires the attempt as UNKNOWN/WAITING_HUMAN. Host inspects evidence/effects and applies explicit resolve_unknown(RETRY/CANCEL) only under current authorization, available attempts/units, real cost headroom, and whole-job deadline. Even PURE work is not silently reissued. Attempts and reservations remain consumed. Separate in-adapter transient retries, if permitted, have one finite provider-call budget and recorded attempts; they cannot mask ambiguous provider effects.
 
@@ -292,6 +294,6 @@ Dedicated training, feature-store, model-registry service, multi-agent merger, p
 
 ## 9. Deployment and operational changes
 
-Initial deployment boundary: web frontend/API, one execution host with persistent Trailforge neutral SQLite authority, measured bounded local workers, product DB, private artifacts, and encoder runtime. Product DB/framework versions remain ADR-10 open; Trailforge/Python integration is user-selected. CPU/GPU feasibility and cold start remain measured concerns. Horizontal/distributed generic execution is deferred until an appropriate authority implementation is separately designed and tested.
+Initial deployment boundary: web frontend/API, one execution host with persistent Trailforge neutral SQLite authority, measured bounded local workers, product DB, private artifacts, and encoder runtime. The local stack is selected in ADR-10: FastAPI, vanilla JavaScript, separate SQLite databases and local CPU CLIP; exact dependencies are in requirements.lock. CPU/GPU feasibility and cold start remain measured concerns. Horizontal/distributed generic execution is deferred until an appropriate authority implementation is separately designed and tested.
 
 Release unit also binds Trailforge commit/version, adapter implementation/config hashes, Goal-construction manifest, and neutral protocol. Back up product truth, authority, run links and artifacts consistently; use SQLite backup API or quiescent snapshot for active authority. Retained usage cannot be reset by restore or file replacement. Restore reapplies deletion tombstones before serving. Compatible rollback tests old-run reconstruction as well as product schemas/derived state; a changed Goal or adapter identity gets a new run, not rewritten checkpoints.

@@ -13,12 +13,15 @@ from pathlib import Path
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--source-root', required=True)
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument('--source-root')
+    mode.add_argument('--installed', action='store_true', help='Check the installed package, not a source checkout')
     parser.add_argument('--output', required=True)
     args = parser.parse_args()
-    root = Path(args.source_root).resolve()
+    root = Path(args.source_root).resolve() if args.source_root else None
     sys.dont_write_bytecode = True
-    sys.path.insert(0, str(root / 'src'))
+    if root:
+        sys.path.insert(0, str(root / 'src'))
     from trailforge.core import ContractError
     from trailforge.develop import CandidateWorkspace, Develop
     from trailforge.ports import AdapterCapabilities, FunctionAdapter, VerifiedResult
@@ -169,13 +172,23 @@ def main():
                {'phase_count': 6, 'changed_candidate': 'DENIED',
                 'execution_mode': handoff['execution_mode'], 'linux_isolation_verified': False})
 
-    commit = subprocess.check_output(['git', '-C', str(root), 'rev-parse', 'HEAD'], text=True).strip()
+    if root:
+        commit = subprocess.check_output(['git', '-C', str(root), 'rev-parse', 'HEAD'], text=True).strip()
+        execution = 'source checkout imports; not installed-wheel conformance'
+    else:
+        from importlib.metadata import distribution
+        package = distribution('trailforge')
+        assert package.version == '0.1.0a1'
+        direct = json.loads(package.read_text('direct_url.json'))
+        commit = direct['vcs_info']['commit_id']
+        assert commit == 'fbefaf40fb39a1429dcc328184372214f9fd849d'
+        execution = 'installed package imports; six bounded mechanism checks, not full upstream conformance'
     report = {
-        'date': '2026-10-08', 'release': 'v0.1.0a1', 'source_commit': commit,
-        'execution': 'source checkout imports; not installed-wheel conformance',
+        'date': '2026-10-10' if args.installed else '2026-10-08', 'release': 'v0.1.0a1', 'source_commit': commit,
+        'execution': execution,
         'check_count': len(results), 'status': 'PASS', 'checks': results,
         'limits': ['Synthetic data only', 'No CLIP or provider calls', 'No Prism application implementation',
-                   'No Docker, PostgreSQL, distributed, or installed-package conformance claim'],
+                   'No Docker, PostgreSQL, distributed, or full upstream conformance claim'],
     }
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)

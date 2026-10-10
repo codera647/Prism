@@ -1,0 +1,18 @@
+{
+  "tenant": "prism-developer",
+  "milestone": "replace-with-your-milestone-id",
+  "objective": "Describe one bounded implementation milestone with explicit acceptance criteria",
+  "candidate": "../.prism/developer/candidate",
+  "checks": "../.prism/developer/protected-checks",
+  "authority": "../.prism/developer/authority.sqlite3",
+  "allowed_paths": ["src/prism/your_module.py"],
+  "rounds": 1,
+  "budget_units": 32,
+  "agents": {
+    "PLAN": ["your-agent-command", "--phase", "plan"],
+    "RESEARCH": ["your-agent-command", "--phase", "research"],
+    "BUILD": ["your-agent-command", "--phase", "build"],
+    "DEBUG": ["your-agent-command", "--phase", "debug"]
+  },
+  "verify_command": ["python", "check_milestone.py"]
+}

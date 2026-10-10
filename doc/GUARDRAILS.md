@@ -1,5 +1,7 @@
 # Prism - Autonomy, Output Integrity, and Failure Controls
 
+> Implementation update (2026-10-10): the local Prism 0.1.0 app is built with real CLIP and pinned Trailforge. See [IMPLEMENTATION.md](IMPLEMENTATION.md) for implemented contracts, evidence and remaining gates. Earlier proposals below remain framework/reference requirements; they do not imply that missing real-data, pilot or hosted-release evidence exists.
+
 Date: 2026-10-08 (Asia/Karachi). Status: proposed policies to implement and evaluate. No guardrail has been demonstrated yet.
 
 Framework references: five moves pp. 4-5, seven failure modes pp. 8-9, A0-A4 pp. 9-10, P04-P09/P12/P16/P19/P20 pp. 14-19. Related: [SECURITY.md](SECURITY.md), [ARCHITECTURE.md](ARCHITECTURE.md), [PLAN.md](PLAN.md).

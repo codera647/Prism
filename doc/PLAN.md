@@ -1,5 +1,7 @@
 # Prism - Framework Mapping and Delivery Plan
 
+> Implementation update (2026-10-10): the local Prism 0.1.0 app is built with real CLIP and pinned Trailforge. See [IMPLEMENTATION.md](IMPLEMENTATION.md) for implemented contracts, evidence and remaining gates. Earlier proposals below remain framework/reference requirements; they do not imply that missing real-data, pilot or hosted-release evidence exists.
+
 Updated: 2026-10-09 (Asia/Karachi). Status: blueprint adapted to user-selected Trailforge. Product implementation, ML experiments, pilot, and release are not started. Limited synthetic harness checks are separate study evidence.
 
 ## Read this first

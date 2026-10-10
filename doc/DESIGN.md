@@ -1,5 +1,7 @@
 # Prism - Product and Interaction Design
 
+> Implementation update (2026-10-10): the local Prism 0.1.0 app is built with real CLIP and pinned Trailforge. See [IMPLEMENTATION.md](IMPLEMENTATION.md) for implemented contracts, evidence and remaining gates. Earlier proposals below remain framework/reference requirements; they do not imply that missing real-data, pilot or hosted-release evidence exists.
+
 Date: 2026-10-08 (Asia/Karachi). Status: proposed UX specification; no screens or usability evidence exist yet.
 
 Framework mapping: P02, PDF p. 13; autonomy pp. 9-10; P19 p. 19. Requirements: [PRD.md](PRD.md). Failure behavior: [GUARDRAILS.md](GUARDRAILS.md).

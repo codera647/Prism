@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "prism-creative"
+version = "0.1.0"
+description = "Local ad creative analysis and semantic visual board powered by CLIP and Trailforge"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115,<1", "uvicorn>=0.34,<1", "python-multipart>=0.0.20,<1",
+  "Pillow>=11,<13", "numpy>=2,<3", "scikit-learn>=1.6,<2",
+  "open_clip_torch>=3,<4", "filelock>=3,<5",
+  "trailforge @ git+https://github.com/codera647/Trailforge.git@fbefaf40fb39a1429dcc328184372214f9fd849d",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "httpx>=0.28,<1", "playwright>=1.50,<2"]
+
+[project.scripts]
+prism = "prism.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+prism = ["web/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

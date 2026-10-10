@@ -6,6 +6,8 @@ The first `v0.2.0` desktop Actions run stopped before packaging/publication when
 
 The updated full local suite passed **32 tests in 126.39 seconds**. The browser core suite passed five tests and its production build succeeded. The desktop package was relocated to the user's AppData folder and passed another actual-executable six-image check with controlled shutdown. A desktop shortcut opens the local application; the installed native backend's interface was also inspected through its loopback URL.
 
+**Published:** [Windows v0.2.1](https://github.com/codera647/Prism/releases/tag/v0.2.1), plus [Cloudflare browser app](https://prism-creative.pages.dev/). GitHub Actions passed the Windows contracts and actual packaged smoke before publishing. GitHub's archive digest matches the published checksum file. Raw photographs, private account credentials and deployment tokens are excluded from the repository and release.
+
 ## Architecture and ordered delivery
 
 1. Keep the Python product host and pinned Trailforge Harness as the full desktop execution plane. Freeze a small launcher; attach isolated portable CPython and native libraries so supervised decoding and CLIP multiprocessing use their normal runtime.

@@ -38,3 +38,9 @@ Cloudflare Pages is static hosting. This is a browser implementation of Prism's 
 6. Push a matching version tag after verification. [Windows desktop release](../.github/workflows/desktop-release.yml) repeats the build and packaged tests in GitHub Actions, then publishes the ZIP and digest as a prerelease. GitHub repository visibility remains unchanged.
 
 Real product photographs establish that the pipeline accepts and searches actual photos. They do not establish authentic advertising-copy extraction, held-out retrieval quality or campaign effectiveness. Synthetic demos remain clearly labelled.
+
+## Published result
+
+The website is live at **https://prism-creative.pages.dev/**. Version 0.2.1 deployed through [Pages run 38076807066](https://github.com/codera647/Prism/actions/runs/38076807066). The Windows download is [v0.2.1](https://github.com/codera647/Prism/releases/tag/v0.2.1), built by [desktop run 38076811675](https://github.com/codera647/Prism/actions/runs/38076811675). The 609,980,938-byte ZIP's GitHub SHA-256 digest matches `SHA256SUMS.txt`. Repository visibility remains private; downloading needs an account with repository access. The website is public.
+
+On this computer, the application is installed at `%LOCALAPPDATA%/Prism/app/0.2.1/Prism.exe` and a **Prism** shortcut exists on the Desktop. See [release evidence](../output/evidence/implementation/desktop-release.json) and [verification record](RELEASE_0_2.md).

@@ -4,6 +4,15 @@
 
 Last updated: 2026-10-10 (Asia/Karachi).
 
+## Current desktop and hosted release
+
+- **Prism 0.2.1 is published:** https://github.com/codera647/Prism/releases/tag/v0.2.1 . Windows Actions run `38076811675` passed 32 contracts, assembled the isolated runtime, tested the actual packaged executable and published the ZIP/checksum. Released code commit: `b97ed18de052f59a1a4555b8f6ecb96aa8a7b89c`. The earlier v0.2.0 tag failed before publication; retain its history.
+- **Cloudflare Pages is live:** https://prism-creative.pages.dev/ . Pages run `38076807066` succeeded. Browser CLIP uses pinned q8 ONNX weights and local IndexedDB; no server Trailforge receipts or cross-device sync. Account/project deployment credentials are private and ignored. Pages token expires 2027-01-09.
+- **Installed app:** `%LOCALAPPDATA%/Prism/app/0.2.1/Prism.exe`; Desktop shortcut `Prism.lnk`; data `%LOCALAPPDATA%/Prism/data`. The native application was opened and its managed loopback backend verified. The Windows computer-use native pipe was unavailable, so do not claim a native-window visual inspection.
+- **Real data checks:** 30 Google/Unsplash product photographs were downloaded, visually inspected, deduplicated and tested in browser CLIP and the packaged Python/Trailforge host. No authentic ad copy was available. Reports correctly remained partial; some group labels and retrieval results were wrong suggestions. Originals remain ignored; source/hash evidence is tracked. These checks do not complete held-out quality or real-user pilot gates.
+- **Public browser UI:** real model inference, grouped synthetic demo, search, reload retention, source copy edits/reanalysis, exact review, deletion/reanalysis and downloaded JSON export were exercised. Current test demo has 29 creatives after deleting one synthetic fixture.
+- See [release verification](RELEASE_0_2.md), [deployment guide](DEPLOYMENT.md) and `output/evidence/implementation/{desktop-release,desktop-real-smoke,browser-release,real-photo-sources}.json` for bounded evidence. Private test credentials are runtime-only; users create their own desktop account.
+
 ## 1. User intent and current authorization
 
 Prism answers "Show me what all these ads have in common": 30-100 uploaded ad images/copy, CLIP visual grouping and natural-language retrieval, source-linked hook/offer analysis, pattern drafts and three distinct creative experiments. The user requested the framework documentation, a step-by-step build order, adapting it to their own Trailforge harness, GitHub setup/push, then **complete the project** and **continue**. They confirmed that they have no images available.

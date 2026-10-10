@@ -71,6 +71,7 @@ test-results/
 !/output/evidence/implementation/verification.json
 !/output/evidence/implementation/prism-board.jpg
 !/output/evidence/implementation/desktop-real-smoke.json
+!/output/evidence/implementation/desktop-release.json
 !/output/evidence/implementation/browser-release.json
 !/output/evidence/implementation/real-photo-sources.json
 !/output/evidence/implementation/prism-web.jpg

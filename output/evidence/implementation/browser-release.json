@@ -5,33 +5,90 @@
   "deployment_commit": "7b219afe7210f4f414394117d6b17ac01e5e06ce",
   "deployment_run": "https://github.com/codera647/Prism/actions/runs/38075807380",
   "deployment_status": "success",
-  "browser_core_tests": {"passed": 5, "failed": 0},
-  "model": {"id":"Xenova/clip-vit-base-patch32", "revision":"d15189d7028b43f1d3e65039190477f6af591c2a", "dtype":"q8", "runtime":"Transformers.js 3.8.1 / ONNX browser CPU"},
+  "browser_core_tests": {
+    "passed": 5,
+    "failed": 0
+  },
+  "model": {
+    "id": "Xenova/clip-vit-base-patch32",
+    "revision": "d15189d7028b43f1d3e65039190477f6af591c2a",
+    "dtype": "q8",
+    "runtime": "Transformers.js 3.8.1 / ONNX browser CPU"
+  },
   "public_ui_checks": {
     "real_browser_model_download_and_inference_under_csp": "PASS",
     "synthetic_ads": 30,
-    "groups": {"Product close-ups":10,"Testimonials":10,"Discount promotions":10},
+    "groups": {
+      "Product close-ups": 10,
+      "Testimonials": 10,
+      "Discount promotions": 10
+    },
     "experiments": 3,
     "skincare_query_matches": 20,
     "reload_preserved_board_analysis": "PASS",
     "visible_creative_cards_after_adblock_class_fix": 30,
     "inspected_closeup_group_images_loaded": 10,
     "exact_report_review": "PASS",
-    "export_button": "Clicked; no downloaded-file content verification claimed",
+    "export_button": "PASS: downloaded JSON schema, 30 ads, reviewed report and image URLs excluded verified",
     "image_bytes_and_copy_uploaded_to_server": false
   },
   "local_real_photo_checks": {
-    "url":"http://127.0.0.1:8123/real-eval.html",
-    "scope":"Same browser engine; local evaluation-only import helper; no fixture photographs deployed",
-    "accepted":30, "rejected":0, "advertising_copy_count":0,
-    "report":"partial; one visual experiment, explicit missing-copy gap",
-    "queries":[
-      {"query":"minimal skincare ads with product close-ups","matches":17,"top5":["photo-1583209814683-c023dd293cc6.jpg","photo-1580870069867-74c57ee1bb07.jpg","photo-1615397349754-cfa2066a298e.jpg","photo-1585945037805-5fd82c2e60b1.jpg","photo-1608571423902-eed4a5ad8108.jpg"]},
-      {"query":"running shoes","matches":8,"top5":["photo-1542291026-7eec264c27ff.jpg","photo-1595950653106-6c9ebd614d3a.jpg","photo-1560769629-975ec94e6a86.jpg","photo-1608231387042-66d1773070a5.jpg","photo-1606107557195-0e29a4b5b4aa.jpg"]},
-      {"query":"underwater submarines and coral reefs","matches":0,"no_match":true}
+    "url": "http://127.0.0.1:8123/real-eval.html",
+    "scope": "Same browser engine; local evaluation-only import helper; no fixture photographs deployed",
+    "accepted": 30,
+    "rejected": 0,
+    "advertising_copy_count": 0,
+    "report": "partial; one visual experiment, explicit missing-copy gap",
+    "queries": [
+      {
+        "query": "minimal skincare ads with product close-ups",
+        "matches": 17,
+        "top5": [
+          "photo-1583209814683-c023dd293cc6.jpg",
+          "photo-1580870069867-74c57ee1bb07.jpg",
+          "photo-1615397349754-cfa2066a298e.jpg",
+          "photo-1585945037805-5fd82c2e60b1.jpg",
+          "photo-1608571423902-eed4a5ad8108.jpg"
+        ]
+      },
+      {
+        "query": "running shoes",
+        "matches": 8,
+        "top5": [
+          "photo-1542291026-7eec264c27ff.jpg",
+          "photo-1595950653106-6c9ebd614d3a.jpg",
+          "photo-1560769629-975ec94e6a86.jpg",
+          "photo-1608231387042-66d1773070a5.jpg",
+          "photo-1606107557195-0e29a4b5b4aa.jpg"
+        ]
+      },
+      {
+        "query": "underwater submarines and coral reefs",
+        "matches": 0,
+        "no_match": true
+      }
     ],
-    "known_quality_limit":"Some plain product photos received the tentative Discount promotions visual label. Labels and the grouping threshold need authentic-ad evaluation."
+    "known_quality_limit": "Some plain product photos received the tentative Discount promotions visual label. Labels and the grouping threshold need authentic-ad evaluation."
   },
-  "limitations":["Developmental checks, not held-out quality metrics","Photographs are not authenticated campaign creatives and have no ad copy","Browser boards are device/origin-local, separate from desktop; no cloud sync or server Trailforge receipts","Native Windows window was not visually inspected because the computer-use helper was unavailable"],
-  "paid_inference_calls":0
+  "limitations": [
+    "Developmental checks, not held-out quality metrics",
+    "Photographs are not authenticated campaign creatives and have no ad copy",
+    "Browser boards are device/origin-local, separate from desktop; no cloud sync or server Trailforge receipts",
+    "Native Windows window was not visually inspected because the computer-use helper was unavailable"
+  ],
+  "paid_inference_calls": 0,
+  "version_0_2_1_followup": {
+    "deployment_commit": "b97ed18de052f59a1a4555b8f6ecb96aa8a7b89c",
+    "deployment_run": "https://github.com/codera647/Prism/actions/runs/38076807066",
+    "copy_edit_invalidates_analysis": "PASS",
+    "reanalyzed_source_quotes": [
+      "Discover",
+      "simple",
+      "20% off",
+      "Free shipping"
+    ],
+    "delete_synthetic_creative": "PASS; board count 29, deleted creative absent, previous report invalidated",
+    "reanalyze_after_deletion": "PASS; three experiments, deleted creative absent",
+    "progress_on_completion": "Analysis complete, no lingering model download notice"
+  }
 }

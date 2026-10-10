@@ -1,0 +1,32 @@
+{
+  "version": "0.2.1",
+  "release_url": "https://github.com/codera647/Prism/releases/tag/v0.2.1",
+  "release_id": 409138665,
+  "tag": "v0.2.1",
+  "prerelease": true,
+  "source_commit": "b97ed18de052f59a1a4555b8f6ecb96aa8a7b89c",
+  "workflow": "https://github.com/codera647/Prism/actions/runs/38076811675",
+  "windows_contract_tests": 32,
+  "packaged_clip_smoke": "PASS in release workflow",
+  "assets": [
+    {
+      "name": "Prism-0.2.1-Windows-x64.zip",
+      "bytes": 609980938,
+      "digest": "sha256:7bb8e2f426eac0f042727ef12e5e5cd0a273662382dbcc1affbe304aec66a30b",
+      "url": "https://github.com/codera647/Prism/releases/download/v0.2.1/Prism-0.2.1-Windows-x64.zip"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 95,
+      "digest": "sha256:f4b52a1b585d9a8290c3203b1b3b74720eb39cb212fd800d00bb535ccc2c1c0e",
+      "url": "https://github.com/codera647/Prism/releases/download/v0.2.1/SHA256SUMS.txt"
+    }
+  ],
+  "archive_digest_matches_sha256sums": true,
+  "installed_path": "C:\\Users\\nexge\\AppData\\Local\\Prism\\app\\0.2.1\\Prism.exe",
+  "installed_native_backend_version": "0.2.1",
+  "installed_native_backend_clip_ready": true,
+  "native_window_visual_inspection": "Unavailable: computer-use native pipe missing",
+  "validation_scope": "Packaged runtime mechanics and developmental real photos; no held-out ad quality or performance claim",
+  "workflow_status": "success"
+}

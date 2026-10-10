@@ -34,7 +34,7 @@ Fourteen documents now live in doc: ARCHITECTURE, BUILD_PROMPT, BUILD_ORDER, DEC
 | Product/host tests | 28 passed; zero failed/skipped | Privacy, invalid inputs, currentness, tampering, real process death, explicit UNKNOWN recovery, cross-store crash windows, exact-report review, Develop continuity and restore/deletion |
 | Installed harness | Pin metadata plus six bounded checks passed | [installed-harness.json](../output/evidence/implementation/installed-harness.json); not full upstream conformance |
 | Real CLIP | Synthetic 30/100-ad workflows passed | [local-smoke.json](../output/evidence/implementation/local-smoke.json); no custom training or paid calls |
-| Browser/package | Responsive mobile/tablet inspected; wheel built | [verification.json](../output/evidence/implementation/verification.json), [screenshot](../output/evidence/implementation/prism-board.png) |
+| Browser/package | Responsive mobile/tablet inspected; wheel built | [verification.json](../output/evidence/implementation/verification.json), [screenshot](../output/evidence/implementation/prism-board.jpg) |
 | S0/S1 full signoff | Open | No real workflow/baseline, permitted representative dataset or held-out quality |
 | S2/S3 framework gates | Local mechanical implementation documented | Proposed targets/owners not fully ratified; synthetic evidence does not fill missing prerequisites |
 | S4 pilot | Open | No actual strategist usefulness/review-effort measurements |

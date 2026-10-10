@@ -68,7 +68,7 @@ test-results/
 !/output/evidence/implementation/local-smoke.json
 !/output/evidence/implementation/installed-harness.json
 !/output/evidence/implementation/verification.json
-!/output/evidence/implementation/prism-board.png
+!/output/evidence/implementation/prism-board.jpg
 
 # Local editors, logs, temporary files, and operating system metadata
 .idea/

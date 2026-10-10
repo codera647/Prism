@@ -58,7 +58,7 @@
     "patterns_and_experiments": "PASS",
     "mobile_390_no_page_overflow": true,
     "tablet_1024_no_page_overflow": true,
-    "screenshot": "prism-board.png"
+    "screenshot": "prism-board.jpg"
   },
   "limits": [
     "Synthetic developmental fixtures, not held-out quality or advertising performance.",

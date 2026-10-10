@@ -67,7 +67,7 @@ Setup downloads the official immutable artifact, verifies the known hash, then c
 
 The automated suite covers cross-owner reads/mutations, origin/CSRF denial, upload corruption/ambiguity and variants, exact copy spans, source corrections, stale revisions, idempotency/concurrent admission, typed verification and forged source/count denial, cancelled late callbacks, staged-artifact corruption, native process death/explicit recovery, cross-store crash windows, exact-report review, Develop candidate continuity and restore/deletion/reservation handling.
 
-Evidence: [real-model smoke](../output/evidence/implementation/local-smoke.json), [installed harness checks](../output/evidence/implementation/installed-harness.json), [final verification](../output/evidence/implementation/verification.json), [browser screenshot](../output/evidence/implementation/prism-board.png). The reproducible real-model check is [scripts/verify_local.py](../scripts/verify_local.py); it creates synthetic boards and requires an already installed model. Detailed test source is in [tests](../tests).
+Evidence: [real-model smoke](../output/evidence/implementation/local-smoke.json), [installed harness checks](../output/evidence/implementation/installed-harness.json), [final verification](../output/evidence/implementation/verification.json), [browser screenshot](../output/evidence/implementation/prism-board.jpg). The reproducible real-model check is [scripts/verify_local.py](../scripts/verify_local.py); it creates synthetic boards and requires an already installed model. Detailed test source is in [tests](../tests).
 
 ## Framework status and remaining work
 

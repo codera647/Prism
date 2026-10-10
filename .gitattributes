@@ -13,3 +13,4 @@
 .gitignore text eol=lf
 .env.example text eol=lf
 *.png binary
+*.jpg binary

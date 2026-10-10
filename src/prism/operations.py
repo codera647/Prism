@@ -50,7 +50,7 @@ def restore(settings, source):
     root = settings.data
     floors = unit_floor(root)
     with tempfile.TemporaryDirectory(prefix="prism-restore-") as work:
-        temp = Path(work)
+        temp = Path(work).resolve()
         with zipfile.ZipFile(source) as archive:
             if sum(item.file_size for item in archive.infolist()) > 12*1024**3:
                 raise ValueError("Backup exceeds the restore size bound")

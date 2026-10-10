@@ -25,7 +25,7 @@ function view(board){
 let mlWorker,pending=new Map();
 function worker(){if(!mlWorker){mlWorker=new Worker('/static/clip-worker.js',{type:'module'});mlWorker.onmessage=event=>{
   const data=event.data;if(data.progress){document.dispatchEvent(new CustomEvent('prism-progress',{detail:data.progress}));return;}
-  const task=pending.get(data.id);if(task){clearTimeout(task.timeout);pending.delete(data.id);data.error?task.reject(Error(data.error)):task.resolve(data.result);}
+  const task=pending.get(data.id);if(task){clearTimeout(task.timeout);pending.delete(data.id);data.error?task.reject(Error(data.error)):task.resolve(data.result);if(!pending.size&&!data.error)document.dispatchEvent(new CustomEvent('prism-progress',{detail:'CLIP ready. Your boards and images are stored on this device.'}));}
 };mlWorker.onerror=()=>resetWorker('Browser CLIP could not start. Reload or try the desktop app.');}return mlWorker;}
 function resetWorker(reason){mlWorker?.terminate();mlWorker=null;for(const task of pending.values()){clearTimeout(task.timeout);task.reject(Error(reason));}pending.clear();}
 function infer(kind,values){return new Promise((resolve,reject)=>{const id=crypto.randomUUID(),w=worker();const timeout=setTimeout(()=>resetWorker('Browser inference timed out. Your saved images are retained; retry analysis.'),600000);pending.set(id,{resolve,reject,timeout});w.postMessage({id,kind,values});});}
@@ -67,7 +67,7 @@ function fileName(value){if(typeof value!=='string'||!value||value.length>240||/
 
 async function route(path,options={}){
   const url=new URL(path,'https://prism.invalid'),parts=url.pathname.split('/').filter(Boolean),method=options.method||'GET',body=options.body||{};
-  if(parts[0]==='health')return {status:'ok',version:'0.2.0',mode:'browser',clip_ready:true,model:policy.model,harness:null};
+  if(parts[0]==='health')return {status:'ok',version:'0.2.1',mode:'browser',clip_ready:true,model:policy.model,harness:null};
   if(parts[0]==='auth'&&parts[1]==='me')return {name:'On this device'};
   if(parts[0]==='auth')fail('The browser app uses one device workspace, without accounts.');
   if(parts[0]==='demo'){

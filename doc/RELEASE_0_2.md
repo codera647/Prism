@@ -2,6 +2,10 @@
 
 Updated 2026-10-10. The user authorized a Windows desktop release, GitHub Actions deployment, free public hosting and tests with real product images. Cloudflare Pages Free was selected after other providers required payment or a credit card. No paid inference service is used.
 
+The first `v0.2.0` desktop Actions run stopped before packaging/publication when its clean Windows runner exposed a valid-backup rejection under a noncanonical temporary directory. Version **0.2.1** resolves the temporary root before validating archive descendants; containment and traversal rejection stay enforced. A regression test uses an equivalent aliased temporary root. Earlier 0.2.0 inference evidence below remains applicable to the unchanged CLIP pipeline.
+
+The updated full local suite passed **32 tests in 126.39 seconds**. The browser core suite passed five tests and its production build succeeded. The desktop package was relocated to the user's AppData folder and passed another actual-executable six-image check with controlled shutdown. A desktop shortcut opens the local application; the installed native backend's interface was also inspected through its loopback URL.
+
 ## Architecture and ordered delivery
 
 1. Keep the Python product host and pinned Trailforge Harness as the full desktop execution plane. Freeze a small launcher; attach isolated portable CPython and native libraries so supervised decoding and CLIP multiprocessing use their normal runtime.

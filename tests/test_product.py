@@ -15,6 +15,30 @@ from prism.workflow import Workflow
 from conftest import create_board, finish, image_bytes, upload, FixtureEncoder
 
 
+def test_restore_accepts_valid_archive_with_noncanonical_temp_root(system, tmp_path, monkeypatch):
+    """Temp roots can be aliases, notably Windows runner short user paths."""
+    from contextlib import contextmanager
+    from pathlib import Path
+    from prism import operations
+    _, client, _, settings = system
+    cid = create_board(client)
+    target = tmp_path / 'private-backup.zip'
+    backup(settings, target)
+    original = operations.tempfile.TemporaryDirectory
+
+    @contextmanager
+    def aliased_temp(**kwargs):
+        with original(**kwargs) as work:
+            child = Path(work) / 'nested'
+            child.mkdir()
+            yield str(child / '..')
+
+    monkeypatch.setattr(operations.tempfile, 'TemporaryDirectory', aliased_temp)
+    assert restore(settings, target)['deletions_replayed']
+    with operations.Store(settings).connect() as db:
+        assert db.execute('SELECT name FROM collections WHERE id=?', (cid,)).fetchone()[0] == 'Test board'
+
+
 def test_complete_upload_analysis_report_search_review_export(system):
     app, client, encoder, settings = system
     cid = create_board(client)

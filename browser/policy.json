@@ -1,0 +1,76 @@
+{
+  "VISUAL_LABELS": [
+    [
+      "Product close-ups",
+      "an advertising image with a close-up of a single skincare product on a minimal plain background"
+    ],
+    [
+      "People & lifestyle",
+      "an advertising image with a person using a product in a lifestyle photograph"
+    ],
+    [
+      "Testimonials",
+      "a testimonial advertisement featuring a customer review and star ratings"
+    ],
+    [
+      "Discount promotions",
+      "a promotional advertisement featuring a large discount price or sale percentage"
+    ],
+    [
+      "Product collections",
+      "an advertising photograph showing several products arranged together"
+    ],
+    [
+      "Text-led creatives",
+      "a typography advertisement dominated by headline text and graphics"
+    ]
+  ],
+  "HOOK_RULES": [
+    [
+      "Question",
+      "[^.!\\n?]{0,180}\\?"
+    ],
+    [
+      "Social proof",
+      "\\b(?:rated\\s+[\\d.]+|[\\d,]+\\+?\\s+(?:customers|reviews)|customers?\\s+love|verified\\s+review|five.star|5.star)\\b"
+    ],
+    [
+      "Urgency",
+      "\\b(?:limited\\s+time|ends?\\s+(?:tonight|today|soon)|last\\s+chance|today\\s+only|while\\s+stocks?\\s+last)\\b"
+    ],
+    [
+      "Discovery",
+      "\\b(?:meet|introducing|discover|new)\\b"
+    ],
+    [
+      "Benefit claim",
+      "\\b(?:hydrati\\w*|glow\\w*|smooth\\w*|soft\\w*|bright\\w*|simpl\\w*|gentle)\\b"
+    ]
+  ],
+  "OFFER_RULES": [
+    [
+      "Discount",
+      "\\b\\d{1,3}(?:\\.\\d+)?\\s*%\\s*(?:off|discount)?|\\b(?:save|off)\\s*[$£€]\\s*\\d+(?:\\.\\d{1,2})?"
+    ],
+    [
+      "Free shipping",
+      "\\bfree\\s+(?:shipping|delivery)\\b"
+    ],
+    [
+      "Bundle",
+      "\\b(?:bundle|buy\\s+one\\s+get\\s+one|bogo|starter\\s+kit)\\b"
+    ],
+    [
+      "Gift",
+      "\\bfree\\s+gift\\b"
+    ]
+  ],
+  "model": {
+    "name": "Xenova/clip-vit-base-patch32",
+    "revision": "d15189d7028b43f1d3e65039190477f6af591c2a",
+    "dtype": "q8",
+    "dimensions": 512,
+    "runtime": "Transformers.js / ONNX CPU",
+    "tokenization": "75-token chunks; normalized mean"
+  }
+}

@@ -12,6 +12,7 @@
 __pycache__/
 *.py[cod]
 .venv/
+.desktop-build/
 venv/
 env/
 .pytest_cache/

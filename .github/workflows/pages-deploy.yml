@@ -1,0 +1,40 @@
+name: Deploy Cloudflare Pages
+on:
+  push:
+    branches: [main]
+    paths: ['browser/**', 'src/prism/web/**', 'src/prism/analysis.py', 'scripts/export_browser_policy.py', '.github/workflows/pages-deploy.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: prism-pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: browser
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: browser/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Verify shared copy-policy export
+        run: |
+          python ../scripts/export_browser_policy.py
+          git diff --exit-code -- policy.json
+      - run: npm ci --no-audit --no-fund
+      - run: npm test
+      - run: npm run build
+      - name: Deploy static browser app on the free Pages project
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx wrangler pages deploy dist --project-name=prism-creative --branch=main --commit-hash=${{ github.sha }}

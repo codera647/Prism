@@ -91,8 +91,10 @@ def decode_bounded(root, name, content):
     environment = {k: v for k, v in os.environ.items() if k.upper() in {"SYSTEMROOT", "WINDIR", "PATH", "TEMP", "TMP", "LANG", "LC_ALL"}}
     with DECODER_SLOTS:
         try:
-            process = subprocess.run([sys.executable, "-m", "prism.decode_worker", str(root), name, aid], input=content,
-                                     capture_output=True, timeout=20, env=environment)
+            command = [sys.executable, "--decode-worker"] if getattr(sys, "frozen", False) else [sys.executable, "-m", "prism.decode_worker"]
+            flags = subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0
+            process = subprocess.run([*command, str(root), name, aid], input=content,
+                                     capture_output=True, timeout=20, env=environment, creationflags=flags)
             if process.returncode or len(process.stdout) > 8192:
                 raise ValueError("decoder failed")
             value = json.loads(process.stdout)

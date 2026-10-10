@@ -6,6 +6,7 @@ from pathlib import Path
 import sqlite3
 import threading
 import time
+import sys
 
 from trailforge.core import digest
 from trailforge.ports import AdapterCapabilities, FunctionAdapter, VerifiedResult
@@ -21,6 +22,8 @@ LOG = logging.getLogger("prism.jobs")
 
 def code_hash():
     root = Path(__file__).parent
+    if getattr(sys, "frozen", False):
+        return json.loads((root / "build_identity.json").read_text(encoding="utf-8"))["code_sha256"]
     return fingerprint({p.name: file_hash(p) for p in sorted(root.glob("*.py"))})
 
 

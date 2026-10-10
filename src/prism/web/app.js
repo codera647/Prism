@@ -7,6 +7,7 @@ const el = id => document.getElementById(id);
 let toastTimer;
 function toast(message){const t=el("toast");t.textContent=message;t.style.display="block";clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.style.display="none",5500);}
 async function api(path, options={}){
+  if(window.prismBrowserApi)return window.prismBrowserApi(path,options);
   const headers={...options.headers};
   if(state.user?.csrf)headers["X-CSRF-Token"]=state.user.csrf;
   if(options.body && !(options.body instanceof FormData)){headers["Content-Type"]="application/json";options.body=JSON.stringify(options.body);}

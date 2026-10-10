@@ -1,0 +1,63 @@
+name: Windows desktop release
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+permissions:
+  contents: write
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: |
+            requirements.lock
+            requirements-desktop.lock
+      - name: Install pinned desktop environment
+        run: |
+          python -m venv .desktop-build
+          .desktop-build/Scripts/python.exe -m pip install -r requirements.lock -r requirements-desktop.lock
+          .desktop-build/Scripts/python.exe -m pip install --no-deps -e .
+          .desktop-build/Scripts/python.exe -m pip check
+      - name: Verify product contracts
+        run: .desktop-build/Scripts/python.exe -m pytest -q
+      - name: Prepare verified offline model and icon
+        run: .desktop-build/Scripts/python.exe scripts/prepare_desktop.py
+      - name: Freeze native desktop application
+        run: .desktop-build/Scripts/python.exe -m PyInstaller packaging/prism.spec --noconfirm --distpath dist --workpath output/pyinstaller
+      - name: Attach isolated portable Python and native CLIP libraries
+        run: .desktop-build/Scripts/python.exe scripts/assemble_desktop.py
+      - name: Test actual packaged subprocesses and CLIP
+        run: .desktop-build/Scripts/python.exe scripts/smoke_desktop.py
+      - name: Assemble portable desktop download
+        shell: pwsh
+        run: |
+          $version = .desktop-build/Scripts/python.exe -c "from prism import __version__; print(__version__)"
+          if ('${{ github.ref_type }}' -eq 'tag' -and '${{ github.ref_name }}' -ne "v$version") { throw 'Tag does not match package version' }
+          New-Item -ItemType Directory -Force output/release | Out-Null
+          Copy-Item packaging/DESKTOP_README.txt dist/Prism/README.txt
+          $archive = "output/release/Prism-$version-Windows-x64.zip"
+          Compress-Archive -Path dist/Prism -DestinationPath $archive
+          $digest = (Get-FileHash $archive -Algorithm SHA256).Hash.ToLower()
+          "$digest  Prism-$version-Windows-x64.zip" | Set-Content output/release/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Prism-Windows-desktop
+          path: |
+            output/release/*
+            output/desktop-smoke.json
+          retention-days: 14
+      - name: Publish verified desktop prerelease
+        if: github.ref_type == 'tag'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh release create '${{ github.ref_name }}' output/release/*
+          --title 'Prism ${{ github.ref_name }} — Windows desktop'
+          --notes-file packaging/RELEASE_NOTES.md --prerelease --verify-tag

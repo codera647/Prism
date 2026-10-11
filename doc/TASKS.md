@@ -1,5 +1,7 @@
 # Prism - Dependency-Ordered Backlog
 
+> Gemini model-availability fix: **completed in 0.3.1**. Model discovery, explicit selection, private key lifecycle, new-model generation compatibility and separate search pricing are covered by 21 browser regressions. Pages and Windows Actions passed; local desktop backend/assets and real catalogue requests passed. Live Gemini success remains a user-key check. [Evidence](../output/evidence/implementation/gemini-connection-patch.json).
+
 > Current campaign research / Gemini / UI extension: [Prism 0.3 specification and framework mapping](RELEASE_0_3.md). Earlier sections below remain historical baseline records.
 
 

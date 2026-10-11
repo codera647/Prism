@@ -1,0 +1,64 @@
+{
+  "source_commit": "5ac5c78a3c05da97fcb88ff09f48d745fffdf7ea",
+  "site": "https://prism-creative.pages.dev",
+  "assets": {
+    "studio.mjs": {
+      "status": 200,
+      "sha256": "809d9d68a1d7fac90ff3035b8903ec0a4ed9908ee9118d24df9dcccc1f7ef60e",
+      "bytes": 32734
+    },
+    "gemini-client.mjs": {
+      "status": 200,
+      "sha256": "76c76b899c5aedb023afbf7ded60562c6d6e878c058b28c4383738242297f45c",
+      "bytes": 4275
+    }
+  },
+  "model_list_cors": {
+    "status": 200,
+    "allow_origin": "https://prism-creative.pages.dev"
+  },
+  "local_browser_tests": 21,
+  "live_gemini_generation": "not tested: user key remains private",
+  "scope": "HTTP/source verification and mocked regression tests; no native-window or live Gemini visual/quality verification",
+  "installed_desktop": {
+    "version": "0.3.1",
+    "clip_ready": true,
+    "studio_asset_bytes": 32734,
+    "gemini_client_sha256": "76c76b899c5aedb023afbf7ded60562c6d6e878c058b28c4383738242297f45c",
+    "live_catalogue_references": 12,
+    "reference_image_bytes": 103501,
+    "installation": "Pinned 0.2.1 runtime reused; released 0.3.1 source/UI copied from 5ac5c78.",
+    "native_window_visual_inspection": "not performed",
+    "existing_data": "separate existing data path retained; old app versions preserved"
+  },
+  "actions": {
+    "pages": {
+      "id": 38120306742,
+      "conclusion": "success"
+    },
+    "contracts": {
+      "id": 38120306740,
+      "conclusion": "success"
+    },
+    "windows": {
+      "id": 38120312857,
+      "conclusion": "success"
+    }
+  },
+  "release": {
+    "url": "https://github.com/codera647/Prism/releases/tag/v0.3.1",
+    "assets": [
+      {
+        "name": "Prism-0.3.1-Windows-x64.zip",
+        "bytes": 610205937,
+        "digest": "sha256:30a8ae080d1bbf2ac5b7f616af73df74475d984138adbbeaade149d49aa94eb1"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "bytes": 95,
+        "digest": "sha256:00d68644b716efa33948b9a8584516a3aaa9a868d5cbbedc44e4e5d4323b35d0"
+      }
+    ],
+    "local_official_zip_download": "not performed; local runtime reuse is documented separately"
+  }
+}

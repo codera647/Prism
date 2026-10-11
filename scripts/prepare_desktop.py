@@ -19,10 +19,11 @@ if args.model:
 else:
     from prism.encoder import download_model
     download_model(seed)
-image=Image.new('RGBA',(256,256),(119,86,201,255))
+image=Image.new('RGBA',(256,256),(241,237,228,255))
 draw=ImageDraw.Draw(image)
-draw.line([(128,40),(218,208),(38,208),(128,40)],fill='white',width=12)
-draw.line([(128,40),(105,178),(218,208)],fill='white',width=6)
+draw.line([(40,196),(124,36),(216,196),(40,196)],fill=(60,56,47),width=12)
+draw.line([(124,36),(128,144),(216,196)],fill=(151,62,45),width=8)
+draw.line([(40,196),(128,144)],fill=(151,62,45),width=8)
 dest=root/'output/packaging';dest.mkdir(parents=True,exist_ok=True)
 image.save(dest/'prism.ico',sizes=[(16,16),(32,32),(48,48),(64,64),(128,128),(256,256)])
 print('Desktop model seed and icon ready.')

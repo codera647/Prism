@@ -2,6 +2,8 @@
 
 **Start with a product. Leave with a direction.**
 
+Prism 0.4 replaces the layout with a flat, warm workspace: Campaign brief, References and Creative concepts. All existing board, CLIP, Gemini, chat and export features remain. [Redesign and verification](doc/RELEASE_0_4.md).
+
 Prism 0.3 adds **Campaign studio**: describe your product, Pakistan/global market, platform, audience and copy language; discover real product references, import selected photographs into a local CLIP board, and connect your own Gemini key for cited web research, three tailored creative concepts and a chat assistant. Enter the key privately in the app, never in chat. Click **Load available models**, choose a listed Flash / Flash-Lite text model, then connect. The key clears on refresh. [Workflow, architecture and boundaries](doc/RELEASE_0_3.md).
 
 Try: **anti-frizz shampoo → Pakistan → Instagram → English + Roman Urdu → reference keyword: shampoo**. Catalogue photographs are labelled product references; their paid-ad status and Instagram delivery are unverified. Regional Ad Library links help check actual ads. Images remain device-side; optional Gemini calls send your brief and selected text to Google. For the free route use a Gemini project without paid billing; provider quotas apply. Google Search grounding is separate, unavailable on newer models' API free tier, and disabled until explicitly enabled in AI connection. Free product discovery and regional search links remain available.

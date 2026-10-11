@@ -1,5 +1,7 @@
 # Prism - Project Memory and Continuation State
 
+> Current work: **0.4 layout replacement** following the user's supplied design-checklist video. User explicitly chose to retain all working features and confirmed Gemini was working before this request. The new UI is locally verified; publication and desktop installation evidence will follow. Browser-control runtime is unavailable, so do not claim screenshot/native visual QA. [Release record](RELEASE_0_4.md). Earlier missing-model/live-success notes below are historical.
+
 ## Gemini availability correction (2026-10-11)
 
 Completed: Pages deployment, v0.3.1 Windows publication, and local installed-backend verification. [Patch evidence](../output/evidence/implementation/gemini-connection-patch.json) records source hashes, CI runs, release checksums and the local runtime-reuse method. 42 Python contracts / packaged-app checks passed in Actions; 21 browser regressions passed. Native UI visual inspection and live Gemini success with the private user key remain unverified.

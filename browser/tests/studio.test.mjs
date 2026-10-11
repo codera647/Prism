@@ -11,13 +11,13 @@ test('campaign flow imports missing-copy references, drafts with current CLIP co
   const originals={};for(const [name,value] of Object.entries({window:w,document:w.document,localStorage:w.localStorage,FormData:w.FormData,File:w.File})){originals[name]=globalThis[name];globalThis[name]=value;}
   const ref={id:'r-1',title:'Shampoo <script>alert(1)</script>',brand:'Example',region:'PK',image:'https://cdn.shopify.com/s/files/1/1/a.jpg',url:'https://saeedghani.pk/products/example',kind:'product_reference',verification:'Paid-ad status not verified.'};
   const board={id:'b-1',name:'References',revision:1,count:0,copy_count:0,ads:[],groups:[],patterns:[],jobs:[],stale:false,model:null,report:null};
-  const calls=[],requests=[];let collections=[],failFirstGeneration=true,modelLists=0;
+  const calls=[],requests=[];let collections=[],failFirstGeneration=true,modelLists=0,finishDiscovery;
   w.prismBrowserApi=async(path,opts={})=>{
     calls.push({path,body:opts.body});
     if(path==='/health')return {clip_ready:true};if(path==='/auth/me')return {name:'On this device'};
     if(path==='/collections'&&opts.method==='POST'){collections=[board];return board;}
     if(path==='/collections')return collections;
-    if(path==='/discover')return {references:[ref],catalogues:[{store:'Example',status:'ok',count:1}],retrieved_at:new Date().toISOString()};
+    if(path==='/discover')return new Promise(resolve=>{finishDiscovery=()=>resolve({references:[ref],catalogues:[{store:'Example',status:'ok',count:1}],retrieved_at:new Date().toISOString()});});
     if(path==='/collections/b-1/upload'){
       assert.equal(opts.body.get('copy_json'),'{}');const file=opts.body.getAll('files')[0];board.ads.push({id:'a-1',filename:file.name,image:'https://prism.test/private.jpg',copy:'',width:100,height:100,tags:[]});board.count=1;board.revision++;return {accepted:[{id:'a-1'}],rejected:[]};
     }
@@ -42,10 +42,21 @@ test('campaign flow imports missing-copy references, drafts with current CLIP co
     w.eval(await readFile('../src/prism/web/app.js','utf8'));
     await import('../../src/prism/web/studio.mjs?dom-test');await delay(15);
     const fill=(name,value)=>{w.document.querySelector(`[name="${name}"]`).value=value;};
-    const click=async action=>{const button=w.document.querySelector(`[data-studio="${action}"]`);assert.ok(button,action+' button missing');button.click();await delay(20);};
-    assert.match(w.document.querySelector('h1').textContent,/Start with a product/);
+    const click=async action=>{let button=w.document.querySelector(`[data-studio="${action}"]`);assert.ok(button,action+' button missing');const panel=button.closest('[role="tabpanel"]');if(panel?.hidden){w.document.querySelector(`[aria-controls="${panel.id}"]`).click();await delay(10);button=w.document.querySelector(`[data-studio="${action}"]`);}const menu=button.closest('details');if(menu)menu.open=true;button.click();await delay(20);};
+    assert.match(w.document.querySelector('h1').textContent,/Give your next/);
+    assert.equal(w.document.querySelector('#campaign-panel-brief').hidden,false);
+    assert.equal(w.document.querySelector('#campaign-panel-references').hidden,true);
+    assert.equal(w.document.querySelector('.orbit-art'),null);
+    // Navigation preserves even incomplete briefs, and supports tab keyboard use.
+    fill('product','Unfinished draft');w.document.querySelector('#campaign-tab-brief').dispatchEvent(new w.KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true,cancelable:true}));await delay(10);
+    assert.equal(w.document.querySelector('#campaign-panel-references').hidden,false);assert.equal(w.document.activeElement.id,'campaign-tab-references');
+    w.document.querySelector('#campaign-tab-references').dispatchEvent(new w.KeyboardEvent('keydown',{key:'Home',bubbles:true,cancelable:true}));await delay(10);
+    assert.equal(w.document.querySelector('[name="product"]').value,'Unfinished draft');assert.equal(w.document.querySelector('#campaign-panel-brief').hidden,false);
     fill('product','Anti-frizz shampoo');fill('query','shampoo');
-    w.document.querySelector('#campaign-form').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));await delay(25);
+    w.document.querySelector('#campaign-form').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));await delay(10);
+    assert.ok(w.document.querySelector('[role="status"].research-progress'));assert.equal(w.document.querySelectorAll('.skeleton-photo').length,6);assert.equal(w.document.querySelector('.loading-reference-grid').getAttribute('aria-hidden'),'true');
+    finishDiscovery();await delay(25);assert.equal(w.document.querySelector('.loading-reference-grid'),null);
+    assert.equal(w.document.querySelector('#campaign-panel-references').hidden,false);
     assert.equal(w.document.querySelectorAll('.reference-card').length,1);assert.equal(w.document.querySelector('.reference-info script'),null);
     await click('select-all');await click('import');assert.equal(board.ads.length,1);assert.equal(board.ads[0].copy,'');
     await click('settings');w.document.querySelector('#gemini-key').value='test-only-gemini-key-not-a-real-secret';await click('load-models');
@@ -57,6 +68,7 @@ test('campaign flow imports missing-copy references, drafts with current CLIP co
     await click('settings');assert.equal(w.document.querySelector('#gemini-key').value,'test-only-gemini-key-not-a-real-secret');await click('load-models');assert.equal(modelLists,2);
     w.document.querySelector('#gemini-model').value='gemini-3.8-flash';w.document.querySelector('#ai-settings').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));await delay(10);
     await click('ideas');assert.equal(w.document.querySelectorAll('.concept-card').length,3);assert.equal(requests.length,2);assert.match(requests[1].url,/gemini-3.8-flash:generateContent/);assert.equal(requests[1].body.generationConfig.temperature,undefined);assert.equal(requests[1].body.generationConfig.thinkingConfig,undefined);
+    assert.equal(w.document.querySelector('#campaign-panel-concepts').hidden,false);
     assert.match(requests[0].body.contents[0].parts[0].text,/Product close-ups/);assert.equal(requests[0].url.includes('test-only-gemini'),false);assert.equal(w.localStorage.getItem('prism-studio-v1:On this device').includes('test-only-gemini'),false);
     assert.equal(requests[0].body.contents[0].parts[0].text.includes('private.jpg'),false);
     await click('web');assert.match(w.document.querySelector('.studio-error').textContent,/free tier/);assert.equal(requests.length,2);assert.equal(w.document.querySelectorAll('.concept-card').length,3);
@@ -72,5 +84,7 @@ test('campaign flow imports missing-copy references, drafts with current CLIP co
     assert.match(w.document.querySelector('.chat-messages').textContent,/not proof/);
     await click('settings');await click('disconnect');
     assert.equal(w.document.querySelector('.connection').textContent.includes('Connect Gemini'),true);
+    w.document.querySelector('[data-action="privacy"]').click();assert.match(w.document.querySelector('#modal-content').textContent,/discovery endpoint/);assert.equal(w.document.querySelector('#modal-content').textContent.includes('test-only-gemini'),false);
+    w.document.querySelector('[data-action="close"]').click();w.document.querySelector('[data-action="usage"]').click();assert.match(w.document.querySelector('#modal-content').textContent,/does not publish ads/);
   }finally{globalThis.fetch=fetchOriginal;for(const [name,value] of Object.entries(originals)){if(value===undefined)delete globalThis[name];else globalThis[name]=value;}dom.window.close();}
 });

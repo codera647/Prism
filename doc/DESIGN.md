@@ -1,5 +1,7 @@
 # Prism - Product and Interaction Design
 
+> Current interface: [Prism 0.4 redesign](RELEASE_0_4.md). Flat warm surfaces, three campaign views, image-first references, numbered concepts, functional loading states and factual privacy/usage sheets. All working features are retained.
+
 > Current campaign research / Gemini / UI extension: [Prism 0.3 specification and framework mapping](RELEASE_0_3.md). Earlier sections below remain historical baseline records.
 
 

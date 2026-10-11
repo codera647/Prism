@@ -7,7 +7,287 @@
     "providers_in_tests": "Fixtures with actual SQLite, WebCrypto, HTTP handlers and DOM",
     "live_browser_visual_qa": false,
     "live_google_oauth": false,
-    "live_muapi_generation": false
+    "live_muapi_generation": false,
+    "production_bundle": "PASS",
+    "functions_compile": "PASS",
+    "live_discovery": {
+      "reference_count": 12,
+      "catalogues": [
+        {
+          "store": "Saeed Ghani",
+          "status": "ok",
+          "count": 6
+        },
+        {
+          "store": "Conatural",
+          "status": "ok",
+          "count": 6
+        }
+      ],
+      "paid_ad_delivery_verified": false
+    },
+    "live_image": {
+      "bytes": 103501,
+      "mime": "image/jpeg"
+    },
+    "live_public_exa": {
+      "status": 502,
+      "result": "Public web search is unavailable or rate limited. Catalogue references remain available."
+    },
+    "agent_reach_package": {
+      "package_pin": "94f06c1969dfc1834001269d79d3ad0972d9dee6",
+      "web_channel_import": true,
+      "system_installer_run": false,
+      "personal_browser_sessions_accessed": false,
+      "reader_test_url": "https://www.conaturalintl.com/collections/hair-care",
+      "reader_read": true,
+      "content_bytes": 33534,
+      "note": "Public page content, not verified advertising delivery"
+    },
+    "installed_source_files": {
+      "source_commit": "067c84018c29fb7d3a5cf3eca1a99a7f5c5861d4",
+      "installed_files_matching_tag": 27,
+      "official_package": true
+    },
+    "native_real_photos": {
+      "status": "PASS",
+      "version": "0.5.0",
+      "packaged_executable": true,
+      "scope": "real product photos; missing ad copy; developmental, not held-out quality",
+      "model": {
+        "name": "ViT-B-32",
+        "pretrained": "openai",
+        "sha256": "431adb635d7a35aaaf5b70acf8738712c6f9ae30d08e17698c6f505c9a686fb8",
+        "file": "clip-ViT-B-32-openai.safetensors",
+        "preprocessing": "open_clip/ViT-B-32/224/v1",
+        "dimensions": 512,
+        "quick_gelu": true,
+        "tokenization": "75-token chunks; normalized mean",
+        "source_sha256": "40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af"
+      },
+      "harness": "Trailforge 0.1.0a1",
+      "collection_id": "1ce65782313c4f67b3d2c746b0ccca13",
+      "coverage": {
+        "images": 3,
+        "copy": 0,
+        "ad_variants": 3,
+        "unique_images": 3
+      },
+      "upload_seconds": 2.516,
+      "groups": [
+        {
+          "name": "Product close-ups",
+          "count": 2
+        },
+        {
+          "name": "Product collections",
+          "count": 1
+        }
+      ],
+      "report_status": "partial",
+      "report_limitations": [
+        "Visual labels are tentative CLIP suggestions; rename them after inspection.",
+        "Copy tags use English rules and quote supplied text. No OCR or semantic language model is enabled.",
+        "Repeated claims in ads are advertiser statements, not verified product benefits.",
+        "No campaign performance data was supplied."
+      ],
+      "queries": [
+        {
+          "query": "minimal skincare ads with product close-ups",
+          "seconds": 0.137,
+          "match_count": 0,
+          "no_match": true,
+          "top5": []
+        },
+        {
+          "query": "a pair of headphones",
+          "seconds": 0.153,
+          "match_count": 0,
+          "no_match": true,
+          "top5": []
+        },
+        {
+          "query": "running shoes",
+          "seconds": 0.217,
+          "match_count": 0,
+          "no_match": true,
+          "top5": []
+        },
+        {
+          "query": "underwater submarines and coral reefs",
+          "seconds": 0.235,
+          "match_count": 0,
+          "no_match": true,
+          "top5": []
+        }
+      ],
+      "paid_calls": 0,
+      "elapsed_seconds": 45.304,
+      "controlled_shutdown": true
+    },
+    "native_startup_note": "First real-photo attempt reported CLIP model startup failure. Same unmodified binary passed direct worker and subsequent full-photo check. First failure cause remains unconfirmed.",
+    "native_shampoo_retrieval": {
+      "status": "PASS",
+      "version": "0.5.0",
+      "packaged_executable": true,
+      "scope": "real product photos; missing ad copy; developmental, not held-out quality",
+      "model": {
+        "name": "ViT-B-32",
+        "pretrained": "openai",
+        "sha256": "431adb635d7a35aaaf5b70acf8738712c6f9ae30d08e17698c6f505c9a686fb8",
+        "file": "clip-ViT-B-32-openai.safetensors",
+        "preprocessing": "open_clip/ViT-B-32/224/v1",
+        "dimensions": 512,
+        "quick_gelu": true,
+        "tokenization": "75-token chunks; normalized mean",
+        "source_sha256": "40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af"
+      },
+      "harness": "Trailforge 0.1.0a1",
+      "collection_id": "234b84f7c93d4bd29a82cad41820b9a3",
+      "coverage": {
+        "images": 3,
+        "copy": 0,
+        "ad_variants": 3,
+        "unique_images": 3
+      },
+      "upload_seconds": 3.009,
+      "groups": [
+        {
+          "name": "Product close-ups",
+          "count": 2
+        },
+        {
+          "name": "Product collections",
+          "count": 1
+        }
+      ],
+      "report_status": "partial",
+      "report_limitations": [
+        "Visual labels are tentative CLIP suggestions; rename them after inspection.",
+        "Copy tags use English rules and quote supplied text. No OCR or semantic language model is enabled.",
+        "Repeated claims in ads are advertiser statements, not verified product benefits.",
+        "No campaign performance data was supplied."
+      ],
+      "queries": [
+        {
+          "query": "a shampoo bottle",
+          "seconds": 0.129,
+          "match_count": 3,
+          "no_match": false,
+          "top5": [
+            {
+              "id": "a251f74abf0145298c7a37aecba9e349",
+              "score": 0.2702,
+              "similarity": 0.2702,
+              "filename": "shampoo-2.jpg"
+            },
+            {
+              "id": "3f8604f71430452a97fe5949bb988080",
+              "score": 0.2662,
+              "similarity": 0.2662,
+              "filename": "shampoo-1.jpg"
+            },
+            {
+              "id": "d685669764ff464b93935502baa972f7",
+              "score": 0.2659,
+              "similarity": 0.2659,
+              "filename": "shampoo-3.jpg"
+            }
+          ]
+        },
+        {
+          "query": "hair care products",
+          "seconds": 0.135,
+          "match_count": 3,
+          "no_match": false,
+          "top5": [
+            {
+              "id": "3f8604f71430452a97fe5949bb988080",
+              "score": 0.3081,
+              "similarity": 0.3081,
+              "filename": "shampoo-1.jpg"
+            },
+            {
+              "id": "d685669764ff464b93935502baa972f7",
+              "score": 0.2706,
+              "similarity": 0.2706,
+              "filename": "shampoo-3.jpg"
+            },
+            {
+              "id": "a251f74abf0145298c7a37aecba9e349",
+              "score": 0.2661,
+              "similarity": 0.2661,
+              "filename": "shampoo-2.jpg"
+            }
+          ]
+        },
+        {
+          "query": "a product photograph of shampoo bottles on a white background",
+          "seconds": 0.179,
+          "match_count": 2,
+          "no_match": false,
+          "top5": [
+            {
+              "id": "3f8604f71430452a97fe5949bb988080",
+              "score": 0.2716,
+              "similarity": 0.2716,
+              "filename": "shampoo-1.jpg"
+            },
+            {
+              "id": "a251f74abf0145298c7a37aecba9e349",
+              "score": 0.2361,
+              "similarity": 0.2361,
+              "filename": "shampoo-2.jpg"
+            }
+          ]
+        },
+        {
+          "query": "underwater submarines and coral reefs",
+          "seconds": 0.157,
+          "match_count": 0,
+          "no_match": true,
+          "top5": []
+        }
+      ],
+      "paid_calls": 0,
+      "elapsed_seconds": 40.463,
+      "controlled_shutdown": true
+    },
+    "real_product_provenance": [
+      {
+        "filename": "shampoo-1.jpg",
+        "source_url": "https://saeedghani.pk/products/bundle-of-4-shampoo-at-the-price-of-3?_pos=1&_psq=shampoo&_psid=595028c2f&_ss=e",
+        "image_url": "https://cdn.shopify.com/s/files/1/0434/3604/8550/files/Shampoo_Bundle_1.webp?v=1785404105&width=900",
+        "title": "Bundle of 4 Shampoos at the price of 3",
+        "kind": "public_product_reference",
+        "paid_ad_delivery_verified": false,
+        "bytes": 103501,
+        "sha256": "aa6c66178a4d34be8578a01a721f064047e3e1d79c0affab24cb84b74f65dfc8",
+        "retrieved_at": "2026-10-11T11:55:34.177580+00:00"
+      },
+      {
+        "filename": "shampoo-2.jpg",
+        "source_url": "https://conaturalintl.com/products/hair-volume-shampoo?_pos=1&_psq=shampoo&_psid=fd982d0c4&_ss=e",
+        "image_url": "https://cdn.shopify.com/s/files/1/0605/2313/files/hair_volume_shampoo_8ec35c20-7fc4-41d3-907b-f8d93390825c.jpg?v=1775469661&width=900",
+        "title": "Hair Volume Shampoo",
+        "kind": "public_product_reference",
+        "paid_ad_delivery_verified": false,
+        "bytes": 48053,
+        "sha256": "ed349e737b62b317a4f4ad482ec4253f38c2140f8adf87b12e4bf5169bc0662e",
+        "retrieved_at": "2026-10-11T11:55:34.497406+00:00"
+      },
+      {
+        "filename": "shampoo-3.jpg",
+        "source_url": "https://conaturalintl.com/products/hyaluronic-acid-shampoo?_pos=2&_psq=shampoo&_psid=fd982d0c4&_ss=e",
+        "image_url": "https://cdn.shopify.com/s/files/1/0605/2313/files/hyluronic_acid_shampoo.jpg?v=1775471219&width=900",
+        "title": "Hyaluronic Acid Shampoo",
+        "kind": "public_product_reference",
+        "paid_ad_delivery_verified": false,
+        "bytes": 48492,
+        "sha256": "57e7c0ae0c0ae28bf0fe5627c7cca5f52b3d0f47b15cf17daf9debc0d4796c62",
+        "retrieved_at": "2026-10-11T11:55:34.843811+00:00"
+      }
+    ]
   },
   "production_activation": {
     "database_created": false,
@@ -25,6 +305,68 @@
   },
   "live_exa_search": "Free public quota exhausted; no successful sourced result claimed",
   "publication": {
-    "status": "Pending"
+    "status": "Published account-ready code; account activation remains blocked",
+    "site": "https://prism-creative.pages.dev",
+    "web_backend": {
+      "deployment_id": "13ebd84c-556a-4b00-8b7b-06238fd85040",
+      "url": "https://13ebd84c.prism-creative.pages.dev",
+      "environment": "production",
+      "source_commit": "f778b11c9fd2f206fcb6071f465549a8a5a232f2",
+      "latest_stage": "success"
+    },
+    "cloud_readiness": {
+      "accounts_ready": false,
+      "database_ready": false,
+      "google_ready": false,
+      "vault_ready": false,
+      "media_ready": false,
+      "max_users": 30,
+      "research": "Agent Reach / Exa MCP",
+      "generation": "Open-Higgsfield-compatible Muapi",
+      "image_models": [
+        {
+          "id": "flux-dev-image",
+          "label": "Flux Dev",
+          "source_model": "flux-dev"
+        },
+        {
+          "id": "nano-banana",
+          "label": "Nano Banana",
+          "source_model": "nano-banana"
+        }
+      ]
+    },
+    "pages_workflow": "https://github.com/codera647/Prism/actions/runs/38137753364",
+    "backend_core_workflow": "https://github.com/codera647/Prism/actions/runs/38137753381",
+    "desktop_workflow": "https://github.com/codera647/Prism/actions/runs/38135827673",
+    "desktop_release": {
+      "url": "https://github.com/codera647/Prism/releases/tag/v0.5.0",
+      "tag": "v0.5.0",
+      "prerelease": true,
+      "assets": [
+        {
+          "name": "Prism-0.5.0-Windows-x64.zip",
+          "bytes": 610226485,
+          "digest": "sha256:49b28a3ad76678f13605d6f82e1bbac80b643df9323ae2d39094104442fc0b78"
+        },
+        {
+          "name": "SHA256SUMS.txt",
+          "bytes": 95,
+          "digest": "sha256:62af32b28cc2d78230a15a94930501fceb3a88d2bd0838bc7a8a0b3b0bc55adb"
+        }
+      ]
+    },
+    "installed_desktop": {
+      "version": "0.5.0",
+      "release": "https://github.com/codera647/Prism/releases/tag/v0.5.0",
+      "installed_from": "Official GitHub Actions release ZIP",
+      "zip_bytes": 610226485,
+      "zip_sha256": "49b28a3ad76678f13605d6f82e1bbac80b643df9323ae2d39094104442fc0b78",
+      "release_digest_and_checksum_match": true,
+      "version_check": "0.5.0",
+      "prior_versions_retained": true,
+      "existing_data_retained": true
+    },
+    "desktop_shortcut_updated": true
   }
 }

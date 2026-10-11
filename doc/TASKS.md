@@ -375,3 +375,21 @@ The user selected Trailforge v0.1.0a1. [TRAILFORGE_INTEGRATION.md](TRAILFORGE_IN
 ## Completion record format
 
 For each task update: status, actual owner, start/completion date, affected contract/decision, evidence artifact location, actual metrics/result, limitations, and next dependency. Do not check off a task because the next developer was given a build prompt.
+
+## 0.5 account activation checklist
+
+- [x] Green/gray dashboard and existing core feature regression checks.
+- [x] D1 schema, Google OIDC code, per-account campaigns/ideas, encrypted persistent key API and CAS saves.
+- [x] Bounded Agent Reach upstream adapter; isolated pinned package import/public-reader verification.
+- [x] Two editable Gemini prompts; opt-in one/two image-job adapter and durable idempotency contracts.
+- [x] Optional private image storage API, ownership/bytes/30-file/100-MiB limits and dashboard upload controls.
+- [x] Public web deployment and official Windows release, checksum download, installation and preserved data.
+- [ ] D1 provisioning: token currently denied 401/10000.
+- [ ] Google OAuth client setup and genuine two-account/cross-device tests.
+- [ ] Vault secret configuration and private recovery-key backup.
+- [ ] Optional private R2 activation and genuine storage validation; no automatic billing enrollment.
+- [ ] Genuine Exa sourced search on deployed Functions; current public route is unavailable.
+- [ ] Real, explicitly requested image generation with connected Muapi credits/key.
+- [ ] Native Google SSO and automatic whole-board synchronization (future scope).
+- [ ] Reproduce/explain initial local CLIP worker start failure; later same-binary checks pass.
+- [ ] Full browser/native visual QA through supported controls, held-out retrieval and human pilot.

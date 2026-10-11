@@ -107,3 +107,13 @@ Keep verified facts separate from proposals and assumptions. Link actual evidenc
 - Created [codera647/Prism](https://github.com/codera647/Prism) with private visibility. Use `origin` at `https://github.com/codera647/Prism.git` and publish the local `main` branch.
 - Root .gitignore excludes local secrets/config, dependency/build caches, uploaded ads, model/runtime artifacts, databases, and generated output. The existing synthetic study script/report under output/evidence/trailforge are explicitly retained so documentation evidence links remain usable.
 - Publishing this documentation/evidence snapshot does not complete any product or agent-integration task. Future synchronization is determined from actual Git status and remote refs.
+
+## 2026-10-11: account-ready 0.5 delivery
+
+User requested green/gray, Google-linked saved campaigns/ideas, persistent private keys, a 10?30-user design, Agent Reach web research and optional Open-Higgsfield-compatible product designs. The current authority is SYSTEM_DESIGN.md and RELEASE_0_5.md. Implementation contains D1 ownership/CAS, OIDC/PKCE/CSRF, AES-GCM/AAD vault keys, user quotas, SQL dispatch idempotency and dashboard controls. Native Google SSO is not implemented; native local accounts and pixel boards remain separate.
+
+45 Python and 36 browser contracts pass. Provider/session fixtures are not real OAuth/inference evidence. Windows v0.5.0 source is 067c840; latest cloud backend f778b11 includes OAuth error handling and 30-file/100 MiB account media limits. GitHub Actions published and verified the native package; downloaded ZIP and digest match. It is installed with its shortcut updated and previous versions/data preserved. Live discovery returned 12 shampoo references and a real photo; public Exa research returned 502/unavailable. The isolated Agent Reach package imported and read a real public product-category page.
+
+Account activation remains blocked: the existing token has Pages access but D1 returns 401/10000; Google OAuth credentials and vault binding are absent. R2 and real image-provider credentials are unconfigured. Chrome-control runtime tool is unavailable; do not inspect browser profiles/cookies as a substitute or claim Google login occurred. No paid provider request or billing enrollment was made.
+
+Local packaged-photo check passed on retry with real CLIP, receipts, private images, export and orderly shutdown. The first local worker start failed; later direct and full checks passed with the same unchanged binary. Retain this unconfirmed startup issue in evidence rather than claiming unconditional cold-start reliability. Neither this release nor synthetic tests close held-out retrieval, human-pilot or campaign-effectiveness gates.

@@ -1,5 +1,8 @@
 # Prism - Dependency-Ordered Backlog
 
+> Current campaign research / Gemini / UI extension: [Prism 0.3 specification and framework mapping](RELEASE_0_3.md). Earlier sections below remain historical baseline records.
+
+
 > Current 0.2 desktop/browser scope and verification: [release record](RELEASE_0_2.md), [deployment architecture](DEPLOYMENT.md). Earlier local-only implementation sections below describe the 0.1 baseline; open human/quality gates remain open.
 
 Updated: 2026-10-10 (Asia/Karachi). The local app is implemented. **Implemented locally** means a mechanical capability with linked evidence; it does not complete missing human/real-data prerequisites or framework stage signoff. Full completion-evidence requirements below are retained.

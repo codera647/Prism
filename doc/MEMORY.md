@@ -1,8 +1,11 @@
 # Prism - Project Memory and Continuation State
 
+> Current work: **0.3 campaign studio**. User requested internet references for anti-frizz shampoo/Pakistan/Instagram, optional free-tier Gemini, chat and UI motion. User will enter a key privately in Prism; do not ask for a key in chat or reveal it. See [0.3 mapping](RELEASE_0_3.md). Live catalogue checks found 12 shampoo references. Gemini live validation and visual inspection remain open; tools for browser control are unavailable this turn. Native Trailforge receipts continue to cover image/report workflows, not the optional client-side Gemini calls. Deployment/release status must be verified from Actions before claiming publication.
+
+
 > Current 0.2 desktop/browser scope and verification: [release record](RELEASE_0_2.md), [deployment architecture](DEPLOYMENT.md). Earlier local-only implementation sections below describe the 0.1 baseline; open human/quality gates remain open.
 
-Last updated: 2026-10-10 (Asia/Karachi).
+Last updated: 2026-10-11 (Asia/Karachi).
 
 ## Current desktop and hosted release
 

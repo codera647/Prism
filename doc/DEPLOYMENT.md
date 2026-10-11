@@ -1,5 +1,8 @@
 # Prism desktop and free web deployment
 
+> In 0.3, Pages also deploys two bounded, read-only research functions. CLIP still runs on-device; no Python backend is hosted. Gemini keys are entered privately by users and are never deployment secrets. See [0.3 architecture](RELEASE_0_3.md).
+
+
 The selected target is **Cloudflare Pages Free**, plus a Windows desktop release. Oracle was dropped because the user has no credit card. Hugging Face Docker hosting required a paid account. No paid plan or inference service is used.
 
 ## Two execution environments

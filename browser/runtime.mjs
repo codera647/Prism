@@ -67,7 +67,11 @@ function fileName(value){if(typeof value!=='string'||!value||value.length>240||/
 
 async function route(path,options={}){
   const url=new URL(path,'https://prism.invalid'),parts=url.pathname.split('/').filter(Boolean),method=options.method||'GET',body=options.body||{};
-  if(parts[0]==='health')return {status:'ok',version:'0.2.1',mode:'browser',clip_ready:true,model:policy.model,harness:null};
+  if(parts[0]==='discover'){
+    const response=await fetch('/api/discover',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:options.signal});
+    const data=await response.json();if(!response.ok)fail(data.detail||'Research is unavailable.',response.status);return data;
+  }
+  if(parts[0]==='health')return {status:'ok',version:'0.3.0',mode:'browser',clip_ready:true,model:policy.model,harness:null};
   if(parts[0]==='auth'&&parts[1]==='me')return {name:'On this device'};
   if(parts[0]==='auth')fail('The browser app uses one device workspace, without accounts.');
   if(parts[0]==='demo'){
@@ -163,10 +167,10 @@ let lastProgress='';
 document.addEventListener('prism-progress',e=>{lastProgress=e.detail;const node=document.getElementById('browser-progress');if(node)node.textContent=lastProgress;});
 const observer=new MutationObserver(()=>{
   const local=document.querySelector('.local');if(local&&!local.textContent.includes('Stored in this browser'))local.innerHTML='<span class="dot"></span>Stored in this browser';
-  const footer=document.querySelector('.sidebar .footer-note');if(footer&&!footer.textContent.startsWith('Browser CLIP'))footer.textContent='Browser CLIP · Your images stay on this device. Export before clearing site data.';
+  const footer=document.querySelector('.sidebar .footer-note');if(footer&&!footer.textContent.startsWith('Browser CLIP'))footer.textContent='Browser CLIP · Images stay on-device. Optional Gemini sends selected text to Google. Export before clearing site data.';
   document.querySelector('[data-action="logout"]')?.remove();
   const diagnostic=document.querySelector('.diagnostics');if(diagnostic){const hints=diagnostic.querySelectorAll('.hint');if(hints[0]&&!hints[0].textContent.startsWith('This job runs'))hints[0].textContent='This job runs in a browser worker. Trailforge execution receipts are available in the desktop app.';}
-  if(!document.getElementById('browser-progress')&&document.querySelector('.workspace')){const notice=document.createElement('div');notice.className='notice';notice.id='browser-progress';notice.textContent=lastProgress||'Private browser workspace. First analysis downloads CLIP weights (~150 MB); keep this tab open. Boards are saved on this device, without accounts or cloud sync.';document.querySelector('.workspace').prepend(notice);}
+  if(!document.getElementById('browser-progress')&&document.querySelector('.workspace')&&!document.querySelector('.studio')){const notice=document.createElement('div');notice.className='notice';notice.id='browser-progress';notice.textContent=lastProgress||'Private browser workspace. First analysis downloads CLIP weights (~150 MB); keep this tab open. Boards are saved on this device, without accounts or cloud sync.';document.querySelector('.workspace').prepend(notice);}
   // Blob image URLs cannot carry HTTP query parameters.
   for(const image of document.querySelectorAll('img[src^="blob:"]'))if(image.getAttribute('src').endsWith('?full=true'))image.src=image.getAttribute('src').slice(0,-10);
 });

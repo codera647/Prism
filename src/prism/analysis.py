@@ -7,7 +7,7 @@ from sklearn.cluster import AgglomerativeClustering
 from .domain import fingerprint
 
 VISUAL_LABELS = [
-    ("Product close-ups", "an advertising image with a close-up of a single skincare product on a minimal plain background"),
+    ("Product close-ups", "an advertising image with a close-up of a single product on a minimal plain background"),
     ("People & lifestyle", "an advertising image with a person using a product in a lifestyle photograph"),
     ("Testimonials", "a testimonial advertisement featuring a customer review and star ratings"),
     ("Discount promotions", "a promotional advertisement featuring a large discount price or sale percentage"),

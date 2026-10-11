@@ -1,6 +1,10 @@
 # Prism
 
-**Find the pattern. Create the next idea.**
+**Start with a product. Leave with a direction.**
+
+Prism 0.3 adds **Campaign studio**: describe your product, Pakistan/global market, platform, audience and copy language; discover real product references, import selected photographs into a local CLIP board, and connect your own Gemini key for cited web research, three tailored creative concepts and a chat assistant. Enter the key privately in the app, never in chat. It clears on refresh. [Workflow, architecture and boundaries](doc/RELEASE_0_3.md).
+
+Try: **anti-frizz shampoo → Pakistan → Instagram → English + Roman Urdu → reference keyword: shampoo**. Catalogue photographs are labelled product references; their paid-ad status and Instagram delivery are unverified. Regional Ad Library links help check actual ads. Images remain device-side; optional Gemini calls send your brief and selected text to Google. For the free route use a Gemini project without paid billing; provider quotas apply.
 
 Prism turns up to 100 static ad images and their copy into a private visual board. It uses local pretrained CLIP embeddings for visual grouping and natural-language search, extracts source-linked hooks/offers with English rules, and drafts three distinct creative experiments using evidence-based templates.
 

@@ -10,7 +10,7 @@ import time
 from typing import Annotated
 
 from fastapi import Depends, FastAPI, File, Form, Request, UploadFile
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from starlette.middleware.trustedhost import TrustedHostMiddleware
@@ -24,6 +24,7 @@ from .encoder import ClipEncoder
 from .media import copy_manifest, decode_bounded
 from .store import Store
 from .workflow import Workflow
+from .research import CampaignBrief, discover, reference_image
 
 
 class Credentials(BaseModel):
@@ -110,13 +111,24 @@ def create_app(settings=None, encoder=None, run_worker=True):
         response = await call_next(request)
         response.headers["X-Content-Type-Options"] = "nosniff"
         response.headers["Referrer-Policy"] = "no-referrer"
-        response.headers["Content-Security-Policy"] = "default-src 'self'; img-src 'self' blob:; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+        response.headers["Content-Security-Policy"] = "default-src 'self'; img-src 'self' blob:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' https://generativelanguage.googleapis.com; object-src 'none'; frame-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
         if request.url.path.startswith("/api/"):
             response.headers["Cache-Control"] = "no-store"
         return response
 
     def user(request: Request):
         return principal(store, request)
+
+    @app.post('/api/discover')
+    def discover_references(payload: CampaignBrief, current=Depends(user)):
+        return discover(payload)
+
+    @app.get('/api/reference-image')
+    def get_reference_image(url: str, current=Depends(user)):
+        if len(url) > 2000:
+            raise Problem('invalid_reference', 'Image URL is too long.', 400)
+        body, media_type = reference_image(url)
+        return Response(body, media_type=media_type)
 
     def job_key(request):
         return request.headers.get("Idempotency-Key") or identifier()

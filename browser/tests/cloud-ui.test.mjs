@@ -8,7 +8,7 @@ import {handleCloud} from '../server/cloud.mjs';
 import {admitGoogleUser} from '../server/oauth.mjs';
 import {b64,encryptKey,hash,now,random} from '../server/security.mjs';
 
-test('Google-linked UI restores campaigns, autosaves, retains encrypted keys and saves generated ideas',{timeout:20000},async()=>{
+test('Google-linked UI restores campaigns, autosaves, retains encrypted keys and saves generated ideas',{timeout:40000},async()=>{
  const DB=database(),env={DB,GOOGLE_CLIENT_ID:'fixture-client',GOOGLE_CLIENT_SECRET:'fixture-secret',VAULT_KEY:b64(crypto.getRandomValues(new Uint8Array(32)))};
  const user=await admitGoogleUser(env,{sub:'fixture-alice',email:'alice@example.test',name:'Alice'}),token=random(),csrf=random();
  await DB.prepare('INSERT INTO sessions(token_hash,user_id,csrf,expires_at) VALUES(?,?,?,?)').bind(await hash(token),user.id,csrf,now()+3600).run();
@@ -35,18 +35,19 @@ test('Google-linked UI restores campaigns, autosaves, retains encrypted keys and
  };
  w.prismBrowserApi=async(path)=>{if(path==='/health')return {clip_ready:true};if(path==='/auth/me')return w.prismCloud.user();if(path==='/collections')return [];throw Error('Unexpected fixture board route '+path);};
  const click=async selector=>{const b=w.document.querySelector(selector);assert.ok(b,selector);const panel=b.closest('[role="tabpanel"]');if(panel?.hidden){w.document.querySelector('[aria-controls="'+panel.id+'"]').click();await delay(10);}w.document.querySelector(selector).click();await delay(60);};
+ const waitFor=async(predicate,label)=>{const deadline=Date.now()+10000;while(!predicate()){assert.ok(Date.now()<deadline,'Timed out waiting for '+label);await delay(25);}};
  try{
   await import('../../src/prism/web/cloud-account.mjs?cloud-ui');await w.prismCloud.ready;
   assert.equal(w.prismCloud.cached().length,1);
-  w.eval(await readFile('../src/prism/web/app.js','utf8'));await import('../../src/prism/web/studio.mjs?cloud-ui');await delay(60);
+  w.eval(await readFile('../src/prism/web/app.js','utf8'));await import('../../src/prism/web/studio.mjs?cloud-ui');await waitFor(()=>w.document.querySelector('#brief-product')?.value==='Shampoo','campaign restoration');
   assert.equal(w.document.querySelector('#brief-product').value,'Shampoo');assert.equal(w.document.querySelector('.connection').textContent,'AI connected');
-  w.document.querySelector('#brief-audience').value='Busy parents';w.document.querySelector('#brief-audience').dispatchEvent(new w.Event('change',{bubbles:true}));await delay(1000);
+  w.document.querySelector('#brief-audience').value='Busy parents';w.document.querySelector('#brief-audience').dispatchEvent(new w.Event('change',{bubbles:true}));await waitFor(()=>JSON.parse(DB.sql.prepare('SELECT payload FROM campaigns WHERE user_id=? AND id=?').get(user.id,campaign.id).payload).brief.audience==='Busy parents','campaign autosave');
   const saved=JSON.parse(DB.sql.prepare('SELECT payload FROM campaigns WHERE user_id=? AND id=?').get(user.id,campaign.id).payload);assert.equal(saved.brief.audience,'Busy parents');
-  await click('[data-studio="ideas"]');assert.equal(w.document.querySelectorAll('.concept-card').length,3);assert.equal(generationCalls,1);
-  await click('[data-studio="save-idea"]');assert.equal(DB.sql.prepare('SELECT COUNT(*) AS n FROM saved_ideas WHERE user_id=?').get(user.id).n,1);
-  await click('[data-studio="design-prompts"]');assert.equal(w.document.querySelectorAll('#design-form textarea').length,2);assert.equal(imageCalls,0);
+  await click('[data-studio="ideas"]');await waitFor(()=>w.document.querySelectorAll('.concept-card').length===3,'three creative concepts');assert.equal(generationCalls,1);
+  await click('[data-studio="save-idea"]');await waitFor(()=>DB.sql.prepare('SELECT COUNT(*) AS n FROM saved_ideas WHERE user_id=?').get(user.id).n===1,'individually saved idea');
+  await click('[data-studio="design-prompts"]');await waitFor(()=>w.document.querySelectorAll('#design-form textarea').length===2,'design prompt review');assert.equal(imageCalls,0);
   w.document.querySelector('#design-count').value='2';w.document.querySelector('#confirm-design-usage').checked=true;
-  w.document.querySelector('#design-form').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));await delay(100);
+  w.document.querySelector('#design-form').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));await waitFor(()=>w.document.querySelectorAll('.saved-design').length===2,'two recorded design jobs');
   assert.equal(imageCalls,2);assert.equal(DB.sql.prepare('SELECT COUNT(*) AS n FROM design_jobs WHERE user_id=?').get(user.id).n,2);assert.equal(w.document.querySelectorAll('.saved-design').length,2);
   await click('[data-action="close"]');
   await click('[data-action="dashboard"]');assert.match(w.document.querySelector('.dashboard').textContent,/alice@example.test/);assert.ok(w.document.querySelector('[data-cloud="saved-ideas"]'));

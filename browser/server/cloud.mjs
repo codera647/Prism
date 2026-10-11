@@ -80,8 +80,8 @@ export async function handleCloud(request,env,fetcher=fetch){
     const bytes=await limited(request,10*1024*1024);check(bytes.length>12,400,'Image file is empty or incomplete.');
     const valid=mime==='image/jpeg'?bytes[0]===255&&bytes[1]===216:mime==='image/png'?[137,80,78,71,13,10,26,10].every((v,i)=>bytes[i]===v):new TextDecoder().decode(bytes.slice(0,4))==='RIFF'&&new TextDecoder().decode(bytes.slice(8,12))==='WEBP';
     check(valid,400,'File bytes do not match the image type.');const id=crypto.randomUUID(),object=`${user.id}/${campaign}/${id}`;
-    const row=await env.DB.prepare('INSERT INTO media(id,user_id,campaign_id,object_key,mime,bytes,created_at) SELECT ?,?,?,?,?,?,? WHERE COALESCE((SELECT SUM(bytes) FROM media WHERE user_id=?),0)+?<=104857600 RETURNING id').bind(id,user.id,campaign,object,mime,bytes.length,now(),user.id,bytes.length).first();
-    check(row,409,'The 100 MiB account-image limit was reached. Remove old uploads first.');
+    const row=await env.DB.prepare('INSERT INTO media(id,user_id,campaign_id,object_key,mime,bytes,created_at) SELECT ?,?,?,?,?,?,? WHERE COALESCE((SELECT SUM(bytes) FROM media WHERE user_id=?),0)+?<=104857600 AND (SELECT COUNT(*) FROM media WHERE user_id=?)<30 RETURNING id').bind(id,user.id,campaign,object,mime,bytes.length,now(),user.id,bytes.length,user.id).first();
+    check(row,409,'The 30-image or 100 MiB account limit was reached. Remove old uploads first.');
     try{await env.MEDIA.put(object,bytes,{httpMetadata:{contentType:mime}});}catch{await env.DB.prepare('DELETE FROM media WHERE user_id=? AND id=?').bind(user.id,id).run();throw new HttpError(503,'Image upload did not complete. Keep your original file and retry.');}
     return json({id,url:`/api/cloud/media/${id}`,bytes:bytes.length},201);
    }

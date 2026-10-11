@@ -19,6 +19,9 @@ test('optional image storage checks ownership, file bytes, quota and deletion',a
   assert.equal((await route(f,f.bob,'/media/'+image.id)).status,404);const owned=await route(f,f.alice,'/media/'+image.id);assert.equal(owned.headers.get('cache-control'),'private, no-store');assert.deepEqual(new Uint8Array(await owned.arrayBuffer()),png);
   assert.equal((await (await route(f,f.alice,'/media?campaign=c1')).json()).images.length,1);
   f.env.DB.sql.prepare('UPDATE media SET bytes=104857600 WHERE user_id=?').run(f.alice.id);assert.equal((await upload(f.alice,png)).status,409);
+  f.env.DB.sql.prepare('UPDATE media SET bytes=13 WHERE user_id=?').run(f.alice.id);
+  for(let i=0;i<29;i++)f.env.DB.sql.prepare('INSERT INTO media(id,user_id,campaign_id,object_key,mime,bytes,created_at) VALUES(?,?,?,?,?,?,?)').run('cap'+i,f.alice.id,'c1','cap-object'+i,'image/png',13,now());
+  assert.equal((await upload(f.alice,png)).status,409);
   await route(f,f.alice,'/campaigns/c1','DELETE');assert.equal(objects.size,0);assert.equal(f.env.DB.sql.prepare('SELECT COUNT(*) AS n FROM media').get().n,0);
  }finally{f.close();}
 });

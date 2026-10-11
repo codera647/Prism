@@ -90,7 +90,7 @@ Campaign payloads save the brief, reference metadata, selected IDs, source-linke
 
 `Save idea` creates an independently retrievable account record only on explicit request. The dashboard lists those ideas per campaign and supports removing them. Generated concepts also remain in the campaign payload. Gemini chat history currently clears on reload; it is not advertised as a saved conversation.
 
-Optional private R2 endpoints support explicit account images with JPEG/PNG/WebP byte signatures, 10 MiB/file and a 100 MiB/account quota. The dashboard exposes separate explicit account uploads when MEDIA is configured. Automatic synchronization of whole CLIP boards is not part of this release. The UI states that originals remain device-side.
+Optional private R2 endpoints support explicit account images with JPEG/PNG/WebP byte signatures, 10 MiB/file, 30 files/account and a 100 MiB/account quota. The dashboard exposes separate explicit account uploads when MEDIA is configured. Automatic synchronization of whole CLIP boards is not part of this release. The UI states that originals remain device-side.
 
 ## 7. Permanent provider-key storage
 
@@ -108,7 +108,7 @@ Inspected source: [Agent Reach](https://github.com/Panniantong/agent-reach) at `
 
 `POST /api/cloud/research` requires a logged-in user and applies its quota; an optional encrypted Exa key is passed in an upstream header. Device research uses `/api/research/search`. The query includes the product, market and platform. The tool receives an objective to distinguish product references, organic posts and verified advertising. Only public HTTPS source links are retained, with provenance and retrieval time.
 
-Responses are bounded to 200 KB, text to 30,000 characters and links to 12. SSE/JSON and provider quota signals are handled explicitly. Empty unsourced responses are errors. No Instagram session scraping, restricted-page bypass, browser cookies or password harvesting is integrated. Jina, social-account channels and the installer are not installed into production; the actual delivered integration is the upstream HTTP search route. [Exa MCP tool documentation](https://exa.ai/docs/get-started/exa-mcp).
+Responses are bounded to 200 KB, text to 30,000 characters and links to 12. SSE/JSON and provider quota signals are handled explicitly. Empty unsourced responses are errors. No Instagram session scraping, restricted-page bypass, browser cookies or password harvesting is integrated. Jina and social-account channels are not installed into production; the delivered integration is the upstream HTTP search route. Optional local package installation is isolated in .prism/agent-reach-env through scripts/setup_agent_reach.py --install; it does not run the upstream system installer or inspect personal browser configuration. [Exa MCP tool documentation](https://exa.ai/docs/get-started/exa-mcp).
 
 Gemini receives the campaign context and resulting sourced text through the existing context builder; users can research with Agent Reach, then draft concepts or chat. Retrieved content is evidence, never authority to reveal keys, run shell commands or change system rules. A source describing an ad does not prove regional delivery. When public quotas fail, catalogue references and regional search links remain available.
 
@@ -155,7 +155,7 @@ Retries with the same key return the existing job without generating again. An u
 | POST research | Bounded Agent Reach / Exa research |
 | GET/POST designs; GET/POST designs/:id | Job history, explicit dispatch, manual polling |
 | GET designs/:id/image?index=0 | Private bounded generated image proxy |
-| POST media?campaign=:id; GET/DELETE media/:id | Optional private account image API |
+| POST media?campaign=:id; GET/DELETE media/:id | Optional private account image API (30 files/account) |
 | GET account/export; DELETE account | Portable metadata and explicit deletion |
 
 Mutation requests require same-origin cookies and CSRF, except the separate validated OAuth flow. Private responses use `no-store`. Provider hosts, image models and output domains are allowlisted. Request bodies, upstream responses and timeouts are bounded. Unknown operations fail closed. Errors omit raw SQL, provider response bodies, OAuth codes and credentials.

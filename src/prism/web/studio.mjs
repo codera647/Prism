@@ -1,15 +1,16 @@
 import {safeLink,validateBrief,researchLinks,parseIdeas,boardContext,groundedSegments,SYSTEM,ideaPrompt} from './research-core.mjs';
+import {listModels,generationConfig,providerError,checkGrounding} from './gemini-client.mjs';
 
 const $=id=>document.getElementById(id);
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const emptyBrief=()=>({product:'',region:'PK',platform:'Instagram',audience:'',goal:'Get people to visit the product page',language:'English + Roman Urdu',claims:'',query:''});
-let host,sessionKey='',model='gemini-2.5-flash',scope='',saved=[],active=null,working=false,step='',error='',chatOpen=false,messages=[],chatWorking=false;
+let host,sessionKey='',model='',availableModels=[],groundingEnabled=false,scope='',saved=[],active=null,working=false,step='',error='',chatOpen=false,messages=[],chatWorking=false;
 const storageKey=()=>`prism-studio-v1:${scope}`;
 function persist(){try{localStorage.setItem(storageKey(),JSON.stringify(saved));}catch{error='Your browser could not save this research. Export it before closing.';}}
 function initScope(){
   const user=host.user();if(!user)return;
   const next=user.name;
-  if(scope!==next){scope=next;sessionKey='';messages=[];active=null;saved=[];try{const data=JSON.parse(localStorage.getItem(storageKey())||'[]');if(Array.isArray(data))saved=data.slice(0,20);for(const r of saved){if(r.ideas?.board_revision)r.ideas.needs_check=true;delete r.checking;}}catch{}active=saved[0]||null;}
+  if(scope!==next){scope=next;sessionKey='';model='';availableModels=[];groundingEnabled=false;messages=[];active=null;saved=[];try{const data=JSON.parse(localStorage.getItem(storageKey())||'[]');if(Array.isArray(data))saved=data.slice(0,20);for(const r of saved){if(r.ideas?.board_revision)r.ideas.needs_check=true;delete r.checking;}}catch{}active=saved[0]||null;}
 }
 function session(){if(!active){active={id:crypto.randomUUID(),brief:emptyBrief(),references:[],selected:[],board_id:null,imports:[],ideas:null,web:null,created_at:new Date().toISOString()};saved.unshift(active);}return active;}
 function render(){host.render();}
@@ -63,12 +64,13 @@ async function jsonRequest(path,body,signal){
 async function gemini(text,{grounded=false,structured=false,signal}={}){
   if(!sessionKey)throw Error('Connect a Gemini API key first using “Connect Gemini”.');
   if(sessionKey.length<20)throw Error('This API key appears incomplete. Reconnect Gemini.');
-  const body={systemInstruction:{parts:[{text:SYSTEM}]},contents:[{role:'user',parts:[{text}]}],generationConfig:{temperature:.6,maxOutputTokens:6000,thinkingConfig:{thinkingBudget:0}}};
+  if(grounded)checkGrounding(model,groundingEnabled);
+  const body={systemInstruction:{parts:[{text:SYSTEM}]},contents:[{role:'user',parts:[{text}]}],generationConfig:generationConfig(model,structured)};
   if(grounded)body.tools=[{google_search:{}}];
   if(structured)body.generationConfig.responseMimeType='application/json';
   const timeout=AbortSignal.timeout(90000),combined=signal?AbortSignal.any([signal,timeout]):timeout;
   const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':sessionKey},body:JSON.stringify(body),signal:combined});
-  if(!r.ok){if(r.status===429)throw Error('Gemini quota is exhausted or requests are too frequent. Check your free-tier quota in AI Studio; Prism will not switch to another paid model.');if([401,403].includes(r.status))throw Error('Gemini rejected this key or its permissions. Check it in Google AI Studio.');if(r.status===404)throw Error('This Gemini model is unavailable. Choose the other model in AI connection.');throw Error(`Gemini could not complete the request (${r.status}). No draft was saved.`);}
+  if(!r.ok)throw await providerError(r,{grounded});
   const data=await r.json(),candidate=data.candidates?.[0];
   if(candidate?.finishReason!=='STOP')throw Error('Gemini did not finish a complete response. Try again; no draft was saved.');
   const answer=candidate.content?.parts?.filter(p=>!p.thought&&p.text).map(p=>p.text).join('\n');
@@ -83,9 +85,38 @@ async function context(boardId=session().board_id){
   const references=s.references.filter(r=>s.selected.includes(r.id)&&!removed.has(r.id)).map(({id,title,brand,region,url,kind,verification})=>({id,title,brand,region,url,kind,verification}));
   return {brief:{...s.brief},references,board:boardContext(board),web:s.web?{text:s.web.text,sources:s.web.sources}:null};
 }
-function settings(){host.openModal(`<div class="modal-header"><h2>Connect your creative assistant</h2><button data-action="close" aria-label="Close dialog">×</button></div><form id="ai-settings"><p>Use your own Gemini key. It stays in this page’s memory and goes directly to Google; Prism does not save it or send it to Cloudflare.</p><label for="gemini-key">Gemini API key</label><input id="gemini-key" type="password" autocomplete="off" required placeholder="Paste privately here"><label for="gemini-model">Model</label><select id="gemini-model"><option value="gemini-2.5-flash">Gemini 2.5 Flash</option><option value="gemini-2.5-flash-lite">Gemini 2.5 Flash-Lite</option></select><p class="hint">${link('https://aistudio.google.com/api-keys','Get a key in Google AI Studio')} · ${link('https://ai.google.dev/gemini-api/docs/pricing','Check current pricing')}<br>Use a project without paid billing for free-tier limits. Google controls quotas and may use free-tier inputs to improve its products. Do not send confidential copy unless appropriate. Reconnect after refreshing.</p><div class="modal-actions"><button type="button" data-studio="disconnect">Disconnect</button><button class="primary" type="submit">Connect Gemini</button></div></form>`);$('gemini-model').value=model;}
+function settings(){
+  host.openModal(`<div class="modal-header"><h2>Connect your creative assistant</h2><button data-action="close" aria-label="Close dialog">×</button></div><form id="ai-settings"><p>Enter your Gemini key privately, load Google's model list, then choose a model. Your key stays in this page's memory and goes directly to Google; Prism does not save it or send it to Cloudflare.</p><label for="gemini-key">Gemini API key</label><input id="gemini-key" type="password" autocomplete="off" required placeholder="Paste privately here"><button type="button" data-studio="load-models">Load available models</button><p id="model-status" class="hint" role="status"></p><label for="gemini-model">Flash text model</label><select id="gemini-model" required></select><p class="hint">Models shown are reported by Google for this key; generation access and free quota still depend on your project. Flash-Lite is suitable for short copy and chat.</p><label class="ai-grounding-option"><input id="gemini-grounding" type="checkbox"> Enable Gemini web search for this session</label><p class="hint">Google Search is separate from text generation and is unavailable on the newer models' API free tier. A billed project may incur search and text charges. Leave this off for the free route: product references, regional search links, CLIP, chat and concept drafts.</p><p class="hint">${link('https://aistudio.google.com/api-keys','Get a key in Google AI Studio')} · ${link('https://ai.google.dev/gemini-api/docs/pricing','Check current pricing')}<br>Use a project without paid billing for free-tier limits. Prism cannot read your billing status. Google controls quotas and may use free-tier inputs to improve its products. Reconnect after refreshing.</p><div class="modal-actions"><button type="button" data-studio="disconnect">Disconnect</button><button id="connect-gemini" class="primary" type="submit">Connect selected model</button></div></form>`);
+  const form=$('ai-settings');form.loadedKey=sessionKey;form.models=availableModels;form.loading=false;
+  $('gemini-key').value=sessionKey;$('gemini-grounding').checked=groundingEnabled;
+  populateModels(form.models,model);
+  $('model-status').textContent=form.models.length?'Models loaded. Choose one and connect.':'Load the model list using your key. No AI generation is run during discovery.';
+}
+function populateModels(models,selected=''){
+  $('gemini-model').innerHTML='<option value="">Choose a listed model</option>'+models.map(m=>`<option value="${esc(m.id)}">${esc(m.label)} (${esc(m.id)})</option>`).join('');
+  $('gemini-model').value=selected;$('gemini-model').disabled=!models.length;
+}
+function clearConnectionForm(){
+  const form=$('ai-settings');if(!form)return;
+  form.loadedKey='';form.models=[];$('gemini-key').value='';
+}
+async function loadConnectionModels(){
+  const form=$('ai-settings');if(!form||form.loading)return;
+  const key=$('gemini-key').value.trim(),connectionScope=scope;
+  form.loading=true;form.loadedKey='';form.models=[];populateModels([]);
+  const status=$('model-status'),load=form.querySelector('[data-studio="load-models"]');
+  load.disabled=true;$('connect-gemini').disabled=true;status.textContent='Checking models with Google...';
+  try{
+    const models=await listModels(key);
+    if($('ai-settings')!==form||$('gemini-key').value.trim()!==key||scope!==connectionScope)return;
+    form.loadedKey=key;form.models=models;populateModels(models,key===sessionKey?model:'');
+    status.textContent=`Google listed ${models.length} compatible models. Choose one, then connect. Listing a model does not guarantee free quota.`;
+  }catch(e){if($('ai-settings')===form&&scope===connectionScope)status.textContent=e.name==='TimeoutError'?'Model discovery timed out. Try loading again.':e.message;}
+  finally{form.loading=false;if($('ai-settings')===form){load.disabled=false;$('connect-gemini').disabled=false;}}
+}
+
 function mount(){
-  if(!host?.user()){document.getElementById('prism-chat-root')?.remove();sessionKey='';scope='';active=null;messages=[];return;}
+  if(!host?.user()){document.getElementById('prism-chat-root')?.remove();clearConnectionForm();sessionKey='';model='';availableModels=[];groundingEnabled=false;scope='';active=null;messages=[];return;}
   initScope();
   if(active?.ideas?.needs_check&&!active.checking){const target=active;target.checking=true;host.api('/collections/'+target.board_id).then(board=>{if(board.revision!==target.ideas?.board_revision)target.ideas=null;else target.ideas.needs_check=false;}).catch(()=>{target.ideas=null;}).finally(()=>{target.checking=false;persist();render();});}
   let root=$('prism-chat-root');if(!root){root=document.createElement('aside');root.id='prism-chat-root';document.body.append(root);}
@@ -102,8 +133,18 @@ async function chat(text){
 }
 document.addEventListener('submit',async event=>{
   if(event.target.id==='campaign-form'){event.preventDefault();try{collectBrief();persist();await job('Finding live product photographs…',async signal=>{const s=session(),result=await jsonRequest('/discover',s.brief,signal);s.references=result.references;s.discovery=result;s.selected=[];s.ideas=null;s.web=null;});}catch(e){displayError(e);}}
-  if(event.target.id==='ai-settings'){event.preventDefault();sessionKey=$('gemini-key').value.trim();model=$('gemini-model').value;host.closeModal();render();}
+  if(event.target.id==='ai-settings'){
+    event.preventDefault();const form=event.target,key=$('gemini-key').value.trim(),selected=$('gemini-model').value;
+    if(form.loading)return;
+    if(form.loadedKey!==key||!form.models?.length){await loadConnectionModels();return;}
+    if(!form.models.some(m=>m.id===selected)){$('model-status').textContent='Choose a listed model before connecting.';return;}
+    sessionKey=key;model=selected;availableModels=form.models;groundingEnabled=$('gemini-grounding').checked;error='';clearConnectionForm();host.closeModal();render();
+  }
   if(event.target.id==='prism-chat-form'){event.preventDefault();const text=$('chat-message').value.trim();if(text)await chat(text);}
+});
+document.addEventListener('close',event=>{if(event.target.id==='modal'&&!event.target.open)clearConnectionForm();},true);
+document.addEventListener('input',event=>{
+  if(event.target.id==='gemini-key'){const form=$('ai-settings');form.loadedKey='';form.models=[];populateModels([]);$('model-status').textContent='Key changed. Load its model list before connecting.';}
 });
 document.addEventListener('change',event=>{
   if(event.target.dataset.ref){const s=session(),id=event.target.dataset.ref;s.selected=event.target.checked?[...new Set([...s.selected,id])]:s.selected.filter(x=>x!==id);s.ideas=null;persist();render();}
@@ -114,7 +155,8 @@ document.addEventListener('click',async event=>{
   const button=event.target.closest('[data-studio]');if(!button)return;const action=button.dataset.studio;
   if(action==='cancel'){controller?.abort();return;}
   if(action==='settings'){settings();return;}
-  if(action==='disconnect'){sessionKey='';host.closeModal();render();return;}
+  if(action==='load-models'){await loadConnectionModels();return;}
+  if(action==='disconnect'){sessionKey='';model='';availableModels=[];groundingEnabled=false;clearConnectionForm();host.closeModal();render();return;}
   if(action==='chat-toggle'){chatOpen=!chatOpen;mount();return;}
   if(action==='chat-prompt'){await chat(button.dataset.prompt);return;}
   if(working)return;

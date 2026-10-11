@@ -4,11 +4,11 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 
 const out=path.resolve('dist'), web=path.resolve('../src/prism/web');
-const buildId=createHash('sha256').update(await readFile(web+'/app.js')).update(await readFile(web+'/style.css')).update(await readFile(web+'/studio.mjs')).update(await readFile(web+'/research-core.mjs')).update(await readFile('runtime.mjs')).digest('hex').slice(0,16);
+const buildId=createHash('sha256').update(await readFile(web+'/app.js')).update(await readFile(web+'/style.css')).update(await readFile(web+'/studio.mjs')).update(await readFile(web+'/research-core.mjs')).update(await readFile(web+'/gemini-client.mjs')).update(await readFile('runtime.mjs')).digest('hex').slice(0,16);
 await mkdir(out+'/static/ort',{recursive:true});
 await build({entryPoints:['runtime.mjs','clip-worker.mjs','decode-worker.mjs'],outdir:out+'/static',bundle:true,
              format:'esm',platform:'browser',target:'es2022',minify:true,sourcemap:false,define:{PRISM_BUILD_ID:JSON.stringify(buildId)}});
-for(const name of ['style.css','icon.svg','research-core.mjs','studio.mjs'])await copyFile(web+'/'+name,out+'/static/'+name);
+for(const name of ['style.css','icon.svg','research-core.mjs','gemini-client.mjs','studio.mjs'])await copyFile(web+'/'+name,out+'/static/'+name);
 await copyFile(web+'/app.js',out+'/static/app.js');
 let html=await readFile(web+'/index.html','utf8');
 html=html.replace('<script src="/static/app.js?v=1" defer></script>',`<script type="module" src="/static/runtime.js?v=${buildId}"></script>`).replace('/static/style.css?v=1',`/static/style.css?v=${buildId}`).replace('/static/studio.mjs?v=1',`/static/studio.mjs?v=${buildId}`);

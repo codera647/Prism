@@ -1,13 +1,21 @@
 # Prism - Project Memory and Continuation State
 
-> Current work: **0.3 campaign studio**. User requested internet references for anti-frizz shampoo/Pakistan/Instagram, optional free-tier Gemini, chat and UI motion. User will enter a key privately in Prism; do not ask for a key in chat or reveal it. See [0.3 mapping](RELEASE_0_3.md). Live catalogue checks found 12 shampoo references. Gemini live validation and visual inspection remain open; tools for browser control are unavailable this turn. Native Trailforge receipts continue to cover image/report workflows, not the optional client-side Gemini calls. Deployment/release status must be verified from Actions before claiming publication.
+## Gemini availability correction (2026-10-11)
+
+0.3.1 replaces the two hardcoded Gemini 2.5 choices with direct models.list discovery and explicit Flash text model selection. The user reported a missing-model error; Google restricts some 2.5 projects to previous users. Discovery uses a private in-memory key in a header, runs no generation, and does not guarantee generation quota. New models omit deprecated generation settings. Grounding is separate from free text generation and now off until explicitly enabled per session. 21 local browser/source/DOM tests passed, including fixture 404 recovery; live Gemini success remains unverified with the user's private key.
+
+0.3.0 Actions verified and published the Windows ZIP. The local install reused the verified 0.2.1 runtime plus exact 0.3.0 released source; its ZIP download stalled and was not used. The interrupted local version check produced no success record; do not claim the native UI was visually verified.
+
+
+
+> Current work: **0.3.1 Gemini availability fix**. User tested the key and reported a missing model; the account-driven selection fix is being deployed. Historical 0.3 status: User requested internet references for anti-frizz shampoo/Pakistan/Instagram, optional free-tier Gemini, chat and UI motion. User will enter a key privately in Prism; do not ask for a key in chat or reveal it. See [0.3 mapping](RELEASE_0_3.md). Live catalogue checks found 12 shampoo references; actual CLIP produced three groups, 12 shampoo matches and zero underwater matches (27.911 seconds). Cloudflare deployment `38118963618` succeeded. Windows release `38118976802` has published v0.3.0; final cleanup status and local installation are being verified. The user subsequently reported a missing-model error; live provider quality and UI visual inspection remain open; tools for browser control are unavailable this turn. Native Trailforge receipts continue to cover image/report workflows, not the optional client-side Gemini calls. Deployment/release status must be verified from Actions before claiming publication.
 
 
 > Current 0.2 desktop/browser scope and verification: [release record](RELEASE_0_2.md), [deployment architecture](DEPLOYMENT.md). Earlier local-only implementation sections below describe the 0.1 baseline; open human/quality gates remain open.
 
 Last updated: 2026-10-11 (Asia/Karachi).
 
-## Current desktop and hosted release
+## Earlier 0.2 desktop and hosted release evidence
 
 - **Prism 0.2.1 is published:** https://github.com/codera647/Prism/releases/tag/v0.2.1 . Windows Actions run `38076811675` passed 32 contracts, assembled the isolated runtime, tested the actual packaged executable and published the ZIP/checksum. Released code commit: `b97ed18de052f59a1a4555b8f6ecb96aa8a7b89c`. The earlier v0.2.0 tag failed before publication; retain its history.
 - **Cloudflare Pages is live:** https://prism-creative.pages.dev/ . Pages run `38076807066` succeeded. Browser CLIP uses pinned q8 ONNX weights and local IndexedDB; no server Trailforge receipts or cross-device sync. Account/project deployment credentials are private and ignored. Pages token expires 2027-01-09.

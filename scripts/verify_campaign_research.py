@@ -30,7 +30,8 @@ def main():
             assert image.width*image.height <= 40_000_000
             image.convert('RGB').save(path, 'JPEG', quality=90)
         paths.append(path)
-        ads.append({'id': ref['id'], 'copy':'', 'corrections':[]})
+        ads.append({'id': ref['id'], 'copy':'', 'corrections':[], 'tags':[],
+                    'hash':hashlib.sha256(data).hexdigest()})
         checked.append({'id':ref['id'], 'source':ref['url'], 'bytes':len(data),
                         'content_type':kind, 'sha256':hashlib.sha256(data).hexdigest()})
     encoder = ClipEncoder(root/'.prism/models')

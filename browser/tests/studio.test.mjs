@@ -11,7 +11,7 @@ test('campaign flow imports missing-copy references, drafts with current CLIP co
   const originals={};for(const [name,value] of Object.entries({window:w,document:w.document,localStorage:w.localStorage,FormData:w.FormData,File:w.File})){originals[name]=globalThis[name];globalThis[name]=value;}
   const ref={id:'r-1',title:'Shampoo <script>alert(1)</script>',brand:'Example',region:'PK',image:'https://cdn.shopify.com/s/files/1/1/a.jpg',url:'https://saeedghani.pk/products/example',kind:'product_reference',verification:'Paid-ad status not verified.'};
   const board={id:'b-1',name:'References',revision:1,count:0,copy_count:0,ads:[],groups:[],patterns:[],jobs:[],stale:false,model:null,report:null};
-  const calls=[],requests=[];let collections=[];
+  const calls=[],requests=[];let collections=[],failFirstGeneration=true,modelLists=0;
   w.prismBrowserApi=async(path,opts={})=>{
     calls.push({path,body:opts.body});
     if(path==='/health')return {clip_ready:true};if(path==='/auth/me')return {name:'On this device'};
@@ -27,7 +27,12 @@ test('campaign flow imports missing-copy references, drafts with current CLIP co
   const fetchOriginal=globalThis.fetch;
   globalThis.fetch=async(url,options)=>{
     if(url.startsWith('/api/reference-image'))return {ok:true,blob:async()=>new w.Blob(['fixture'],{type:'image/jpeg'})};
+    if(url.includes('/v1beta/models?')){
+      modelLists++;assert.equal(options.headers['x-goog-api-key'],'test-only-gemini-key-not-a-real-secret');assert.equal(url.includes('test-only-gemini'),false);
+      return Response.json({models:[{name:'models/gemini-3.5-flash-lite',displayName:'Gemini 3.5 Flash-Lite',supportedGenerationMethods:['generateContent']},{name:'models/gemini-3.8-flash',displayName:'Gemini 3.8 Flash',supportedGenerationMethods:['generateContent']},{name:'models/gemini-3.1-flash-image',supportedGenerationMethods:['generateContent']}]});
+    }
     requests.push({url,body:JSON.parse(options.body),headers:options.headers});
+    if(failFirstGeneration){failFirstGeneration=false;return Response.json({error:{message:'Model unavailable'}},{status:404});}
     if(requests.at(-1).body.tools)return Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:'A product catalogue is available; paid delivery is unverified.'}]},groundingMetadata:{groundingChunks:[{web:{uri:'https://saeedghani.pk/products/example',title:'Example source'}}],groundingSupports:[{segment:{text:'A product catalogue is available'},groundingChunkIndices:[0]}],webSearchQueries:['shampoo Pakistan Instagram'],searchEntryPoint:{renderedContent:'<style>.chip{color:blue}</style><a href="https://www.google.com/search?q=shampoo" target="_blank">Search shampoo</a>'}}}]});
     if(requests.at(-1).body.contents[0].parts[0].text.startsWith('Answer the latest'))return Response.json({candidates:[{finishReason:'STOP',content:{parts:[{text:'These are tentative product close-up groups, not proof of successful ads.'}]}}]});
     const ideas=[1,2,3].map(i=>({title:`Direction ${i}`,angle:'Proposal',visual:'Bottle with a different background',headline:`Draft ${i}`,caption:'New copy',cta:'Learn more',test:'Change one visual variable',keep_constant:'Audience and headline',source_ids:['a-1']}));
@@ -43,12 +48,19 @@ test('campaign flow imports missing-copy references, drafts with current CLIP co
     w.document.querySelector('#campaign-form').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));await delay(25);
     assert.equal(w.document.querySelectorAll('.reference-card').length,1);assert.equal(w.document.querySelector('.reference-info script'),null);
     await click('select-all');await click('import');assert.equal(board.ads.length,1);assert.equal(board.ads[0].copy,'');
-    await click('settings');w.document.querySelector('#gemini-key').value='test-only-gemini-key-not-a-real-secret';w.document.querySelector('#ai-settings').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));await delay(10);
+    await click('settings');w.document.querySelector('#gemini-key').value='test-only-gemini-key-not-a-real-secret';await click('load-models');
+    assert.equal(w.document.querySelector('#gemini-model').querySelectorAll('option').length,3);assert.equal(w.document.querySelector('#gemini-model').value,'');assert.equal(modelLists,1);
+    w.document.querySelector('#gemini-model').value='gemini-3.5-flash-lite';w.document.querySelector('#ai-settings').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));await delay(10);
     await click('ideas');assert.match(w.document.querySelector('.studio-error').textContent,/not finished/);assert.equal(requests.length,0);
     board.model='fixture-only-clip';board.groups=[{id:'g1',name:'Product close-ups',members:['a-1']}];
-    await click('ideas');assert.equal(w.document.querySelectorAll('.concept-card').length,3);assert.equal(requests.length,1);
+    await click('ideas');assert.match(w.document.querySelector('.studio-error').textContent,/Load available models/);assert.equal(requests.length,1);assert.equal(w.document.querySelectorAll('.concept-card').length,0);
+    await click('settings');assert.equal(w.document.querySelector('#gemini-key').value,'test-only-gemini-key-not-a-real-secret');await click('load-models');assert.equal(modelLists,2);
+    w.document.querySelector('#gemini-model').value='gemini-3.8-flash';w.document.querySelector('#ai-settings').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));await delay(10);
+    await click('ideas');assert.equal(w.document.querySelectorAll('.concept-card').length,3);assert.equal(requests.length,2);assert.match(requests[1].url,/gemini-3.8-flash:generateContent/);assert.equal(requests[1].body.generationConfig.temperature,undefined);assert.equal(requests[1].body.generationConfig.thinkingConfig,undefined);
     assert.match(requests[0].body.contents[0].parts[0].text,/Product close-ups/);assert.equal(requests[0].url.includes('test-only-gemini'),false);assert.equal(w.localStorage.getItem('prism-studio-v1:On this device').includes('test-only-gemini'),false);
     assert.equal(requests[0].body.contents[0].parts[0].text.includes('private.jpg'),false);
+    await click('web');assert.match(w.document.querySelector('.studio-error').textContent,/free tier/);assert.equal(requests.length,2);assert.equal(w.document.querySelectorAll('.concept-card').length,3);
+    await click('settings');w.document.querySelector('#gemini-grounding').checked=true;w.document.querySelector('#ai-settings').dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));await delay(10);
     await click('web');assert.ok(w.document.querySelector('.google-suggestions'));
     assert.equal(w.document.querySelector('.google-suggestions').getAttribute('sandbox').includes('allow-scripts'),false);
     assert.match(w.document.querySelector('.citation-details').textContent,/product catalogue/);

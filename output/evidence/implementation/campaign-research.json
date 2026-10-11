@@ -1,0 +1,363 @@
+{
+  "status": "passed",
+  "scope": "Live Pakistani catalogue photos + real local CLIP mechanics; paid Instagram status and creative effectiveness unverified.",
+  "brief": {
+    "product": "Anti-frizz shampoo",
+    "audience": "People exploring everyday hair care",
+    "goal": "Product page visits",
+    "claims": "",
+    "query": "shampoo",
+    "region": "PK",
+    "platform": "Instagram",
+    "language": "English + Roman Urdu"
+  },
+  "research": {
+    "references": [
+      {
+        "id": "saeedghani.pk:7054420836530",
+        "title": "Bundle of 4 Shampoos at the price of 3",
+        "brand": "Saeed Ghani",
+        "region": "PK",
+        "url": "https://saeedghani.pk/products/bundle-of-4-shampoo-at-the-price-of-3?_pos=1&_psq=shampoo&_psid=e097c960f&_ss=e",
+        "image": "https://cdn.shopify.com/s/files/1/0434/3604/8550/files/Shampoo_Bundle_1.webp?v=1785404105&width=900",
+        "kind": "product_reference",
+        "copy": "",
+        "retrieved_at": "2026-10-11T06:47:51.859620+00:00",
+        "verification": "Catalogue photograph. Paid-ad status, Instagram placement and regional delivery are not verified."
+      },
+      {
+        "id": "saeedghani.pk:6810865270962",
+        "title": "Tea Tree & Aloe Vera Shampoo",
+        "brand": "Saeed Ghani",
+        "region": "PK",
+        "url": "https://saeedghani.pk/products/tea-tree-aloe-vera-shampoo?_pos=2&_psq=shampoo&_psid=e097c960f&_ss=e",
+        "image": "https://cdn.shopify.com/s/files/1/0434/3604/8550/files/Shampoo__0001_Group_11_copy.jpg?v=1776432176&width=900",
+        "kind": "product_reference",
+        "copy": "",
+        "retrieved_at": "2026-10-11T06:47:51.860252+00:00",
+        "verification": "Catalogue photograph. Paid-ad status, Instagram placement and regional delivery are not verified."
+      },
+      {
+        "id": "saeedghani.pk:8275754647730",
+        "title": "Anti Hairfall Onion Shampoo",
+        "brand": "Saeed Ghani",
+        "region": "PK",
+        "url": "https://saeedghani.pk/products/anti-hairfall-onion-shampoo?_pos=3&_psq=shampoo&_psid=e097c960f&_ss=e",
+        "image": "https://cdn.shopify.com/s/files/1/0434/3604/8550/files/Edit_0008_Onion_Shampoo_aadd9498-d996-4ef5-ba4d-3becb9f23b63.webp?v=1783053939&width=900",
+        "kind": "product_reference",
+        "copy": "",
+        "retrieved_at": "2026-10-11T06:47:51.860761+00:00",
+        "verification": "Catalogue photograph. Paid-ad status, Instagram placement and regional delivery are not verified."
+      },
+      {
+        "id": "saeedghani.pk:5516568821926",
+        "title": "Argan Oil Shampoo",
+        "brand": "Saeed Ghani",
+        "region": "PK",
+        "url": "https://saeedghani.pk/products/argan-oil-shampoo-250ml?_pos=4&_psq=shampoo&_psid=e097c960f&_ss=e",
+        "image": "https://cdn.shopify.com/s/files/1/0434/3604/8550/files/Shampoo__0000_Group_12_copy.jpg?v=1776432207&width=900",
+        "kind": "product_reference",
+        "copy": "",
+        "retrieved_at": "2026-10-11T06:47:51.861242+00:00",
+        "verification": "Catalogue photograph. Paid-ad status, Instagram placement and regional delivery are not verified."
+      },
+      {
+        "id": "saeedghani.pk:5516464947366",
+        "title": "Amla Shampoo",
+        "brand": "Saeed Ghani",
+        "region": "PK",
+        "url": "https://saeedghani.pk/products/amla-shampoo-200ml?_pos=5&_psq=shampoo&_psid=e097c960f&_ss=e",
+        "image": "https://cdn.shopify.com/s/files/1/0434/3604/8550/files/Shampoo__0004_Group_8_copy.jpg?v=1776432091&width=900",
+        "kind": "product_reference",
+        "copy": "",
+        "retrieved_at": "2026-10-11T06:47:51.861697+00:00",
+        "verification": "Catalogue photograph. Paid-ad status, Instagram placement and regional delivery are not verified."
+      },
+      {
+        "id": "saeedghani.pk:6878211997874",
+        "title": "Neem & Mint Refresh Shampoo",
+        "brand": "Saeed Ghani",
+        "region": "PK",
+        "url": "https://saeedghani.pk/products/neem-mint-refresh-shampoo?_pos=6&_psq=shampoo&_psid=e097c960f&_ss=e",
+        "image": "https://cdn.shopify.com/s/files/1/0434/3604/8550/files/Shampoo__0003_Group_9_copy.jpg?v=1776432113&width=900",
+        "kind": "product_reference",
+        "copy": "",
+        "retrieved_at": "2026-10-11T06:47:51.862136+00:00",
+        "verification": "Catalogue photograph. Paid-ad status, Instagram placement and regional delivery are not verified."
+      },
+      {
+        "id": "conaturalintl.com:7164339224763",
+        "title": "Hair Volume Shampoo",
+        "brand": "Conatural",
+        "region": "PK",
+        "url": "https://conaturalintl.com/products/hair-volume-shampoo?_pos=1&_psq=shampoo&_psid=b178dcfa6&_ss=e",
+        "image": "https://cdn.shopify.com/s/files/1/0605/2313/files/hair_volume_shampoo_8ec35c20-7fc4-41d3-907b-f8d93390825c.jpg?v=1775469661&width=900",
+        "kind": "product_reference",
+        "copy": "",
+        "retrieved_at": "2026-10-11T06:47:51.895803+00:00",
+        "verification": "Catalogue photograph. Paid-ad status, Instagram placement and regional delivery are not verified."
+      },
+      {
+        "id": "conaturalintl.com:7844547592379",
+        "title": "Hyaluronic Acid Shampoo",
+        "brand": "Conatural",
+        "region": "PK",
+        "url": "https://conaturalintl.com/products/hyaluronic-acid-shampoo?_pos=2&_psq=shampoo&_psid=b178dcfa6&_ss=e",
+        "image": "https://cdn.shopify.com/s/files/1/0605/2313/files/hyluronic_acid_shampoo.jpg?v=1775471219&width=900",
+        "kind": "product_reference",
+        "copy": "",
+        "retrieved_at": "2026-10-11T06:47:51.896330+00:00",
+        "verification": "Catalogue photograph. Paid-ad status, Instagram placement and regional delivery are not verified."
+      },
+      {
+        "id": "conaturalintl.com:7875560669371",
+        "title": "Blue Shampoo",
+        "brand": "Conatural",
+        "region": "PK",
+        "url": "https://conaturalintl.com/products/blue-shampoo?_pos=3&_psq=shampoo&_psid=b178dcfa6&_ss=e",
+        "image": "https://cdn.shopify.com/s/files/1/0605/2313/files/7_5183ee53-4fc4-4fa6-ad43-b5cabc0994b4.jpg?v=1729669355&width=900",
+        "kind": "product_reference",
+        "copy": "",
+        "retrieved_at": "2026-10-11T06:47:51.896972+00:00",
+        "verification": "Catalogue photograph. Paid-ad status, Instagram placement and regional delivery are not verified."
+      },
+      {
+        "id": "conaturalintl.com:8059916386491",
+        "title": "Rosemary & Onion Shampoo",
+        "brand": "Conatural",
+        "region": "PK",
+        "url": "https://conaturalintl.com/products/rosemary-onion-shampoo?_pos=4&_psq=shampoo&_psid=b178dcfa6&_ss=e",
+        "image": "https://cdn.shopify.com/s/files/1/0605/2313/files/rosemary_and_onion_shampoo.jpg?v=1775221474&width=900",
+        "kind": "product_reference",
+        "copy": "",
+        "retrieved_at": "2026-10-11T06:47:51.897468+00:00",
+        "verification": "Catalogue photograph. Paid-ad status, Instagram placement and regional delivery are not verified."
+      },
+      {
+        "id": "conaturalintl.com:7164350529723",
+        "title": "Hair Growth Shampoo",
+        "brand": "Conatural",
+        "region": "PK",
+        "url": "https://conaturalintl.com/products/hair-growth-shampoo?_pos=5&_psq=shampoo&_psid=b178dcfa6&_ss=e",
+        "image": "https://cdn.shopify.com/s/files/1/0605/2313/files/hair_growth_shampoo_67a2570a-2370-46d9-b51d-046fc54a28b2.jpg?v=1775219779&width=900",
+        "kind": "product_reference",
+        "copy": "",
+        "retrieved_at": "2026-10-11T06:47:51.898042+00:00",
+        "verification": "Catalogue photograph. Paid-ad status, Instagram placement and regional delivery are not verified."
+      },
+      {
+        "id": "conaturalintl.com:1330568899",
+        "title": "Hair Repair Shampoo",
+        "brand": "Conatural",
+        "region": "PK",
+        "url": "https://conaturalintl.com/products/hair-repair-shampoo?_pos=6&_psq=shampoo&_psid=b178dcfa6&_ss=e",
+        "image": "https://cdn.shopify.com/s/files/1/0605/2313/files/hair_repair_shampoo_3d530609-91e7-4bb8-b8f5-b68f0b297851.jpg?v=1775472490&width=900",
+        "kind": "product_reference",
+        "copy": "",
+        "retrieved_at": "2026-10-11T06:47:51.898487+00:00",
+        "verification": "Catalogue photograph. Paid-ad status, Instagram placement and regional delivery are not verified."
+      }
+    ],
+    "catalogues": [
+      {
+        "store": "Saeed Ghani",
+        "status": "ok",
+        "count": 6
+      },
+      {
+        "store": "Conatural",
+        "status": "ok",
+        "count": 6
+      }
+    ],
+    "scope": "Public product catalogues. These are not verified paid Instagram ads.",
+    "retrieved_at": "2026-10-11T06:47:51.902209+00:00"
+  },
+  "images_checked": [
+    {
+      "id": "saeedghani.pk:7054420836530",
+      "source": "https://saeedghani.pk/products/bundle-of-4-shampoo-at-the-price-of-3?_pos=1&_psq=shampoo&_psid=e097c960f&_ss=e",
+      "bytes": 103501,
+      "content_type": "image/jpeg",
+      "sha256": "aa6c66178a4d34be8578a01a721f064047e3e1d79c0affab24cb84b74f65dfc8"
+    },
+    {
+      "id": "saeedghani.pk:6810865270962",
+      "source": "https://saeedghani.pk/products/tea-tree-aloe-vera-shampoo?_pos=2&_psq=shampoo&_psid=e097c960f&_ss=e",
+      "bytes": 63050,
+      "content_type": "image/jpeg",
+      "sha256": "0f2380d30cf2c6acfe2cc4131cf1dbd6eb05a14ce2f7572fe5741ea9aa568feb"
+    },
+    {
+      "id": "saeedghani.pk:8275754647730",
+      "source": "https://saeedghani.pk/products/anti-hairfall-onion-shampoo?_pos=3&_psq=shampoo&_psid=e097c960f&_ss=e",
+      "bytes": 61377,
+      "content_type": "image/jpeg",
+      "sha256": "17a9b24ea7b121f83564cdb5e2e8880ff72b0ff06a50b7b4fc3898cb1fa1aedd"
+    },
+    {
+      "id": "saeedghani.pk:5516568821926",
+      "source": "https://saeedghani.pk/products/argan-oil-shampoo-250ml?_pos=4&_psq=shampoo&_psid=e097c960f&_ss=e",
+      "bytes": 54353,
+      "content_type": "image/jpeg",
+      "sha256": "48ddd8aee78a902aedd4b81a7635a023e3a6a39f398e38babfe28c0955307f82"
+    },
+    {
+      "id": "saeedghani.pk:5516464947366",
+      "source": "https://saeedghani.pk/products/amla-shampoo-200ml?_pos=5&_psq=shampoo&_psid=e097c960f&_ss=e",
+      "bytes": 61508,
+      "content_type": "image/jpeg",
+      "sha256": "d76cfd9cc3a90ee3ced20909ef9f0263868ef66dff865a7d7d26a19ceaff298e"
+    },
+    {
+      "id": "saeedghani.pk:6878211997874",
+      "source": "https://saeedghani.pk/products/neem-mint-refresh-shampoo?_pos=6&_psq=shampoo&_psid=e097c960f&_ss=e",
+      "bytes": 52398,
+      "content_type": "image/jpeg",
+      "sha256": "fbbf74d206a0cb77673de492c054cfd4a8f83dbec3805e67c14103cb77927284"
+    },
+    {
+      "id": "conaturalintl.com:7164339224763",
+      "source": "https://conaturalintl.com/products/hair-volume-shampoo?_pos=1&_psq=shampoo&_psid=b178dcfa6&_ss=e",
+      "bytes": 48053,
+      "content_type": "image/jpeg",
+      "sha256": "ed349e737b62b317a4f4ad482ec4253f38c2140f8adf87b12e4bf5169bc0662e"
+    },
+    {
+      "id": "conaturalintl.com:7844547592379",
+      "source": "https://conaturalintl.com/products/hyaluronic-acid-shampoo?_pos=2&_psq=shampoo&_psid=b178dcfa6&_ss=e",
+      "bytes": 48492,
+      "content_type": "image/jpeg",
+      "sha256": "57e7c0ae0c0ae28bf0fe5627c7cca5f52b3d0f47b15cf17daf9debc0d4796c62"
+    },
+    {
+      "id": "conaturalintl.com:7875560669371",
+      "source": "https://conaturalintl.com/products/blue-shampoo?_pos=3&_psq=shampoo&_psid=b178dcfa6&_ss=e",
+      "bytes": 41625,
+      "content_type": "image/jpeg",
+      "sha256": "c2ffc7c7de982869051fed003c76a70254e15f0e68aeb8af023633cf5d154dce"
+    },
+    {
+      "id": "conaturalintl.com:8059916386491",
+      "source": "https://conaturalintl.com/products/rosemary-onion-shampoo?_pos=4&_psq=shampoo&_psid=b178dcfa6&_ss=e",
+      "bytes": 49612,
+      "content_type": "image/jpeg",
+      "sha256": "2b56c45fee2681182f1677f67f1b02ecbf452ebd3a20a50cbcac9f61baa4068e"
+    },
+    {
+      "id": "conaturalintl.com:7164350529723",
+      "source": "https://conaturalintl.com/products/hair-growth-shampoo?_pos=5&_psq=shampoo&_psid=b178dcfa6&_ss=e",
+      "bytes": 55407,
+      "content_type": "image/jpeg",
+      "sha256": "ca532ea01fd4e7bc0a9cb35c950fc2b67fa2768379810d3d31b38ec648128466"
+    },
+    {
+      "id": "conaturalintl.com:1330568899",
+      "source": "https://conaturalintl.com/products/hair-repair-shampoo?_pos=6&_psq=shampoo&_psid=b178dcfa6&_ss=e",
+      "bytes": 51486,
+      "content_type": "image/jpeg",
+      "sha256": "a57cc1a6e06daccc8e44c511fa8587c5ed33ad2647911ef3349e679919d049eb"
+    }
+  ],
+  "clip": {
+    "model": {
+      "name": "ViT-B-32",
+      "pretrained": "openai",
+      "sha256": "431adb635d7a35aaaf5b70acf8738712c6f9ae30d08e17698c6f505c9a686fb8",
+      "file": "clip-ViT-B-32-openai.safetensors",
+      "preprocessing": "open_clip/ViT-B-32/224/v1",
+      "dimensions": 512,
+      "quick_gelu": true,
+      "tokenization": "75-token chunks; normalized mean",
+      "source_sha256": "40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af"
+    },
+    "count": 12,
+    "dimensions": 512,
+    "groups": [
+      {
+        "id": "208e4694cc081fd1",
+        "name": "Product close-ups",
+        "members": [
+          "saeedghani.pk:7054420836530",
+          "saeedghani.pk:6810865270962",
+          "saeedghani.pk:5516568821926",
+          "saeedghani.pk:5516464947366",
+          "saeedghani.pk:6878211997874"
+        ],
+        "tentative": true
+      },
+      {
+        "id": "da2fa6dcd0bfc218",
+        "name": "Product close-ups",
+        "members": [
+          "conaturalintl.com:7164339224763",
+          "conaturalintl.com:7844547592379",
+          "conaturalintl.com:7875560669371",
+          "conaturalintl.com:8059916386491",
+          "conaturalintl.com:7164350529723",
+          "conaturalintl.com:1330568899"
+        ],
+        "tentative": true
+      },
+      {
+        "id": "12a462259e6464f8",
+        "name": "Product close-ups",
+        "members": [
+          "saeedghani.pk:8275754647730"
+        ],
+        "tentative": true
+      }
+    ],
+    "search": [
+      {
+        "query": "shampoo bottle on a plain background",
+        "matches": 12,
+        "top": [
+          {
+            "source": "https://saeedghani.pk/products/argan-oil-shampoo-250ml?_pos=4&_psq=shampoo&_psid=e097c960f&_ss=e",
+            "cosine": 0.3148864507675171
+          },
+          {
+            "source": "https://saeedghani.pk/products/amla-shampoo-200ml?_pos=5&_psq=shampoo&_psid=e097c960f&_ss=e",
+            "cosine": 0.31260186433792114
+          },
+          {
+            "source": "https://saeedghani.pk/products/anti-hairfall-onion-shampoo?_pos=3&_psq=shampoo&_psid=e097c960f&_ss=e",
+            "cosine": 0.30175578594207764
+          },
+          {
+            "source": "https://saeedghani.pk/products/tea-tree-aloe-vera-shampoo?_pos=2&_psq=shampoo&_psid=e097c960f&_ss=e",
+            "cosine": 0.29544228315353394
+          },
+          {
+            "source": "https://saeedghani.pk/products/neem-mint-refresh-shampoo?_pos=6&_psq=shampoo&_psid=e097c960f&_ss=e",
+            "cosine": 0.28039422631263733
+          }
+        ]
+      },
+      {
+        "query": "underwater submarines and coral reefs",
+        "matches": 0,
+        "top": []
+      }
+    ],
+    "seconds": 27.911
+  },
+  "live_gemini": "Pending user-entered key; mock UI responses are not live model evidence.",
+  "visual_inspection": "Not performed; browser control tool unavailable this turn.",
+  "hosted": {
+    "site": "https://prism-creative.pages.dev/",
+    "actions_run": 38118963618,
+    "conclusion": "success",
+    "references_returned": 12,
+    "source_images_checked": 2,
+    "unsafe_image_status": 400,
+    "other_origin_status": 403,
+    "google_cors_status": 200
+  },
+  "visual_reference_checks": [
+    "reference-02.jpg",
+    "reference-07.jpg",
+    "reference-12.jpg"
+  ]
+}

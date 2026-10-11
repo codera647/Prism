@@ -23,3 +23,6 @@ button:disabled{cursor:wait;opacity:.55}button:active:not(:disabled){transform:t
 .google-suggestions{border:0;width:100%;height:125px;background:white;border-radius:8px;margin:10px 0}.citation-details{font-size:11px;line-height:1.8;margin:12px 0;color:#88729b}
 
 .studio fieldset{border:0;padding:0;margin:0;min-width:0}
+
+.ai-grounding-option { display: flex; align-items: center; gap: 10px; }
+.ai-grounding-option input { width: auto; flex: 0 0 auto; }

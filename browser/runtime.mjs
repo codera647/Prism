@@ -71,7 +71,7 @@ async function route(path,options={}){
     const response=await fetch('/api/discover',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:options.signal});
     const data=await response.json();if(!response.ok)fail(data.detail||'Research is unavailable.',response.status);return data;
   }
-  if(parts[0]==='health')return {status:'ok',version:'0.3.0',mode:'browser',clip_ready:true,model:policy.model,harness:null};
+  if(parts[0]==='health')return {status:'ok',version:'0.3.1',mode:'browser',clip_ready:true,model:policy.model,harness:null};
   if(parts[0]==='auth'&&parts[1]==='me')return {name:'On this device'};
   if(parts[0]==='auth')fail('The browser app uses one device workspace, without accounts.');
   if(parts[0]==='demo'){

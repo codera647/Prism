@@ -1,5 +1,7 @@
 # Prism - System Blueprint
 
+> Current 0.4 interface replacement: [layout, preserved features and verified publication](RELEASE_0_4.md). Existing CLIP, Trailforge, provider and storage boundaries remain applicable.
+
 > Current campaign research / Gemini / UI extension: [Prism 0.3 specification and framework mapping](RELEASE_0_3.md). Earlier sections below remain historical baseline records.
 
 

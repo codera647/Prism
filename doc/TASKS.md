@@ -1,6 +1,6 @@
 # Prism - Dependency-Ordered Backlog
 
-> 0.4 interface redesign: implemented and locally verified with 23 browser/source/DOM tests plus production bundle and Functions compilation. Publication and Windows package checks are pending Actions; live visual inspection remains open. [Scope and evidence](RELEASE_0_4.md).
+> 0.4 interface redesign: implemented and locally verified with 23 browser/source/DOM tests plus production bundle and Functions compilation. Pages and Windows Actions passed, including actual packaged CLIP checks. Deployed source files and installed desktop backend/assets match the tag; live catalogue/photo retrieval passed. Live visual inspection remains open. [Scope and evidence](RELEASE_0_4.md).
 
 > Gemini model-availability fix: **completed in 0.3.1**. Model discovery, explicit selection, private key lifecycle, new-model generation compatibility and separate search pricing are covered by 21 browser regressions. Pages and Windows Actions passed; local desktop backend/assets and real catalogue requests passed. Live Gemini success remains a user-key check. [Evidence](../output/evidence/implementation/gemini-connection-patch.json).
 

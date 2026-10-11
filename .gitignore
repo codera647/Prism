@@ -77,6 +77,7 @@ test-results/
 !/output/evidence/implementation/prism-web.jpg
 !/output/evidence/implementation/campaign-research.json
 !/output/evidence/implementation/gemini-connection-patch.json
+!/output/evidence/implementation/ui-redesign.json
 
 # Local editors, logs, temporary files, and operating system metadata
 .idea/

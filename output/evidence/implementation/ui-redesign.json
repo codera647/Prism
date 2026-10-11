@@ -1,0 +1,209 @@
+{
+  "version": "0.4.0",
+  "verified_at": "2026-10-11T08:23:54.483146+00:00",
+  "source_commit": "c429ef7521807aa2b7dfd59fb4d1be73b892cad1",
+  "user_direction": "Replace the layout; keep all features.",
+  "design_reference": "User-supplied video checklist; reviewed extracted frames. Original and extracted frames are not published.",
+  "site": "https://prism-creative.pages.dev",
+  "local_checks": {
+    "browser_source_dom_tests": 23,
+    "production_bundle": "PASS",
+    "functions_compile": "PASS",
+    "normal_text_css_token_contrast": "PASS"
+  },
+  "deployed_assets": [
+    {
+      "name": "app.js",
+      "bytes": 35909,
+      "sha256": "20ba04505ad7abd4403c4c3cfd645a5a4a1ec5281261575e03ced20541008346",
+      "matches_tag": true
+    },
+    {
+      "name": "style.css",
+      "bytes": 27262,
+      "sha256": "a4ec4a41983ff864385c6e86b63756c03faca1e21055c4fd5af91844733a894c",
+      "matches_tag": true
+    },
+    {
+      "name": "studio.mjs",
+      "bytes": 26201,
+      "sha256": "df7cd14b8281280a66623a38c030ac8f286f08ac78fc775367b9bba7d8f72eac",
+      "matches_tag": true
+    },
+    {
+      "name": "studio-view.mjs",
+      "bytes": 11919,
+      "sha256": "faebdd9ee41307cb0f49314c4e20941ac1be00a0ba8add2e100ffd3affec49c6",
+      "matches_tag": true
+    },
+    {
+      "name": "gemini-client.mjs",
+      "bytes": 4275,
+      "sha256": "76c76b899c5aedb023afbf7ded60562c6d6e878c058b28c4383738242297f45c",
+      "matches_tag": true
+    },
+    {
+      "name": "research-core.mjs",
+      "bytes": 7179,
+      "sha256": "e0fd68e0adc4615c9d0d49c5ce5fe900a223f2fc6fdae2c0e70b2c974d89206b",
+      "matches_tag": true
+    },
+    {
+      "name": "icon.svg",
+      "bytes": 232,
+      "sha256": "287438d93f9200e3e875feec809e7a847cbd4ccd0a5a0125eb5909e462ad0451",
+      "matches_tag": true
+    }
+  ],
+  "live_discovery": {
+    "reference_count": 12,
+    "catalogues": [
+      {
+        "store": "Saeed Ghani",
+        "status": "ok",
+        "count": 6
+      },
+      {
+        "store": "Conatural",
+        "status": "ok",
+        "count": 6
+      }
+    ],
+    "paid_ad_delivery_verified": false
+  },
+  "live_image": {
+    "bytes": 103501,
+    "mime": "image/jpeg"
+  },
+  "actions": [
+    {
+      "id": 38124318626,
+      "name": "Windows desktop release",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/codera647/Prism/actions/runs/38124318626"
+    },
+    {
+      "id": 38124318649,
+      "name": "Local application contracts",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/codera647/Prism/actions/runs/38124318649"
+    },
+    {
+      "id": 38124311609,
+      "name": "Local application contracts",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/codera647/Prism/actions/runs/38124311609"
+    },
+    {
+      "id": 38124311670,
+      "name": "Deploy Cloudflare Pages",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/codera647/Prism/actions/runs/38124311670"
+    }
+  ],
+  "release": {
+    "url": "https://github.com/codera647/Prism/releases/tag/v0.4.0",
+    "tag": "v0.4.0",
+    "prerelease": true,
+    "assets": [
+      {
+        "name": "Prism-0.4.0-Windows-x64.zip",
+        "bytes": 610210994,
+        "digest": "sha256:f8f60f7ec24147487f619c05e6a1b88af5b70a53186b58e5c14e7f2eb07d118f"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "bytes": 95,
+        "digest": "sha256:a8995c8f46c825beb8b2054f6f157097ea1fd452daa6a886526c56d6bb4a20b3"
+      }
+    ]
+  },
+  "local_installation": {
+    "version": "0.4.0",
+    "method": "Reused previously verified pinned runtime/launcher; replaced source/UI from exact v0.4.0 commit. Official release ZIP is separately built and verified by Actions.",
+    "launcher_icon": "Reused launcher retains its older embedded icon; the desktop shortcut uses the new prism.ico. Newly built release launcher has the new icon.",
+    "prior_versions_retained": true,
+    "existing_data_directory_retained": true,
+    "shortcut_updated": true,
+    "backend_health": {
+      "status": "ok",
+      "version": "0.4.0",
+      "clip_ready": true,
+      "model": {
+        "name": "ViT-B-32",
+        "pretrained": "openai",
+        "sha256": "431adb635d7a35aaaf5b70acf8738712c6f9ae30d08e17698c6f505c9a686fb8",
+        "file": "clip-ViT-B-32-openai.safetensors",
+        "preprocessing": "open_clip/ViT-B-32/224/v1",
+        "dimensions": 512,
+        "quick_gelu": true,
+        "tokenization": "75-token chunks; normalized mean",
+        "source_sha256": "40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af"
+      },
+      "mode": "local",
+      "generator": "templates",
+      "ocr": false,
+      "harness": "Trailforge 0.1.0a1"
+    },
+    "served_assets": [
+      {
+        "name": "app.js",
+        "bytes": 35909,
+        "sha256": "20ba04505ad7abd4403c4c3cfd645a5a4a1ec5281261575e03ced20541008346",
+        "matches_tag": true
+      },
+      {
+        "name": "style.css",
+        "bytes": 27262,
+        "sha256": "a4ec4a41983ff864385c6e86b63756c03faca1e21055c4fd5af91844733a894c",
+        "matches_tag": true
+      },
+      {
+        "name": "studio.mjs",
+        "bytes": 26201,
+        "sha256": "df7cd14b8281280a66623a38c030ac8f286f08ac78fc775367b9bba7d8f72eac",
+        "matches_tag": true
+      },
+      {
+        "name": "studio-view.mjs",
+        "bytes": 11919,
+        "sha256": "faebdd9ee41307cb0f49314c4e20941ac1be00a0ba8add2e100ffd3affec49c6",
+        "matches_tag": true
+      },
+      {
+        "name": "icon.svg",
+        "bytes": 232,
+        "sha256": "287438d93f9200e3e875feec809e7a847cbd4ccd0a5a0125eb5909e462ad0451",
+        "matches_tag": true
+      }
+    ],
+    "live_research": {
+      "reference_count": 12,
+      "catalogues": [
+        {
+          "store": "Saeed Ghani",
+          "status": "ok",
+          "count": 6
+        },
+        {
+          "store": "Conatural",
+          "status": "ok",
+          "count": 6
+        }
+      ],
+      "paid_ad_delivery_verified": false
+    },
+    "live_image_bytes": 103501
+  },
+  "limitations": {
+    "browser_native_visual_inspection": "Unavailable: browser-control runtime tool is not exposed.",
+    "responsive_visual_review": "Open; CSS breakpoints and DOM checks are not screenshots.",
+    "live_gemini": "User confirmed it was working before requesting the redesign; no private key or new agent-run generation test.",
+    "catalogue_photos": "Product references; no paid-ad or region/placement verification.",
+    "official_zip_download_local": "Not performed; pinned runtime/source replacement is documented above."
+  }
+}

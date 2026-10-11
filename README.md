@@ -16,7 +16,7 @@ Trailforge `v0.1.0a1` runs separate analysis and report workflows, with durable 
 
 Open **https://prism-creative.pages.dev/** for the browser app. It downloads a pinned CLIP model (~150 MB) on first analysis and processes images on your device. Boards stay in this browser; export before clearing site data. Keep this tab open while processing. Use current Chrome or Edge on a computer.
 
-The Windows x64 portable package is built and tested by [GitHub Actions](https://github.com/codera647/Prism/actions/workflows/desktop-release.yml) and published as [Prism v0.3.1 on GitHub Releases](https://github.com/codera647/Prism/releases/tag/v0.3.1). Extract the entire ZIP, then open `Prism.exe`; keep its `_internal` folder beside it. The package includes Python, CLIP and Trailforge. Windows 10/11 and WebView2 Runtime are required. Its private data lives in `%LOCALAPPDATA%/Prism/data`.
+The Windows x64 portable package is built and tested by [GitHub Actions](https://github.com/codera647/Prism/actions/workflows/desktop-release.yml) and published as [Prism v0.4.0 on GitHub Releases](https://github.com/codera647/Prism/releases/tag/v0.4.0). Extract the entire ZIP, then open `Prism.exe`; keep its `_internal` folder beside it. The package includes Python, CLIP and Trailforge. Windows 10/11 and WebView2 Runtime are required. Its private data lives in `%LOCALAPPDATA%/Prism/data`.
 
 Desktop and browser boards are separate. The website runs quantized CLIP in a browser worker and has no Python backend, Trailforge receipts, accounts or cloud synchronization. Desktop retains the full local Python/Harness workflows. Both use the same source-linked English copy rules. See [deployment architecture](doc/DEPLOYMENT.md) and [0.2 verification record](doc/RELEASE_0_2.md).
 

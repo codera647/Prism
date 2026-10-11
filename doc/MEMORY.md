@@ -1,5 +1,7 @@
 # Prism - Project Memory and Continuation State
 
+> Current 0.5 account system: [complete system design and rollout](SYSTEM_DESIGN.md), [implementation and activation gates](RELEASE_0_5.md). Green/gray dashboard and backend code are implemented; Google accounts require D1/OAuth configuration. Earlier sections are historical baselines.
+
 > Current work: **0.4 layout replacement** following the user's supplied design-checklist video. User explicitly chose to retain all working features and confirmed Gemini was working before this request. Published on Pages and as Windows v0.4.0. 23 browser/source/DOM tests passed; core contracts and actual packaged CLIP passed in Actions. The installed 0.4.0 backend is ready and serves the exact tag assets; 12 live catalogue references and a valid image passed in web and desktop checks. Prior versions and data are retained. [Evidence](../output/evidence/implementation/ui-redesign.json). Browser-control runtime is unavailable, so do not claim screenshot/native visual QA. [Release record](RELEASE_0_4.md). Earlier missing-model/live-success notes below are historical.
 
 ## Gemini availability correction (2026-10-11)

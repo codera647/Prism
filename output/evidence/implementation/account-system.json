@@ -1,0 +1,30 @@
+{
+  "version": "0.5.0",
+  "date": "2026-10-11",
+  "verification": {
+    "python_contracts": 45,
+    "browser_contracts": 36,
+    "providers_in_tests": "Fixtures with actual SQLite, WebCrypto, HTTP handlers and DOM",
+    "live_browser_visual_qa": false,
+    "live_google_oauth": false,
+    "live_muapi_generation": false
+  },
+  "production_activation": {
+    "database_created": false,
+    "google_configured": false,
+    "cloudflare_d1_check": {
+      "status": 401,
+      "code": 10000
+    },
+    "reason": "Pages-only token cannot provision D1; Google OAuth credentials unavailable; mandatory Chrome-control tool absent"
+  },
+  "upstream_references": {
+    "agent_reach": "94f06c1969dfc1834001269d79d3ad0972d9dee6",
+    "open_higgsfield": "b578108936e83a3b2a5e86644057a56f8aea73a1",
+    "open_higgsfield_code_vendored": false
+  },
+  "live_exa_search": "Free public quota exhausted; no successful sourced result claimed",
+  "publication": {
+    "status": "Pending"
+  }
+}

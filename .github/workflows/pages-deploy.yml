@@ -33,9 +33,9 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - run: npm test
       - run: npm run build
-      - name: Compile bounded research functions
+      - name: Compile account and research functions
         run: npx wrangler pages functions build --outdir ../output/functions-check
-      - name: Deploy browser app and read-only research functions
+      - name: Deploy browser app and account functions
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

@@ -128,7 +128,7 @@ def main():
     import webview
     webview.settings["ALLOW_DOWNLOADS"] = True
     session=BackendSession(data)
-    window=webview.create_window("Prism",html="""<!doctype html><html><body style='background:#f8f7f4;font:18px Segoe UI;padding:80px;color:#28272d'><h1 style='color:#7756c9'>Prism</h1><h2>Opening your creative workspace...</h2><p>Preparing local CLIP. Your images stay on this computer.</p><p>The first launch may take a little longer.</p></body></html>""",width=1280,height=900,min_size=(760,600))
+    window=webview.create_window("Prism",html="""<!doctype html><html><body style='background:#eef1ef;font:18px Segoe UI;padding:80px;color:#27352e'><h1 style='color:#285f47'>Prism</h1><h2>Opening your creative workspace...</h2><p>Preparing local CLIP. Your images stay on this computer.</p><p>The first launch may take a little longer.</p></body></html>""",width=1280,height=900,min_size=(760,600))
     def start():
         try:
             with FileLock(str(data/"desktop.lock"),timeout=1):

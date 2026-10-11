@@ -1,5 +1,7 @@
 # Prism desktop and free web deployment
 
+> Current 0.5 account system: [complete system design and rollout](SYSTEM_DESIGN.md), [implementation and activation gates](RELEASE_0_5.md). Green/gray dashboard and backend code are implemented; Google accounts require D1/OAuth configuration. Earlier sections are historical baselines.
+
 > In 0.3, Pages also deploys two bounded, read-only research functions. CLIP still runs on-device; no Python backend is hosted. Gemini keys are entered privately by users and are never deployment secrets. See [0.3 architecture](RELEASE_0_3.md).
 
 

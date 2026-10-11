@@ -25,6 +25,7 @@ from .media import copy_manifest, decode_bounded
 from .store import Store
 from .workflow import Workflow
 from .research import CampaignBrief, discover, reference_image
+from .agent_reach import search_public
 
 
 class Credentials(BaseModel):
@@ -122,6 +123,10 @@ def create_app(settings=None, encoder=None, run_worker=True):
     @app.post('/api/discover')
     def discover_references(payload: CampaignBrief, current=Depends(user)):
         return discover(payload)
+
+    @app.post('/api/research/search')
+    def research_public_web(payload: CampaignBrief, current=Depends(user)):
+        return search_public(payload)
 
     @app.get('/api/reference-image')
     def get_reference_image(url: str, current=Depends(user)):

@@ -78,6 +78,7 @@ test-results/
 !/output/evidence/implementation/campaign-research.json
 !/output/evidence/implementation/gemini-connection-patch.json
 !/output/evidence/implementation/ui-redesign.json
+!/output/evidence/implementation/account-system.json
 
 # Local editors, logs, temporary files, and operating system metadata
 .idea/

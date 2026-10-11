@@ -2,9 +2,9 @@
 
 **Start with a product. Leave with a direction.**
 
-Prism 0.4 replaces the layout with a flat, warm workspace: Campaign brief, References and Creative concepts. All existing board, CLIP, Gemini, chat and export features remain. [Redesign and verification](doc/RELEASE_0_4.md).
+Prism 0.5 adds a **green and gray dashboard**, Agent Reach web research and optional Gemini-generated product-design prompts. Its Google-account backend supports saved campaigns, ideas and encrypted provider keys when configured. **Google sign-in is awaiting Cloudflare database permissions and OAuth setup; device mode still works.** Image generation requires a Muapi key and provider credits. [Complete system design and setup](doc/SYSTEM_DESIGN.md), [implementation and release limits](doc/RELEASE_0_5.md).
 
-Prism 0.3 adds **Campaign studio**: describe your product, Pakistan/global market, platform, audience and copy language; discover real product references, import selected photographs into a local CLIP board, and connect your own Gemini key for cited web research, three tailored creative concepts and a chat assistant. Enter the key privately in the app, never in chat. Click **Load available models**, choose a listed Flash / Flash-Lite text model, then connect. The key clears on refresh. [Workflow, architecture and boundaries](doc/RELEASE_0_3.md).
+Prism 0.3 adds **Campaign studio**: describe your product, Pakistan/global market, platform, audience and copy language; discover real product references, import selected photographs into a local CLIP board, and connect your own Gemini key for cited web research, three tailored creative concepts and a chat assistant. Enter the key privately in the app, never in chat. Click **Load available models**, choose a listed Flash / Flash-Lite text model, then connect. In device mode the key clears on refresh; activated Google-account mode stores it encrypted until replaced or removed. [Workflow, architecture and boundaries](doc/RELEASE_0_3.md).
 
 Try: **anti-frizz shampoo → Pakistan → Instagram → English + Roman Urdu → reference keyword: shampoo**. Catalogue photographs are labelled product references; their paid-ad status and Instagram delivery are unverified. Regional Ad Library links help check actual ads. Images remain device-side; optional Gemini calls send your brief and selected text to Google. For the free route use a Gemini project without paid billing; provider quotas apply. Google Search grounding is separate, unavailable on newer models' API free tier, and disabled until explicitly enabled in AI connection. Free product discovery and regional search links remain available.
 
@@ -18,7 +18,7 @@ Open **https://prism-creative.pages.dev/** for the browser app. It downloads a p
 
 The Windows x64 portable package is built and tested by [GitHub Actions](https://github.com/codera647/Prism/actions/workflows/desktop-release.yml) and published as [Prism v0.4.0 on GitHub Releases](https://github.com/codera647/Prism/releases/tag/v0.4.0). Extract the entire ZIP, then open `Prism.exe`; keep its `_internal` folder beside it. The package includes Python, CLIP and Trailforge. Windows 10/11 and WebView2 Runtime are required. Its private data lives in `%LOCALAPPDATA%/Prism/data`.
 
-Desktop and browser boards are separate. The website runs quantized CLIP in a browser worker and has no Python backend, Trailforge receipts, accounts or cloud synchronization. Desktop retains the full local Python/Harness workflows. Both use the same source-linked English copy rules. See [deployment architecture](doc/DEPLOYMENT.md) and [0.2 verification record](doc/RELEASE_0_2.md).
+Desktop and browser boards are separate. The website runs quantized CLIP in a browser worker and has no Python CLIP backend or Trailforge receipts. Its new account backend supports campaign/idea synchronization after Google/D1 setup; original CLIP boards remain device-side. Desktop retains the full local Python/Harness workflows. Both use the same source-linked English copy rules. See [deployment architecture](doc/DEPLOYMENT.md) and [0.2 verification record](doc/RELEASE_0_2.md).
 
 ## Run on Windows
 

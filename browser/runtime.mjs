@@ -1,4 +1,8 @@
 import {policy,normalize,dot,clusters,copyTags,patterns,draftReport,parseCsv} from './core.mjs';
+import '../src/prism/web/cloud-account.mjs';
+
+await window.prismCloud.ready;
+const owner=()=>window.prismCloud.user()?.id||'device';
 
 const dbReady=new Promise((resolve,reject)=>{
   const request=indexedDB.open('prism-browser-v1',1);
@@ -6,7 +10,7 @@ const dbReady=new Promise((resolve,reject)=>{
   request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error);
 });
 async function transaction(mode,fn){const db=await dbReady;return new Promise((resolve,reject)=>{const tx=db.transaction('boards',mode),store=tx.objectStore('boards');let value;try{const req=fn(store);if(req)req.onsuccess=()=>{value=req.result;};}catch(e){reject(e);tx.abort();return;}tx.oncomplete=()=>resolve(value);tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||Error('Storage could not be saved.'));});}
-const get=id=>transaction('readonly',s=>s.get(id)),all=()=>transaction('readonly',s=>s.getAll()),put=board=>transaction('readwrite',s=>s.put(board));
+const get=async id=>{const b=await transaction('readonly',s=>s.get(id));return b&&(b.owner||'device')===owner()?b:undefined;},all=async()=>{const boards=await transaction('readonly',s=>s.getAll());return boards.filter(b=>(b.owner||'device')===owner());},put=board=>transaction('readwrite',s=>s.put({...board,owner:owner()}));
 async function locked(fn){if(!navigator.locks)throw Error('This browser lacks safe local storage locking. Use current Chrome/Edge or the desktop app.');return navigator.locks.request('prism-browser-mutations',fn);}
 function fail(message,status=400){const e=Error(message);e.status=status;throw e;}
 const urls=new Map();
@@ -67,12 +71,12 @@ function fileName(value){if(typeof value!=='string'||!value||value.length>240||/
 
 async function route(path,options={}){
   const url=new URL(path,'https://prism.invalid'),parts=url.pathname.split('/').filter(Boolean),method=options.method||'GET',body=options.body||{};
-  if(parts[0]==='discover'){
-    const response=await fetch('/api/discover',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:options.signal});
+  if(parts[0]==='discover'||parts[0]==='research'&&parts[1]==='search'){
+    const response=await fetch(parts[0]==='discover'?'/api/discover':'/api/research/search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:options.signal});
     const data=await response.json();if(!response.ok)fail(data.detail||'Research is unavailable.',response.status);return data;
   }
-  if(parts[0]==='health')return {status:'ok',version:'0.4.0',mode:'browser',clip_ready:true,model:policy.model,harness:null};
-  if(parts[0]==='auth'&&parts[1]==='me')return {name:'On this device'};
+  if(parts[0]==='health')return {status:'ok',version:'0.5.0',mode:'browser',clip_ready:true,model:policy.model,harness:null};
+  if(parts[0]==='auth'&&parts[1]==='me')return window.prismCloud.user()||{name:'On this device'};
   if(parts[0]==='auth')fail('The browser app uses one device workspace, without accounts.');
   if(parts[0]==='demo'){
     const board=await route('/collections',{method:'POST',body:{name:'Synthetic demo — browser CLIP'}}),data=new FormData(),mapping={};
@@ -166,7 +170,7 @@ const script=document.createElement('script');script.src=`/static/app.js?v=${PRI
 let lastProgress='';
 document.addEventListener('prism-progress',e=>{lastProgress=e.detail;const node=document.getElementById('browser-progress');if(node)node.textContent=lastProgress;});
 const observer=new MutationObserver(()=>{
-  const local=document.querySelector('.local');if(local&&!local.textContent.includes('Stored in this browser'))local.textContent='Stored in this browser';
+  const local=document.querySelector('.local');if(local&&!window.prismCloud.user()&&!local.textContent.includes('Stored in this browser'))local.textContent='Stored in this browser';
   const footer=document.querySelector('.sidebar .footer-note');if(footer&&!footer.textContent.startsWith('Browser CLIP'))footer.textContent='Browser CLIP · Images stay on-device. Optional Gemini sends selected text to Google. Export before clearing site data.';
   document.querySelector('[data-action="logout"]')?.remove();
   const diagnostic=document.querySelector('.diagnostics');if(diagnostic){const hints=diagnostic.querySelectorAll('.hint');if(hints[0]&&!hints[0].textContent.startsWith('This job runs'))hints[0].textContent='This job runs in a browser worker. Trailforge execution receipts are available in the desktop app.';}

@@ -1,5 +1,7 @@
 # Prism - Framework Mapping and Delivery Plan
 
+> Current 0.5 account system: [complete system design and rollout](SYSTEM_DESIGN.md), [implementation and activation gates](RELEASE_0_5.md). Green/gray dashboard and backend code are implemented; Google accounts require D1/OAuth configuration. Earlier sections are historical baselines.
+
 > Current 0.4 interface replacement: [layout, preserved features and verified publication](RELEASE_0_4.md). Existing CLIP, Trailforge, provider and storage boundaries remain applicable.
 
 > Current campaign research / Gemini / UI extension: [Prism 0.3 specification and framework mapping](RELEASE_0_3.md). Earlier sections below remain historical baseline records.

@@ -8,11 +8,25 @@ const emptyBrief=()=>({product:'',region:'PK',platform:'Instagram',audience:'',g
 let stage='brief';
 let host,sessionKey='',model='',availableModels=[],groundingEnabled=false,scope='',saved=[],active=null,working=false,step='',error='',chatOpen=false,messages=[],chatWorking=false;
 const storageKey=()=>`prism-studio-v1:${scope}`;
-function persist(){try{localStorage.setItem(storageKey(),JSON.stringify(saved));}catch{error='Your browser could not save this research. Export it before closing.';}}
+let syncTimer,pendingSync=new Map();
+const account=()=>window.prismCloud?.user();
+function accountPayload(s){
+ const ctx=host.board()?.id===s.board_id?boardContext(host.board()):s.board_snapshot||null;
+ return {...s,board_snapshot:ctx,local_device:undefined,checking:undefined};
+}
+function persist(){
+ try{localStorage.setItem(storageKey(),JSON.stringify(saved));}catch{error='Your browser could not save this research. Export it before closing.';}
+ if(account()&&active){pendingSync.set(active.id,JSON.parse(JSON.stringify(accountPayload(active))));clearTimeout(syncTimer);syncTimer=setTimeout(()=>{const tasks=[...pendingSync.values()];pendingSync.clear();for(const s of tasks)window.prismCloud.syncCampaign(s).catch(e=>{error=e.message;render();});},700);}
+}
 function initScope(){
   const user=host.user();if(!user)return;
-  const next=user.name;
-  if(scope!==next){stage='brief';scope=next;sessionKey='';model='';availableModels=[];groundingEnabled=false;messages=[];active=null;saved=[];try{const data=JSON.parse(localStorage.getItem(storageKey())||'[]');if(Array.isArray(data))saved=data.slice(0,20);for(const r of saved){if(r.ideas?.board_revision)r.ideas.needs_check=true;delete r.checking;}}catch{}active=saved[0]||null;}
+  const next=user.id||user.name;
+  if(scope!==next){
+   stage='brief';scope=next;sessionKey='';model='';availableModels=[];groundingEnabled=false;messages=[];active=null;saved=[];clearTimeout(syncTimer);pendingSync.clear();
+   try{const data=account()?window.prismCloud.cached():JSON.parse(localStorage.getItem(storageKey())||'[]');if(Array.isArray(data))saved=JSON.parse(JSON.stringify(data.slice(0,account()?50:20)));for(const r of saved){if(r.ideas?.board_revision&&!account())r.ideas.needs_check=true;delete r.checking;if(account()){r.board_id=null;r.imports=[];}}}catch{}
+   active=saved[0]||null;const connection=account()?.providers?.gemini;
+   if(connection){sessionKey='account-vault';model=connection.model;availableModels=[{id:model,label:model}];}
+  }
 }
 function session(){if(!active){active={id:crypto.randomUUID(),brief:emptyBrief(),references:[],selected:[],board_id:null,imports:[],ideas:null,web:null,created_at:new Date().toISOString()};saved.unshift(active);}return active;}
 function render(){host.render();}
@@ -53,6 +67,7 @@ async function jsonRequest(path,body,signal){
   const response=await host.api(path,{method:'POST',body,signal});return response;
 }
 async function gemini(text,{grounded=false,structured=false,signal}={}){
+  if(account())return window.prismCloud.call('/gemini/generate',{method:'POST',body:{text,structured,grounded,groundingEnabled},signal});
   if(!sessionKey)throw Error('Open AI connection and connect a Gemini API key first.');
   if(sessionKey.length<20)throw Error('This API key appears incomplete. Reconnect Gemini.');
   const requestModel=model;
@@ -75,12 +90,12 @@ async function context(boardId=session().board_id){
   const liveIds=new Set(board?.ads.map(a=>a.id)||[]);
   const removed=new Set(s.imports.filter(x=>!liveIds.has(x.ad_id)).map(x=>x.ref_id));
   const references=s.references.filter(r=>s.selected.includes(r.id)&&!removed.has(r.id)).map(({id,title,brand,region,url,kind,verification})=>({id,title,brand,region,url,kind,verification}));
-  return {brief:{...s.brief},references,board:boardContext(board),web:s.web?{text:s.web.text,sources:s.web.sources}:null};
+  return {brief:{...s.brief},references,board:boardContext(board),saved_board_snapshot:!board&&s.board_snapshot?{...s.board_snapshot,analysis_current:false,note:'Saved text snapshot, not a current analysis on this device.'}:null,web:s.web?{text:s.web.text,sources:s.web.sources}:null};
 }
 function settings(){
-  host.openModal(`<div class="modal-header"><h2>Connect your creative assistant</h2><button data-action="close" aria-label="Close dialog">×</button></div><form id="ai-settings"><p>Enter your Gemini key privately, load Google's model list, then choose a model. Your key stays in this page's memory and goes directly to Google; Prism does not save it or send it to Cloudflare.</p><label for="gemini-key">Gemini API key</label><input id="gemini-key" type="password" autocomplete="off" required placeholder="Paste privately here"><button type="button" data-studio="load-models">Load available models</button><p id="model-status" class="hint" role="status"></p><label for="gemini-model">Flash text model</label><select id="gemini-model" required></select><p class="hint">Models shown are reported by Google for this key; generation access and free quota still depend on your project. Flash-Lite is suitable for short copy and chat.</p><label class="ai-grounding-option"><input id="gemini-grounding" type="checkbox"> Enable Gemini web search for this session</label><p class="hint">Google Search is separate from text generation and is unavailable on the newer models' API free tier. A billed project may incur search and text charges. Leave this off for the free route: product references, regional search links, CLIP, chat and concept drafts.</p><p class="hint">${link('https://aistudio.google.com/api-keys','Get a key in Google AI Studio')} · ${link('https://ai.google.dev/gemini-api/docs/pricing','Check current pricing')}<br>Use a project without paid billing for free-tier limits. Prism cannot read your billing status. Google controls quotas and may use free-tier inputs to improve its products. Reconnect after refreshing.</p><div class="modal-actions"><button type="button" data-studio="disconnect">Disconnect</button><button id="connect-gemini" class="primary" type="submit">Connect selected model</button></div></form>`);
-  const form=$('ai-settings');form.loadedKey=sessionKey;form.models=availableModels;form.loading=false;
-  $('gemini-key').value=sessionKey;$('gemini-grounding').checked=groundingEnabled;
+  host.openModal(`<div class="modal-header"><h2>Connect your creative assistant</h2><button data-action="close" aria-label="Close dialog">×</button></div><form id="ai-settings"><p>${account()?'Your saved Gemini key is encrypted in your Google-linked Prism account. Leave the field blank to keep it, or enter a new key privately to replace it. Model calls use the saved key server-side.':"Enter your Gemini key privately, load Google?s model list, then choose a model. In device mode your key stays in memory and clears on refresh."}</p><label for="gemini-key">Gemini API key</label><input id="gemini-key" type="password" autocomplete="off" ${account()?'':'required'} placeholder="${account()?'Leave blank to keep saved key':'Paste privately here'}"><button type="button" data-studio="load-models">Load available models</button><p id="model-status" class="hint" role="status"></p><label for="gemini-model">Flash text model</label><select id="gemini-model" required></select><p class="hint">Models shown are reported by Google for this key; generation access and free quota still depend on your project. Flash-Lite is suitable for short copy and chat.</p><label class="ai-grounding-option"><input id="gemini-grounding" type="checkbox"> Enable Gemini web search for this session</label><p class="hint">Google Search is separate from text generation and is unavailable on the newer models' API free tier. A billed project may incur search and text charges. Leave this off for the free route: product references, regional search links, CLIP, chat and concept drafts.</p><p class="hint">${link('https://aistudio.google.com/api-keys','Get a key in Google AI Studio')} · ${link('https://ai.google.dev/gemini-api/docs/pricing','Check current pricing')}<br>Use a project without paid billing for free-tier limits. Prism cannot read your billing status. Google controls quotas and may use free-tier inputs to improve its products. Reconnect after refreshing.</p><div class="modal-actions"><button type="button" data-studio="disconnect">${account()?'Remove saved Gemini key':'Disconnect'}</button><button id="connect-gemini" class="primary" type="submit">${account()?'Save connection':'Connect selected model'}</button></div></form>`);
+  const form=$('ai-settings');form.loadedKey=account()?'':sessionKey;form.models=availableModels;form.loading=false;
+  $('gemini-key').value=account()?'':sessionKey;$('gemini-grounding').checked=groundingEnabled;
   populateModels(form.models,model);
   $('model-status').textContent=form.models.length?'Models loaded. Choose one and connect.':'Load the model list using your key. No AI generation is run during discovery.';
 }
@@ -99,7 +114,7 @@ async function loadConnectionModels(){
   const status=$('model-status'),load=form.querySelector('[data-studio="load-models"]');
   load.disabled=true;$('connect-gemini').disabled=true;status.textContent='Checking models with Google...';
   try{
-    const models=await listModels(key);
+    const models=account()?(await window.prismCloud.call('/gemini/models',{method:'POST',body:{key}})).models:await listModels(key);
     if($('ai-settings')!==form||$('gemini-key').value.trim()!==key||scope!==connectionScope)return;
     form.loadedKey=key;form.models=models;populateModels(models,key===sessionKey?model:'');
     status.textContent=`Google listed ${models.length} compatible models. Choose one, then connect. Listing a model does not guarantee free quota.`;
@@ -123,6 +138,21 @@ async function chat(text){
   try{const ctx=await context(host.view()==='board'?host.board()?.id:session().board_id);const result=await gemini(`Answer the latest user question using this context. Explain missing evidence. Do not claim to search the web on this call. Context: ${JSON.stringify(ctx)}\nRecent conversation: ${JSON.stringify(messages.slice(-8))}`);if(scope===chatScope&&active?.id===chatSession)messages.push({role:'assistant',text:result.text});}
   catch(e){if(scope===chatScope&&active?.id===chatSession)messages.push({role:'assistant',text:e.message});}finally{chatWorking=false;mount();}
 }
+async function designPrompts(index){
+ const idea=currentIdeas()?.ideas[index];if(!idea)throw Error('Draft a current concept first.');
+ let completed=false;await job('Writing two image-generation prompts…',async signal=>{
+  const s=session(),result=await gemini(`Create exactly two distinct product-ad image prompts based on this approved creative idea and brief. Return JSON {"prompts":["...","..."]}, each 10–3000 characters. Brief: ${JSON.stringify(s.brief)}. Idea: ${JSON.stringify(idea)}. Describe composition, product placement, backdrop, lighting and room for the headline in 4:5 format. These are conceptual mockups, not packaging-accurate renders: no product reference pixels are sent to this call. Never invent product benefits, discounts, certification marks or readable packaging details. Avoid fake before/after proof. Explain that the user must replace placeholder packaging with their real product before publishing.`,{structured:true,signal});
+  let data;try{data=JSON.parse(result.text);}catch{throw Error('Gemini returned invalid prompt JSON. Nothing was saved.');}
+  if(!Array.isArray(data.prompts)||data.prompts.length!==2||data.prompts.some(p=>typeof p!=='string'||p.length<10||p.length>3000))throw Error('Gemini did not return two usable image prompts.');
+  if(currentIdeas()?.ideas[index]!==idea)throw Error('This concept changed while prompts were generated. Draft current prompts again.');s.design_prompts={idea_index:index,idea_title:idea.title,prompts:data.prompts,created_at:new Date().toISOString()};completed=true;persist();
+ });
+ if(completed)showDesignPrompts();
+}
+function showDesignPrompts(){
+ const p=session().design_prompts;if(!p)return;
+ host.openModal(`<div class="modal-header"><h2>Review product-design prompts</h2><button data-action="close" aria-label="Close dialog">×</button></div><p>Two visual directions for ${esc(p.idea_title)}. Edit the prompts before generating. These create conceptual mockups; accurate product packaging needs your real product artwork.</p><form id="design-form">${p.prompts.map((text,i)=>`<label for="design-prompt-${i}">Design ${i+1}</label><textarea id="design-prompt-${i}" maxlength="3000" rows="5">${esc(text)}</textarea>`).join('')}<label for="design-count">How many designs?</label><select id="design-count"><option value="1">One design</option><option value="2">Two designs</option></select><label class="ai-grounding-option"><input type="checkbox" id="confirm-design-usage" required>I want to generate using my image-provider credits.</label><p class="hint">${account()?'Uses the Muapi model saved in account connections. Each image is a separate generation request. No automatic submission retry.':'Google sign-in and an image-provider connection are needed for in-app generation. You can copy these prompts and use them in Open-Higgsfield separately.'}</p><div class="modal-actions"><button type="button" data-studio="copy-prompts">Copy prompts</button><button class="primary" ${account()?'':'disabled'}>Generate selected designs</button></div><div id="design-status" class="hint" role="status"></div></form>`);
+}
+window.addEventListener('beforeunload',event=>{if(pendingSync.size||window.prismCloud?.busy()){event.preventDefault();event.returnValue='';}});
 document.addEventListener('keydown',event=>{
   const tab=event.target.closest('[role="tab"][data-stage]');if(!tab)return;
   const stages=['brief','references','concepts'],index=stages.indexOf(tab.dataset.stage);
@@ -130,13 +160,31 @@ document.addEventListener('keydown',event=>{
   if(next){event.preventDefault();changeStage(next,{focus:true});}
 });
 document.addEventListener('submit',async event=>{
+  if(event.target.id==='design-form'){
+   event.preventDefault();const status=$('design-status'),button=event.target.querySelector('button.primary');button.disabled=true;
+   try{
+    if(!account())throw Error('Sign in with Google and save an image-provider connection first.');
+    const s=session(),count=Number($('design-count').value),prompts=[0,1].map(i=>$('design-prompt-'+i).value.trim());
+    if(![1,2].includes(count)||prompts.slice(0,count).some(p=>p.length<10||p.length>3000))throw Error('Review one or two usable prompts first.');
+    if(!$('confirm-design-usage').checked)throw Error('Confirm image-provider usage first.');
+    s.design_prompts={...s.design_prompts,prompts};persist();await window.prismCloud.syncCampaign(accountPayload(s));const requests=[];
+    for(let i=0;i<count;i++){
+     // Keep idempotency keys with the form; retrying an uncertain call reuses it.
+     const key=event.target['requestKey'+i] ||= crypto.randomUUID();
+     const job=await window.prismCloud.call('/designs',{method:'POST',headers:{'Idempotency-Key':key},body:{campaign_id:s.id,prompt:prompts[i],confirm_provider_usage:true}});requests.push(job);
+     if(['needs_attention','submitting'].includes(job.status))throw Error('Generation submission is uncertain. Check provider history; this request will not be resubmitted.');
+    }
+    host.closeModal();await window.prismCloud.listDesigns(s.id);
+   }catch(e){status.textContent=e.message;if(button.isConnected)button.disabled=false;}
+  }
   if(event.target.id==='campaign-form'){event.preventDefault();try{collectBrief();persist();stage='references';await job('Finding live product photographs…',async signal=>{const s=session(),result=await jsonRequest('/discover',s.brief,signal);s.references=result.references;s.discovery=result;s.selected=[];s.ideas=null;s.web=null;});}catch(e){displayError(e);}}
   if(event.target.id==='ai-settings'){
     event.preventDefault();const form=event.target,key=$('gemini-key').value.trim(),selected=$('gemini-model').value;
     if(form.loading)return;
     if(form.loadedKey!==key||!form.models?.length){await loadConnectionModels();return;}
     if(!form.models.some(m=>m.id===selected)){$('model-status').textContent='Choose a listed model before connecting.';return;}
-    sessionKey=key;model=selected;availableModels=form.models;groundingEnabled=$('gemini-grounding').checked;error='';clearConnectionForm();host.closeModal();render();
+    if(account()){if(key)await window.prismCloud.call('/keys/gemini',{method:'PUT',body:{key,model:selected}});else await window.prismCloud.call('/gemini/model',{method:'PUT',body:{model:selected}});await window.prismCloud.refresh();}
+    sessionKey=account()?'account-vault':key;model=selected;availableModels=form.models;groundingEnabled=$('gemini-grounding').checked;error='';clearConnectionForm();host.closeModal();render();
   }
   if(event.target.id==='prism-chat-form'){event.preventDefault();const text=$('chat-message').value.trim();if(text)await chat(text);}
 });
@@ -155,15 +203,19 @@ document.addEventListener('click',async event=>{
   if(action==='stage'){changeStage(button.dataset.stage,{focus:true});return;}
   if(action==='settings'){settings();return;}
   if(action==='load-models'){await loadConnectionModels();return;}
-  if(action==='disconnect'){sessionKey='';model='';availableModels=[];groundingEnabled=false;clearConnectionForm();host.closeModal();render();return;}
+  if(action==='disconnect'){if(account()){try{await window.prismCloud.call('/keys/gemini',{method:'DELETE'});await window.prismCloud.refresh();}catch(e){displayError(e);return;}}sessionKey='';model='';availableModels=[];groundingEnabled=false;clearConnectionForm();host.closeModal();render();return;}
   if(action==='chat-toggle'){chatOpen=!chatOpen;mount();return;}
   if(action==='chat-prompt'){await chat(button.dataset.prompt);return;}
   if(working)return;
   try{
+    if(action==='reach'){collectBrief();persist();stage='references';await job('Finding public web sources with Agent Reach…',async signal=>{const s=session();const result=account()?await window.prismCloud.call('/research',{method:'POST',body:{brief:s.brief},signal}):await jsonRequest('/research/search',s.brief,signal);s.web=result;s.ideas=null;});}
+    if(action==='save-idea'){const idea=currentIdeas()?.ideas[Number(button.dataset.index)];if(!idea)throw Error('Draft a current concept first.');if(!account())throw Error('Sign in with Google to save individual ideas to your account. The campaign draft is already kept on this device.');await window.prismCloud.saveIdea(accountPayload(session()),idea);host.toast('Idea saved to your account.');}
+    if(action==='design-prompts')await designPrompts(Number(button.dataset.index));
+    if(action==='copy-prompts'){await navigator.clipboard.writeText([0,1].map(i=>$('design-prompt-'+i).value).join('\n\n'));host.toast('Design prompts copied.');}
     if(action==='example'){session().brief={...emptyBrief(),product:'Anti-frizz shampoo',query:'shampoo'};session().ideas=null;persist();render();return;}
-    if(action==='fresh'){stage='brief';active=null;session();saved=saved.slice(0,20);messages=[];error='';persist();render();}
+    if(action==='fresh'){stage='brief';active=null;session();saved=saved.slice(0,account()?50:20);messages=[];error='';persist();render();}
     if(action==='delete'){host.openModal('<div class="modal-header"><h2>Delete this research?</h2></div><p>Your saved brief, source list and drafts will be removed. Its visual board stays available separately.</p><div class="modal-actions"><button data-action="close">Cancel</button><button class="danger" data-studio="confirm-delete">Delete research</button></div>');}
-    if(action==='confirm-delete'){saved=saved.filter(r=>r.id!==active.id);active=saved[0]||null;session();persist();host.closeModal();render();}
+    if(action==='confirm-delete'){if(account()){clearTimeout(syncTimer);pendingSync.delete(active.id);await window.prismCloud.removeCampaign(active.id);}saved=saved.filter(r=>r.id!==active.id);active=saved[0]||null;session();persist();host.closeModal();render();}
     if(action==='links'){const brief=collectBrief();host.openModal(`<div class="modal-header"><h2>Find regional advertising examples</h2><button data-action="close" aria-label="Close dialog">×</button></div><p>These searches use your product, market and platform. In Meta Ad Library, check the country and platform filters before choosing examples. Search results do not prove an ad is running.</p><div class="external-searches">${researchLinks(brief).map(r=>link(r.url,r.title)).join('')}</div><p class="hint">Save an ad screenshot and its actual copy, then upload it to your board. Prism does not bypass login or scrape restricted Instagram pages.</p>`);}
     if(action==='select-all'){session().selected=session().references.map(r=>r.id);session().ideas=null;persist();render();}
     if(action==='open-board')await host.openBoard(session().board_id);
@@ -188,6 +240,6 @@ document.addEventListener('click',async event=>{
     if(action==='export'){if($('campaign-form'))collectBrief();persist();const data={schema:'prism/research-export/1',...session(),note:'Contains briefs, source URLs, provenance and AI drafts. No API keys or original images. Product references are not verified paid ads.'};const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='prism-campaign-research.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
   }catch(e){displayError(e);}
 });
-window.prismStudio={html,mount,connectionLabel:()=>sessionKey?'AI connected':'Connect Gemini',openForBoard(id){stage='references';session().board_id=id;session().imports=[];session().ideas=null;persist();},forgetBoard(id){for(const s of saved)if(s.board_id===id){s.board_id=null;s.imports=[];s.ideas=null;}persist();}};
+window.prismStudio={html,mount,campaigns:()=>{initScope();return saved;},newCampaign(){if(working)return;stage='brief';active=null;session();saved=saved.slice(0,account()?50:20);persist();host.openStudio();},openCampaign(id,payload){if(working)return;saveVisibleBrief();if(payload){const item={...payload,board_id:null,imports:[]};saved=[item,...saved.filter(r=>r.id!==id)];active=item;}else active=saved.find(r=>r.id===id)||null;stage='brief';messages=[];error='';host.openStudio();},connectionLabel:()=>{initScope();return sessionKey?'AI connected':'Connect Gemini';},openForBoard(id){stage='references';session().board_id=id;session().imports=[];session().ideas=null;persist();},forgetBoard(id){for(const s of saved)if(s.board_id===id){s.board_id=null;s.imports=[];s.ideas=null;}persist();}};
 function connect(){host=window.prismStudioHost;if(host){render();}else document.addEventListener('prism-host-ready',()=>{host=window.prismStudioHost;render();},{once:true});}
 connect();

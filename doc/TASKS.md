@@ -1,5 +1,7 @@
 # Prism - Dependency-Ordered Backlog
 
+> Current 0.5 account system: [complete system design and rollout](SYSTEM_DESIGN.md), [implementation and activation gates](RELEASE_0_5.md). Green/gray dashboard and backend code are implemented; Google accounts require D1/OAuth configuration. Earlier sections are historical baselines.
+
 > 0.4 interface redesign: implemented and locally verified with 23 browser/source/DOM tests plus production bundle and Functions compilation. Pages and Windows Actions passed, including actual packaged CLIP checks. Deployed source files and installed desktop backend/assets match the tag; live catalogue/photo retrieval passed. Live visual inspection remains open. [Scope and evidence](RELEASE_0_4.md).
 
 > Gemini model-availability fix: **completed in 0.3.1**. Model discovery, explicit selection, private key lifecycle, new-model generation compatibility and separate search pricing are covered by 21 browser regressions. Pages and Windows Actions passed; local desktop backend/assets and real catalogue requests passed. Live Gemini success remains a user-key check. [Evidence](../output/evidence/implementation/gemini-connection-patch.json).

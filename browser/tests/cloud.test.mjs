@@ -39,6 +39,8 @@ async function create(f,u,id='c1'){const r=await route(f,u,'/campaigns/'+id,'PUT
 test('cloud accounts fail closed when deployment bindings are absent',async()=>{
  const config=await handleCloud(new Request('https://prism.test/api/cloud/config'),{});assert.equal((await config.json()).accounts_ready,false);
  const denied=await handleCloud(new Request('https://prism.test/api/cloud/campaigns'),{});assert.equal(denied.status,503);
+ const start=await handleCloud(new Request('https://prism.test/api/cloud/auth/google'),{});assert.equal(start.status,503);assert.match((await start.json()).detail,/awaiting/);
+ const callback=await handleCloud(new Request('https://prism.test/api/cloud/auth/callback'),{});assert.equal(callback.status,503);
 });
 test('Google tokens require valid signature, audience, issuer, nonce, expiry and verified email',async()=>{
  const {privateKey,publicKey}=await generateKeyPair('RS256');

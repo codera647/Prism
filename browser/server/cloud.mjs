@@ -19,12 +19,12 @@ export async function handleCloud(request,env,fetcher=fetch){
  try{
   const url=new URL(request.url),parts=url.pathname.replace(/^\/api\/cloud\/?/,'').split('/').filter(Boolean),method=request.method;
   if(parts[0]==='config'&&method==='GET')return json({accounts_ready:configured(env),database_ready:!!env.DB,google_ready:!!(env.GOOGLE_CLIENT_ID&&env.GOOGLE_CLIENT_SECRET),vault_ready:!!env.VAULT_KEY,media_ready:!!env.MEDIA,max_users:Math.min(30,Math.max(1,Number(env.MAX_USERS)||30)),research:'Agent Reach / Exa MCP',generation:'Open-Higgsfield-compatible Muapi',image_models:IMAGE_MODELS});
-  if(parts[0]==='auth'&&parts[1]==='google'&&method==='GET')return startOAuth(request,env);
-  if(parts[0]==='auth'&&parts[1]==='callback'&&method==='GET')return finishOAuth(request,env,fetcher);
+  if(parts[0]==='auth'&&parts[1]==='google'&&method==='GET')return await startOAuth(request,env);
+  if(parts[0]==='auth'&&parts[1]==='callback'&&method==='GET')return await finishOAuth(request,env,fetcher);
   const mutation=!['GET','HEAD'].includes(method),user=await principal(request,env,mutation);
   if(mutation&&!['auth','account','keys'].includes(parts[0]))await consume(env,user.id,'requests',600,86400);
   if(parts[0]==='auth'&&parts[1]==='me'&&method==='GET')return json({...user,providers:await providerStatus(env,user.id)});
-  if(parts[0]==='auth'&&parts[1]==='logout'&&method==='POST')return logout(request,env);
+  if(parts[0]==='auth'&&parts[1]==='logout'&&method==='POST')return await logout(request,env);
   if(parts[0]==='campaigns'){
    if(parts.length===1&&method==='GET')return json({campaigns:await listCampaigns(env,user.id)});
    const id=cleanId(parts[1]);
